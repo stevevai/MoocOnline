@@ -43,12 +43,18 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'xadmin',
     'crispy_forms',
+    'captcha',
     # 注册apps
     'users'
 ]
 
 # 继承Django的User模型，自定义
 AUTH_USER_MODEL = "users.UserProfile"
+
+# 设置邮箱和用户名均可登录
+AUTHENTICATION_BACKENDS = (
+    'users.views.CustomBacked',
+)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -141,7 +147,10 @@ STATICFILES_DIRS = [
 # 发送邮件相关配置
 EMAIL_HOST = "smtp.163.com"
 EMAIL_PORT = 25
-EMAIL_HOST_USER = "silentlight1997@163.com"
-EMAIL_HOST_PASSWORD = "zxcvbnm6025680"      # 使用授权码登录
+# 发邮件的邮箱
+EMAIL_HOST_USER = 'silentlight1997@163.com'
+# 使用授权码登录
+EMAIL_HOST_PASSWORD = 'zxcvbnm6025680'
 EMAIL_USE_TLS = False
-EMAIL_FROM = "silentlight1997@163.com"
+# 发件人
+EMAIL_FROM = '慕课在线<silentlight1997@163.com>'

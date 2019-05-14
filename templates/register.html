@@ -13,51 +13,65 @@
 
 
 
-<!-- 注册 -->
-<section class="fdb-block">
+<<section class="fdb-block">
+
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-12 col-md-8 col-lg-7 col-xl-5 text-center">
-                <div class="fdb-box fdb-touch">
-                    <div class="row">
-                        <div class="col">
-                            <h1>注册</h1>
+            <div class="col-12 col-md-12 col-lg-7 col-xl-5 text-center">
+                <form action="/register/" method="post" autocomplete="off">        <!-- 关闭自动填充 -->
+                    <div class="fdb-box">
+                        <div class="row">
+                            <div class="col">
+                                <h1>Register</h1>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col">
+                                <input name="username" type="text" class="form-control" placeholder="用户名">
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col">
+                                <input name="email" type="email" class="form-control" placeholder="邮箱">
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col">
+                                <input name="password" type="password" class="form-control" placeholder="密码">
+                                <p class="text-right"><a href="{% url 'login' %}">已经有账户了？</a></p>
+                            </div>
+                        </div>
+
+                        {% if msg %}
+                            <div class="alert alert-danger" role="alert" id="register_fail">
+                                <a href="#" class="close" data-dismiss="alert">
+                                    &times;
+                                </a>
+                                <strong>{{ msg }}</strong>
+                            </div>
+                        {% endif %}
+
+
+                        <div class="row mt-4">
+                            <div class="col">
+                                <input class="btn btn-primary" type="submit" value="提交" />
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col mt-4">
-                            <input type="text" class="form-control" placeholder="用户名">
-                        </div>
-                    </div>
-                    <div class="row mt-4">
-                        <div class="col">
-                            <input type="text" class="form-control" placeholder="邮箱">
-                        </div>
-                    </div>
-                    <div class="row mt-4">
-                        <div class="col">
-                            <input type="password" class="form-control mb-1" placeholder="密码">
-                            <p class="text-right"><a href="https://www.froala.com">已经有了账户？</a></p>
-                        </div>
-                    </div>
-                    <div class="row mt-4">
-                        <div class="col">
-                            <!-- 验证码 -->
-                            <input type="text" class="form-control" placeholder="邮箱">
-                        </div>
-                    </div>
-                    <div class="row mt-4">
-                        <div class="col">
-                            <button class="btn btn-primary" type="button">提交</button>
-                        </div>
-                    </div>
+                    {% csrf_token %}
+                </form>
                 </div>
             </div>
         </div>
     </div>
 </section>
-
 <!-- Insert HTML for Design Blocks. -->
-
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="/static/js/bootstrap.js"></script>
 </body>
 </html>
