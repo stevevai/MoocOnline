@@ -13,7 +13,7 @@ class BaseSetting(object):
 
 class GlobalSettings(object):
     site_title = "后台管理系统"
-    site_footer = "慕课在线"
+    site_footer = "Mooc Online"
     # menu_style = "accordion"   # 可折叠
 
 

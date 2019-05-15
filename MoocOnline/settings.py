@@ -154,3 +154,8 @@ EMAIL_HOST_PASSWORD = 'zxcvbnm6025680'
 EMAIL_USE_TLS = False
 # 发件人
 EMAIL_FROM = '慕课在线<silentlight1997@163.com>'
+
+
+# 配置Broker中间人
+BROKER_URL = 'redis://127.0.0.1:6379/0'
+BROKER_TRANSPORT = 'redis'
