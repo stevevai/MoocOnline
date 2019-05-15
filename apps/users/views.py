@@ -12,7 +12,7 @@ from .models import UserProfile
 from .forms import LoginForm, RegisterForm
 from MoocOnline.settings import SECRET_KEY
 from util.email_send import send_register_email
-from celery_tasks.tasks import send_register_active_email
+# from celery_tasks.tasks import send_register_active_email
 
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from itsdangerous import SignatureExpired
@@ -112,8 +112,8 @@ class RegisterView(View):
             token = token.decode('utf8')
 
             # 发送邮件
-            # send_register_email(email, token, "register")
-            send_register_active_email.delay(email, user_name, token)  # 异步发送邮件
+            send_register_email(email, token, "register")
+            # send_register_active_email.delay(email, user_name, token)  # 异步发送邮件
 
             # 邮件发送成功
             return render(request, "send_success.html")
