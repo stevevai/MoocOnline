@@ -46,13 +46,16 @@ class LoginView(View):
             user_name = request.POST.get("username", "")
             pass_word = request.POST.get("password", "")
 
-            # 成功则返回user对象，否则返回null
+            # 登录校验
             user = authenticate(username=user_name, password=pass_word)
 
-            # 如果不是null说明验证成功
+            # 用户名和密码正确
             if user is not None:
+                # 检查是否激活
                 if user.is_active:
+                    # 记录用户的登录状态
                     login(request, user)
+                    # 跳转回首页
                     return HttpResponseRedirect(reverse("index"))
                 else:
                     return render(request, "login.html", {"msg": "用户未激活"})

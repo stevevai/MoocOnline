@@ -159,3 +159,27 @@ EMAIL_FROM = '慕课在线<silentlight1997@163.com>'
 # 配置Broker中间人
 BROKER_URL = 'redis://127.0.0.1:6379/0'
 BROKER_TRANSPORT = 'redis'
+
+# django-redis-sessions
+'''
+SESSION_ENGINE = 'redis_sessions.session'
+SESSION_REDIS_HOST = '127.0.0.1'
+SESSION_REDIS_PORT = 6379
+SESSION_REDIS_DB = 2
+SESSION_REDIS_PASSWORD = ''
+SESSION_REDIS_PREFIX = 'session'
+'''
+
+# django-redis
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
+# 配置session存储，放在Redis数据库中
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_CACHE_ALIAS = "default"
