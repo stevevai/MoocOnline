@@ -18,7 +18,7 @@
 
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-12 col-md-8 col-lg-7 col-xl-5 text-center">
+            <div class="col-12 col-md-12 col-lg-7 col-xl-5 text-center">
                 <form action="/login/" method="post" autocomplete="off">        <!-- 关闭自动填充 -->
                     <div class="fdb-box">
                         <div class="row">
@@ -36,6 +36,12 @@
                         <div class="row mt-4">
                             <div class="col">
                                 <input name="password" type="password" class="form-control" placeholder="密码">
+                                <!-- <p class="text-right"><a href="{% url 'register' %}">还没有账号？</a></p> -->
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col">
                                 <p class="text-right"><a href="{% url 'register' %}">还没有账号？</a></p>
                             </div>
                         </div>
