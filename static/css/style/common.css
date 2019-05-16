@@ -1,0 +1,150 @@
+
+.g-user-card {
+    margin-left: -270px;
+    width: 306px;
+    display: none;
+    margin-top: -18px
+}
+.user-card-box:hover .g-user-card{
+    display: block;
+}
+.card-inner {
+    padding: 24px;
+    background-color: #fff;
+    -webkit-box-shadow: 0 4px 8px 0 rgba(7,17,27,.2);
+    -moz-box-shadow: 0 4px 8px 0 rgba(7,17,27,.2);
+    box-shadow: 0 4px 8px 0 rgba(7,17,27,.2);
+}
+.card-top a img {
+    position: absolute;
+    width: 72px;
+    height: 72px;
+    border-radius: 36px;
+    border:2px solid #fff;
+}
+.card-top-right-box {
+    padding-top: 14px;
+    margin-left: 90px;
+}
+.card-top-right-box .name {
+    color: #07111b;
+    font-size: 16px;
+    width: 170px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.card-top-right-box .meta {
+    margin-top: 10px;
+}
+.meta a {
+    float: left;
+    margin-right: 5px;
+    color: #93999f;
+    font-size: 12px;
+    line-height: 12px;
+}
+.user-center-box {
+    margin-top: 40px;
+    margin-bottom: 14px;
+}
+.user-center-box li {
+    width: 126px;
+    height: 36px;
+    margin-left: 2px;
+    margin-bottom: 2px;
+    background-color: #f3f5f7;
+    float: left;
+}
+.user-center-box li>a:hover{
+    color: #787d82;
+}
+.user-center-box li a {
+    padding-left: 12px;
+    line-height: 36px;
+    font-size: 12px;
+    color: #787d82;
+}
+.user-center-box a>span {
+    display: inline-block;
+    font-size: 16px;
+    margin-top:-4px;
+
+}
+
+.card-history{
+    padding-bottom: 16px;
+    border-bottom: 1px solid #edf1f2;
+}
+.history-item{
+    padding-left: 26px;
+    padding-top: 5px;
+}
+@font-face {
+    font-family: 'iconfont';  /* project id 332124 */
+    src: url('http://at.alicdn.com/t/font_n550vrjdqqb5u3di.eot');
+    src: url('http://at.alicdn.com/t/font_n550vrjdqqb5u3di.eot?#iefix') format('embedded-opentype'),
+    url('http://at.alicdn.com/t/font_n550vrjdqqb5u3di.woff') format('woff'),
+    url('http://at.alicdn.com/t/font_n550vrjdqqb5u3di.ttf') format('truetype'),
+    url('http://at.alicdn.com/t/font_n550vrjdqqb5u3di.svg#iconfont') format('svg');
+}
+
+.history-item p{
+    width: 190px;
+    color: #787d82;
+    font-size: 12px;
+    line-height: 12px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.history-item .tit{
+    margin-bottom: 10px;
+    font-weight:700;
+}
+.history-item .go-cart {
+    position: absolute;
+    color: #00a028;
+    font-size: 12px;
+    line-height: 12px;
+    margin-left: 200px;
+    margin-top: -10px;
+}
+.icon-clock {
+    display: inline-block;
+    font-weight: 700;
+    margin-left: 3px;
+    margin-top: -78px;
+    color: #787d82;
+}
+
+.card-sets {
+    font-size: 12px;
+    line-height: 12px;
+    margin-top: 10px;
+    color: #4d555d;
+    padding-top: 5px;
+    text-align: right;
+}
+
+
+
+
+.remindWrap {
+    width: 60px;
+    line-height: 60px;
+}
+.user-card-box {
+    width: 60px;
+}
+.user-card-item {
+    line-height: 60px;
+}
+.user-card-item>img {
+    width: 36px;
+    height: 36px;
+    border-radius: 18px;
+    margin-top: 18px;
+}
+
+.fl{float:left;display:inline}
