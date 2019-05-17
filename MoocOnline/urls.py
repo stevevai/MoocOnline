@@ -34,5 +34,7 @@ urlpatterns = [
     # 验证码
     path("captcha/", include('captcha.urls')),
     # 富文本编辑器
-    path('ueditor/', include('DjangoUeditor.urls'))
+    path('ueditor/', include('DjangoUeditor.urls')),
+    # 课程相关
+    path("course/", include('courses.urls', namespace="course")),
 ]
