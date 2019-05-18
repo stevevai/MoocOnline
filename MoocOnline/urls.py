@@ -17,10 +17,12 @@ from django.contrib import admin
 from django.urls import path, re_path
 from django.views.generic import TemplateView
 from django.conf.urls import include
+from django.views.static import serve
 
 import xadmin
 
 from users.views import LoginView, RegisterView, ActiveUserView, LogoutView
+from .settings import MEDIA_ROOT
 
 urlpatterns = [
     path('xadmin/', xadmin.site.urls),
@@ -37,4 +39,6 @@ urlpatterns = [
     path('ueditor/', include('DjangoUeditor.urls')),
     # 课程相关
     path("course/", include('courses.urls', namespace="course")),
+    # 配置文件上传的url,serve到某个路径下去找
+    re_path(r'^media/(?P<path>.*)', serve, {"document_root": MEDIA_ROOT})
 ]

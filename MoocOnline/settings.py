@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'xadmin',
     'crispy_forms',
     'captcha',
+    'DjangoUeditor',
+    'pure_pagination',
     # 注册apps
     'users',
     'teachers',
@@ -83,6 +85,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',     # 设置media处理器,图片前加上MEDIA_URL
             ],
         },
     },
@@ -186,3 +189,28 @@ CACHES = {
 # 配置session存储，放在Redis数据库中
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "default"
+
+
+# 七牛云
+QINIU_ACCESS_KEY = 'pk3wExyXusE2dmmCvzHwUt8hNNJ18DPQ7Ugxgxmh'
+QINIU_SECRET_KEY = 'YbCAmuSMAOACPB3APY7xKG2SjzUuhLNISvQnt1q2'
+QINIU_BUCKET_NAME = 'mooc-online'
+QINIU_BUCKET_DOMAIN = 'prpg634cf.bkt.clouddn.com'
+QINIU_SECURE_URL = False
+
+
+PREFIX_URL = 'http://'
+# 文件系统更改
+MEDIA_URL = PREFIX_URL + QINIU_BUCKET_DOMAIN + "media/"
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media').replace("\\", "/")
+MEDIA_ROOT = 'media/'
+DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuMediaStorage'
+
+
+# 分页
+PAGINATION_SETTINGS = {
+    'PAGE_RANGE_DISPLAYED': 10,
+    'MARGIN_PAGES_DISPLAYED': 2,
+
+    'SHOW_FIRST_PAGE_WHEN_INVALID': True,
+}

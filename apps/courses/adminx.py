@@ -59,18 +59,18 @@ class BannerCourseAdmin(object):
 
 
 class CourseAdmin(object):
-    list_display = ['name', 'desc', 'degree', 'learn_times', 'students',]
-    search_fields = ['name', 'desc', 'detail', 'degree', 'students']
-    list_filter = ['name', 'desc', 'degree', 'learn_times', 'students']
-    ordering = ['-click_nums']      # 默认排序
-    readonly_fields = ['click_nums', 'fav_nums']    # 只读,不能修改
+    list_display = ['name', 'desc', 'degree', 'learn_times',]
+    search_fields = ['name', 'desc', 'detail', 'degree']
+    list_filter = ['name', 'desc', 'degree', 'learn_times']
+    # ordering = ['-click_nums']      # 默认排序
+    readonly_fields = ['fav_nums']    # 只读,不能修改
     # exclude = ['']  # 详情页不显示
     # 课程页直接添加章节
     inlines = [LessonInline]
     # 可以在列表上快速修改内容
     list_editable = ['degree', 'desc']
     # 配置ueditor,在ueditor.py中get
-    style_fields = {"detail": "ueditor"}
+    # style_fields = {"detail": "ueditor"}
 
     # 过滤列表中的数据
     def queryset(self):
