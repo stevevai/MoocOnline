@@ -201,7 +201,7 @@ QINIU_SECURE_URL = False
 
 PREFIX_URL = 'http://'
 # 文件系统更改
-MEDIA_URL = PREFIX_URL + QINIU_BUCKET_DOMAIN + "media/"
+MEDIA_URL = PREFIX_URL + QINIU_BUCKET_DOMAIN + "/media/"
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media').replace("\\", "/")
 MEDIA_ROOT = 'media/'
 DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuMediaStorage'

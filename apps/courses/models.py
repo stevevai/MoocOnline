@@ -9,6 +9,12 @@ from DjangoUeditor.models import UEditorField
 # Create your models here.
 
 
+# 让上传的文件路径动态地与course的名字有关
+def upload_to_path(instance, filename):
+    name = instance.name
+    return 'courses/images/%s/%s' % (name, filename)
+
+
 # 一级分类
 class CourseClassify(models.Model):
     name = models.CharField(max_length=20, verbose_name=u"一级分类名称")
@@ -48,7 +54,7 @@ class Course(models.Model):
     teacher = models.ForeignKey(Teacher, verbose_name=u"讲师", null=True, blank=True, on_delete=models.CASCADE)
     stu_nums = models.IntegerField(default=0, verbose_name=u"学习人数")
     fav_nums = models.IntegerField(default=0, verbose_name=u"收藏人数")
-    image = models.ImageField(upload_to="courses/%Y/%m", verbose_name="封面图", max_length=100)
+    image = models.ImageField(upload_to=upload_to_path, verbose_name="封面图", max_length=100)
     classify_root = models.ForeignKey(CourseClassify, verbose_name=u"一级分类", on_delete=models.SET_NULL, default="", null=True)
     classify_detail = models.ForeignKey(CourseClassify2, verbose_name=u"二级分类", on_delete=models.SET_NULL, default="", null=True)
     # category = models.CharField(max_length=20, default=u"", verbose_name=u"课程类别")
@@ -123,6 +129,9 @@ class CourseResources(models.Model):
     class Meta:
         verbose_name = u"课程资源"
         verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.name
 
 
 # 一张表分两个model管理，继承Course

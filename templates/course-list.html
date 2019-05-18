@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>慕课网-免费课程</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- 兼容移动设备 -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<!-- 让IE的文档渲染模式永远都是最新的 -->
+<meta http-equiv="X-UA-Compatible" content="IE=Edge，chrome=1">
+<meta http-equiv="Expires" content="0" />
+<link rel="stylesheet" type="text/css" href="/static/css/common.css">
+<link rel="stylesheet" type="text/css" href="/static/css/freecourse.css">
+<link rel="stylesheet" type="text/css" href="/static/css/footer.css">
+<style>
+.menu .item a,.download,.shop-cart,.login a,.login{
+	color: #9ca0a4;
+}
+.menu .item a:hover{
+	color: #fff;
+}
+.menu .item a.menu-item-select{
+	color: #fff;
+}
+.search-area{
+	border-bottom: 1px solid #6a7076;
+}
+.search-input{
+	color: #fff;
+}
+
+.blank{
+    height: 180px;
+}
+</style>
+    <!-- blank 没有搜索结果时中间留白 -->
+</head>
+<body>
+	<!-- header菜单栏 -->
+	<div class="header header-black">
+		<a class="home" href="index.html" title="慕课网">
+			<img src="/static/img/logo_black.png" alt="">
+		</a>
+		<ul class="menu">
+			<li class="item"><a href="course-list.html" class=" menu-item-select">免费课程</a></li>
+			<li class="item"><a href="careerpath.html">职业路径</a></li>
+			<li class="item"><a href="shizhan.html">实战</a></li>
+			<li class="item"><a href="ask.html">猿问</a></li>
+			<li class="item"><a href="discovery.html">发现</a></li>
+		</ul>
+		<div class="search-area">
+			<input class="search-input" type="text">
+			<div class="search-btn"><i class="icon icon-search">&#xe63d;</i></div>
+		</div>
+		<ul class="header-unlogin clearfix">
+			<li class="download">
+				<a href="#">下载APP</a>
+				<div class="download-detail">
+					<img src="/static/img/appload.png" height='100%' alt="">
+					<div class="load-wenzi">
+						<p class="title">扫描下载慕课网APP</p>
+						<p class="ios"><i class="icon">&#xe616;</i>App Store下载</p>
+						<p class="android"><i class="icon">&#xe640;</i>Android下载</p>
+					</div>
+				</div>
+			</li>
+			<li class="shop-cart">
+				<a href="#" class="dark">
+					<i class="icon icon-cart">&#xe61d;</i>
+					<span>购物车</span>
+					<div class="shop-cart-detail">
+						<p class="title"><object><a href="#" class="to-my-cart">我的购物车</a></object><span class="already">已加入0门课程</span></p>
+						<div class="content">
+							<span><i class="icon">&#xe61d;</i></span>
+							<p>购物车空空如也</p>
+							<span></span>
+							<p>快去这里选购你中意的课程</p>
+							<object><a href="#">实战课程</a></object>
+							<object><a href="#">职业路径</a></object>
+						</div>
+						<p class="about-order"><object><a href="">我的订单中心</a></object><span>去购物车</span></p>
+					</div>
+				</a>
+			</li>
+			<li class="login">
+				<a href="#">登录</a>
+				/
+				<a href="#">注册</a>
+			</li>
+		</ul>
+	</div>
+	<!-- 菜单栏 -->
+	<div class="menu-content">
+		<div class="menu-wrap">
+			<div class="category clearfix">
+				<div class="fangxiang">方向：</div>
+				<div class="fangxiang-content">
+					<a href="" class="menu-select">全部</a>
+                    {% for cagotory in classify %}
+					<a href="">{{ cagotory.name }}</a>
+                    {% endfor %}
+				</div>
+				
+			</div>
+			<div class="category clearfix">
+				<div class="fangxiang">分类：</div>
+				<div class="fangxiang-content">
+					<a href="" class="menu-select">全部</a>
+                    {% for catogory2 in classify2 %}
+					<a href="">{{ catogory2.name }}</a>
+                    {% endfor %}
+				</div>
+				
+			</div>
+		</div>
+	</div>
+
+	<!-- 具体内容 -->
+	<div class="main-content">
+		<div class="main-wrap">
+			<div class="main-title">
+				<div class="hot">
+					<a href="?sort=last&c1={{ c1 }}&c2={{ c2 }}&iseasy={{ is_easy }}" class="{% if sort == "last" or sort is null %}
+					a-select{% endif %}">最新</a>
+					<a href="?sort=pop&c1={{ c1 }}&c2={{ c2 }}&iseasy={{ is_easy }}" {% ifequal sort 'pop' %}class="a-select"{% endifequal %}>最热</a>
+				</div>
+				<div class="page">
+					<span class="page-wrap"><span>
+                        {{ current_page }}
+                    </span>/<span>{{ page_nums }}</span></span>
+					<span class="left"><i class="icon">&#xe628;</i></span>
+					<span class="right"><i class="icon">&#xe78b;</i></span>
+				</div>
+				<div class="difficuty">
+					<span>难度：</span>	
+					<a href="?sort={{ sort }}&c1={{ c1 }}&c2={{ c2 }}" {% if is_easy is null or is_easy == ''%}class="a-select"{% endif %}>全部</a>
+					<a href="?sort={{ sort }}&c1={{ c1 }}&c2={{ c2 }}&is_easy=1" {% ifequal is_easy '1' %}class="a-select"{% endifequal %}>初级</a>
+					<a href="?sort={{ sort }}&c1={{ c1 }}&c2={{ c2 }}&is_easy=2" {% ifequal is_easy '2' %}class="a-select"{% endifequal %}>中级</a>
+					<a href="?sort={{ sort }}&c1={{ c1 }}&c2={{ c2 }}&is_easy=3" {% ifequal is_easy '3' %}class="a-select"{% endifequal %}>高级</a>
+				</div>
+			</div>
+			<!-- 免费课程内容内容 -->
+			<div class="courses clearfix">
+                {% for course in all_courses.object_list %}
+				<div class="course-card">
+					<div class="course-img">
+						<img src="{{ MEDIA_URL }}{{ course.image }}" alt="">
+					</div>
+					<p class="course-name">{{ course.name }}</p>
+					<p class="course-count"><span>{{ course.get_degree_display }}</span><i class="icon">&#xe646;</i><span>{{ course.stu_nums }}</span></p>
+					<p class="course-desc">{{ course.desc }}</p>
+				</div>
+                {% endfor %}
+			</div>
+
+            {% if page_nums == 0 %}
+                <div class="courses clearfix">
+                    <div class="blank">
+
+                    </div>
+                </div>
+            {% endif %}
+
+
+			<!-- 分页 -->
+            {% if page_nums > 1 %}
+			<div class="pagenation">
+                 {% if all_courses.has_previous %}
+                    <span><a href="?{{ all_courses.previous_page_number.querystring }}">上一页</a></span>
+                {% endif %}
+                {% for page in all_courses.pages %}
+                    {% if page %}
+                    {% ifequal page page_obj.number %}
+                        <span class="num page-select"><a href="?{{ page.querystring }}">{{ page }}</a></span>
+                    {% else %}
+                        <span class="num"><a href="?{{ page.querystring }}">{{ page }}</a></span>
+                    {% endifequal %}
+                    {% else %}
+                        <span class="num"><a href="">...</a></span>
+                    {% endif %}
+                {% endfor %}
+
+                {% if all_courses.has_next %}
+                    <span><a href="?{{ all_courses.previous_page_number.querystring }}">下一页</a></span>
+                {% endif %}
+			</div>
+        {% endif %}
+		</div>
+
+	
+
+	</div>
+	<!-- footer -->
+	<div class="footer footer-black">
+		<div class="footer-wrap">
+			<div class="blog">
+				<div class="mr22 chat">
+					
+				</div>
+			</div>
+			<div class="footer-links links-white">
+				<a href="#">企业合作</a>
+				<a href="#">人才招聘</a>
+				<a href="#">联系我们</a>
+				<a href="#">讲师招聘</a>
+				<a href="#">常见问题</a>
+				<a href="#">意见反馈</a>
+				<a href="#">慕课大学</a>
+				<a href="#">友情链接</a>
+			</div>
+			<p>© 2018 imooc.com  京ICP备 13046642号-2</p>
+		</div>
+	</div>
+	<!-- 侧边栏 -->
+	<div class="info">
+		<div class="info-wrap">
+			<div class="info-block b"><i class="icon">&#xe61e;</i></div>
+			<div class="info-block b"><i class="icon">&#xe619;</i></div>
+			<div class="info-block b"><i class="icon">&#xe61a;</i>
+		
+			</div>
+			<div class="info-block"><i class="icon">&#xe62b;</i>
+				
+			</div>
+		</div>
+		
+	</div>
+</body>
+<script type="text/javascript" src="/static/js/jquery-3.2.0.min.js"></script>
+<script type="text/javascript" src="/static/js/common.js"></script>
+</html>

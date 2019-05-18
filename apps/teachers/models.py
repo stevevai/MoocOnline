@@ -4,6 +4,12 @@ from datetime import datetime
 # Create your models here.
 
 
+# 让上传的文件路径动态地与user的名字有关
+def upload_to_path(instance, filename):
+    name = instance.name
+    return 'teacher/images/%s/%s' % (name, filename)
+
+
 class Teacher(models.Model):
     job_list = (
         ("hd", u"后端开发工程师"), ("qd", u"前端开发工程师"),
@@ -14,7 +20,7 @@ class Teacher(models.Model):
     name = models.CharField(max_length=50, verbose_name=u"教师名")
     image = models.ImageField(
         default='image/default_t.png',
-        upload_to="teacher/images",
+        upload_to=upload_to_path,
         verbose_name=u"头像",
         max_length=100)
     gender = models.CharField(max_length=10, choices=(("male", u"男"), ("female", u"女"), ("secret", u"保密")),
@@ -32,3 +38,8 @@ class Teacher(models.Model):
     # 统计该教师的课程数量
     def get_course_nums(self):
         return self.course_set.all().count()
+
+    def __str__(self):
+        return self.name
+
+
