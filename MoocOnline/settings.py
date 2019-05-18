@@ -45,7 +45,10 @@ INSTALLED_APPS = [
     'crispy_forms',
     'captcha',
     # 注册apps
-    'users'
+    'users',
+    'teachers',
+    'courses',
+    'operation'
 ]
 
 # 继承Django的User模型，自定义

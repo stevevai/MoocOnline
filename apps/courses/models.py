@@ -6,20 +6,30 @@ from teachers.models import Teacher
 from DjangoUeditor.models import UEditorField
 
 
+# Create your models here.
+
+
 # 一级分类
 class CourseClassify(models.Model):
     name = models.CharField(max_length=20, verbose_name=u"一级分类名称")
     add_time = models.DateTimeField(default=datetime.now, verbose_name=u"添加时间")
 
+    class Meta:
+        verbose_name = u"课程一级分类"
+        verbose_name_plural = verbose_name
+
 
 # 二级分类
 class CourseClassify2(models.Model):
     name = models.CharField(max_length=20, verbose_name=u"二级分类名称")
-    parent_classify = models.ForeignKey(CourseClassify, verbose_name=u"一级分类", on_delete=models.SET_NULL)
+    parent_classify = models.ForeignKey(CourseClassify, verbose_name=u"一级分类", on_delete=models.SET_NULL, null=True)
     add_time = models.DateTimeField(default=datetime.now, verbose_name=u"添加时间")
 
+    class Meta:
+        verbose_name = u"课程二级分类"
+        verbose_name_plural = verbose_name
 
-# Create your models here.
+
 class Course(models.Model):
     name = models.CharField(max_length=50, verbose_name=u"课程名")
     desc = models.CharField(max_length=500, verbose_name=u"课程简要描述")
@@ -31,8 +41,8 @@ class Course(models.Model):
     stu_nums = models.IntegerField(default=0, verbose_name=u"学习人数")
     fav_nums = models.IntegerField(default=0, verbose_name=u"收藏人数")
     image = models.ImageField(upload_to="courses/%Y/%m", verbose_name="封面图", max_length=100)
-    classify_root = models.ForeignKey(CourseClassify, verbose_name=u"一级分类", on_delete=models.SET_NULL, default="")
-    classify_detail = models.ForeignKey(CourseClassify, verbose_name=u"二级分类", on_delete=models.SET_NULL, default="")
+    classify_root = models.ForeignKey(CourseClassify, verbose_name=u"一级分类", on_delete=models.SET_NULL, default="", null=True)
+    classify_detail = models.ForeignKey(CourseClassify2, verbose_name=u"二级分类", on_delete=models.SET_NULL, default="", null=True)
     # category = models.CharField(max_length=20, default=u"", verbose_name=u"课程类别")
     # 加一张课程与标签的中间表
     # tag = models.CharField(max_length=15, verbose_name=u"课程标签", default=u"")
