@@ -12,8 +12,8 @@ class LessonInline(object):
     extra = 0
 
 
-class CourseResourceInline(object):
-    model = Lesson
+class CourseResourcesInline(object):
+    model = CourseResources
     extra = 0
 
 
@@ -66,7 +66,7 @@ class CourseAdmin(object):
     readonly_fields = ['fav_nums']    # 只读,不能修改
     # exclude = ['']  # 详情页不显示
     # 课程页直接添加章节
-    inlines = [LessonInline]
+    inlines = [LessonInline, CourseResourcesInline]
     # 可以在列表上快速修改内容
     list_editable = ['degree', 'desc']
     # 配置ueditor,在ueditor.py中get

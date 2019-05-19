@@ -17,7 +17,7 @@ def upload_to_path(instance, filename):
 
 def upload_video_path(instance, filename):
     name = instance.name
-    file_name = filename + '_' + str(datetime.now())
+    file_name = str(datetime.now()) + '_' + filename
     return 'courses/videos/%s/%s' % (name, file_name)
 
 

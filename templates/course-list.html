@@ -146,9 +146,13 @@
                 {% for course in all_courses.object_list %}
 				<div class="course-card">
 					<div class="course-img">
-						<img src="{{ MEDIA_URL }}{{ course.image }}" alt="">
+                        <a href="{% url "course:course_info" course.id %}">
+						    <img src="{{ MEDIA_URL }}{{ course.image }}" alt="">
+                        </a>
 					</div>
-					<p class="course-name">{{ course.name }}</p>
+
+                    <p class="course-name"> {{ course.name }}</p>
+
 					<p class="course-count"><span>{{ course.get_degree_display }}</span><i class="icon">&#xe646;</i><span>{{ course.stu_nums }}</span></p>
 					<p class="course-desc">{{ course.desc }}</p>
 				</div>
