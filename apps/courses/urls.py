@@ -9,5 +9,6 @@ app_name = "courses"
 
 urlpatterns = [
     # 课程列表页
-    path('list/', CourseListView.as_view(), name="course_list")
+    path('list/', CourseListView.as_view(), name="course_list"),
+    path('learn/', TemplateView.as_view(template_name= 'learn.html'), name="course_learn")
 ]
