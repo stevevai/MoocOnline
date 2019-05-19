@@ -15,6 +15,12 @@ def upload_to_path(instance, filename):
     return 'courses/images/%s/%s' % (name, filename)
 
 
+def upload_video_path(instance, filename):
+    name = instance.name
+    file_name = filename + '_' + str(datetime.now())
+    return 'courses/videos/%s/%s' % (name, file_name)
+
+
 # 一级分类
 class CourseClassify(models.Model):
     name = models.CharField(max_length=20, verbose_name=u"一级分类名称")
@@ -106,8 +112,9 @@ class Lesson(models.Model):
 class Video(models.Model):
     lesson = models.ForeignKey(Lesson, verbose_name=u"章节", on_delete=models.CASCADE)
     name = models.CharField(max_length=100, verbose_name=u"视频名")
-    # 后期添加教师上传视频的入口
-    url = models.CharField(max_length=200, default="", verbose_name=u"访问地址")
+    # 上传视频，存取外链
+    video_file = models.FileField(upload_to=upload_video_path, verbose_name=u"视频地址", max_length=200, default="")
+    # url = models.CharField(max_length=200, default="", verbose_name=u"访问地址")
     add_time = models.DateTimeField(default=datetime.now, verbose_name=u"添加时间")
     # 使用分钟做后台记录(存储最小单位)前台转换
     learn_times = models.IntegerField(default=0, verbose_name=u"学习时长(分钟数)")

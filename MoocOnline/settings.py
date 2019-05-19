@@ -214,3 +214,8 @@ PAGINATION_SETTINGS = {
 
     'SHOW_FIRST_PAGE_WHEN_INVALID': True,
 }
+
+# Django上传比较大的文件，存放在内存的最大文件大小
+# 超过了这个值，会先保存在磁盘的临时文件中
+# 先设定成50MB
+FILE_UPLOAD_MAX_MEMORY_SIZE = 50*1024*1024
