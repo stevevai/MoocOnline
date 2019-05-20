@@ -3,6 +3,7 @@ from django.views.generic.base import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Course, CourseClassify, CourseClassify2, CourseResources, Video
+from operation.models import CourseComments
 
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 # Create your views here.
@@ -140,4 +141,21 @@ class VideoPlayView(LoginRequiredMixin, View):
             "course": course,
             "all_resources": all_resources,
             "video": video,
+        })
+
+
+# 课程评论，还需要编写一个显示章节评论的View
+class CommentsView(LoginRequiredMixin, View):
+    login_url = '/login/'
+    redirect_field_name = 'next'
+
+    def get(self, request, course_id):
+        course = Course.objects.get(id=int(course_id))
+
+        all_resources = CourseResources.objects.filter(course=course)
+        all_comments = CourseComments.objects.all()
+        return render(request, "course-comment.html", {
+            "course": course,
+            "course_resources": all_resources,
+            "all_comments": all_comments,
         })
