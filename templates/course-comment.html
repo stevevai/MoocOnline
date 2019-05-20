@@ -51,7 +51,11 @@
     }
 
     .mt-50{margin-top: 50px;margin-bottom:15px;}
-
+    .chapter {
+        padding: 10px 10px 20px 10px;
+        border-bottom: 1px solid #eee;
+        margin-bottom: 20px;
+    }
     </style>
 	<body>
 		<!-- header菜单栏 -->
@@ -220,25 +224,17 @@
 				
 				<!-- 评论-start -->
 				<div>
+                    {% for user_comments in all_comments %}
 						<div class="comment clearfix">
-							<div class="comment-header"><img class="lecturer-uimg" src="/static/res/i/header.jpg"></div>
+							<div class="comment-header"><img class="lecturer-uimg" src="{{ MEDIA_URL }}{{ user_comments.user.image }}"></div>
 							<div class="comment-main">
-								<div class="user-name">我是张三</div>
-								<div class="comment-content">这门课真实用！一个列表嵌套好多种布局的时候，用recyclerview控件优雅实现，效率果然提高不少，老板肯定又会夸我，啊哈哈！！！</div>
-								<div class="comment-footer">时间：2016-12-05
+								<div class="user-name">{{ user_comments.user.username }}</div>
+								<div class="comment-content">{{ user_comments.comments }}</div>
+								<div class="comment-footer">时间：{{ user_comments.add_time }}
 								</div>
 							</div>
-						</div>		
-								
-						<div class="comment clearfix">
-							<div class="comment-header"><img class="lecturer-uimg" src="/static/res/i/header.jpg"></div>
-							<div class="comment-main">
-								<div class="user-name">我是张三</div>
-								<div class="comment-content">这门课真实用！一个列表嵌套好多种布局的时候，用recyclerview控件优雅实现，效率果然提高不少，老板肯定又会夸我，啊哈哈！！！</div>
-								<div class="comment-footer">时间：2016-12-05
-								</div>
-							</div>
-						</div>		
+						</div>
+                    {% endfor %}
 				</div>
 				<!-- 评论-end -->
 			</div>

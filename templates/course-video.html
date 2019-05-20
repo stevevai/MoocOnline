@@ -13,6 +13,11 @@
         <link rel="stylesheet" type="text/css" href="/static/css/common.css">
         <link rel="stylesheet" type="text/css" href="/static/css/index.css">
         <link rel="stylesheet" href="/static/css/style/common.css" />
+
+	    <link rel="stylesheet" type="text/css" href="/static/css/muke/course/course-comment.css" />
+        <link rel="stylesheet" type="text/css" href="/static/css/muke/base.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/muke/course/common-less.css">
+
         <script type="text/javascript" src="/static/js/index.js"></script>
 		<script type="text/javascript" src="/static/res/js/jquery-1.11.3.min.js"></script>
 		<script type="text/javascript" src="/static/res/js/bootstrap.min.js"></script>
@@ -189,60 +194,41 @@
 							<a  href="javascript:void(0)"><span class="menu-item  cur">评论</span></a>
 						</div>
 				</div>
-				
+
+                <!--发布评论-->
+                    <div id="js-pub-container" class="issques clearfix js-form">
+                        <div class="wgt-ipt-wrap pub-editor-wrap " id="js-pl-input-fake">
+                            <textarea id="js-pl-textarea" class="" placeholder="扯淡、吐槽、表扬、鼓励……想说啥就说啥！" ></textarea>
+                        </div>
+                        <input type="button" id="js-pl-submit" class="pub-btn" data-cid="452" value="发表评论">
+                        <p class="global-errortip js-global-error"></p>
+                    </div>
+
 				<!-- 评论-start -->
 				<div>
+                     {% for user_comments in all_comments %}
 						<div class="comment clearfix">
-							<div class="comment-header"><img class="lecturer-uimg" src="/static/res/i/header.jpg"></div>
+							<div class="comment-header"><img class="lecturer-uimg" src="{{ MEDIA_URL }}{{ user_comments.user.image }}"></div>
 							<div class="comment-main">
-								<div class="user-name">我是张三</div>
-								<div class="comment-content">这门课真实用！一个列表嵌套好多种布局的时候，用recyclerview控件优雅实现，效率果然提高不少，老板肯定又会夸我，啊哈哈！！！</div>
+								<div class="user-name">{{ user_comments.user.username }}</div>
+								<div class="comment-content">{{ user_comments.comments }}</div>
 								<div class="comment-footer">
-									<span>时间：2016-12-05 </span>
-									<a href="">2-2 我是java第二节</a>
+									<span>时间：{{ user_comments.add_time }} </span>
+									<a href="">{{ video.name }}</a>
 								</div>
 							</div>
-						</div>		
-								
-						<div class="comment clearfix">
-							<div class="comment-header"><img class="lecturer-uimg" src="/static/res/i/header.jpg"></div>
-							<div class="comment-main">
-								<div class="user-name">我是张三</div>
-								<div class="comment-content">这门课真实用！一个列表嵌套好多种布局的时候，用recyclerview控件优雅实现，效率果然提高不少，老板肯定又会夸我，啊哈哈！！！</div>
-								<div class="comment-footer">
-									<span>时间：2016-12-05 </span>
-									<a href="">2-2 我是java第二节</a>
-								</div>
-							</div>
-						</div>		
+						</div>
+                    {% endfor %}
 				</div>
 				
-				<!-- 发布评论-start -->
-				<div style="margin-top: 20px;">
-					<div>
-						<span id="commentTitle">发布评论：</span>
-						<span id="commentTip" style="margin-left: 10px;color:#777;">长度小于200</span>
-					</div>
-					<form id="commentForm" action="${s.base}/courseComment/doComment.html" method="post"  style="margin: 5px 0px;">
-						<input type="hidden" id="commentType" name="type" value="0"/>
-						<input type="hidden" name="sectionId" value="${(courseSection.id)!}"/>
-						<input type="hidden" name="courseId" value="${(courseSection.courseId)!}"/>
-						
-						<textarea id="content" name="content" rows="" cols="100"></textarea>
-						<div>
-							<input id="indeityCode" name="indeityCode"  type="text" placeholder="请输入验证码">
-							<img  onclick="reloadIndityImg();" id="indeityImg"  src="${s.base}/tools/identiry/code.html" style="width:80px;height:26px;margin-left:10px;margin-top:-3px;"/>
-						</div>
-					</form>
-					<input type="button" value="发布" class="btn" onclick="doComment();">
-				</div>
+
 				
 				<!-- 评论-end -->
 			</div>
 			
 			<!-- 章节-start -->
 			<div class="main-course-right"  >
-				<h4 class="mt-50">所有章节</h4>
+				<h4 class="mt-50"></h4>
 				<div class="video-course-fix-parent">
 					<div class="video-course-fix">
 
@@ -307,6 +293,41 @@
 				});
 			});	
 		</script>
+
+    <script type="text/javascript">
+    //添加评论
+    $('#js-pl-submit').on('click', function(){
+        var comments = $("#js-pl-textarea").val()
+        if(comments == ""){
+            alert("评论不能为空")
+            return
+        }
+        $.ajax({
+            cache: false,
+            type: "POST",
+            url:"{% url 'course:add_comment' %}",
+            data:{'course_id':{{ course.id }}, 'video_id':{{ video.id }}, 'comments':comments},
+            async: true,
+            beforeSend:function(xhr, settings){
+                xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+            },
+            success: function(data) {
+                if(data.status == 'fail'){
+                    if(data.msg == '用户未登录'){
+                        window.location.href="/login/";
+                    }else{
+                        alert(data.msg)
+                    }
+
+                }else if(data.status == 'success'){
+                    $("#js-pl-textarea").val("");//清空文本框
+                    window.location.reload();//刷新当前页面.
+                }
+            },
+        });
+    });
+
+</script>
 		
 	</body>
 	
