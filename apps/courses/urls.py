@@ -3,7 +3,7 @@ from django.conf.urls import url
 from django.views.generic import TemplateView
 
 # from .views import CourseListView, CourseDetailView, CourseInfoView, CommentsView, AddCommentsView, VideoPlayView
-from .views import CourseListView, CourseInfoView
+from .views import CourseListView, CourseInfoView, VideoPlayView
 
 app_name = "courses"
 
@@ -11,5 +11,5 @@ urlpatterns = [
     # 课程列表页
     path('list/', CourseListView.as_view(), name="course_list"),
     re_path('info/(?P<course_id>\d+)/', CourseInfoView.as_view(), name="course_info"),
-    path('video/', TemplateView.as_view(template_name="course-video.html"),  name="course-video")
+    re_path('video/(?P<video_id>\d+)/', VideoPlayView.as_view(), name="video_play")
 ]

@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic.base import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from .models import Course, CourseClassify, CourseClassify2, CourseResources
+from .models import Course, CourseClassify, CourseClassify2, CourseResources, Video
 
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 # Create your views here.
@@ -118,4 +118,26 @@ class CourseInfoView(LoginRequiredMixin, View):
         return render(request, "course-info.html", {
             "course": course,
             "course_resources": all_resources,
+        })
+
+
+# 播放视频的view
+class VideoPlayView(LoginRequiredMixin, View):
+    login_url = '/login/'
+    redirect_field_name = 'next'
+
+    def get(self, request, video_id):
+        # 此处的id为表默认为我们添加的值。
+        video = Video.objects.get(id=int(video_id))
+
+        # 查询对应的course
+        course = video.lesson.course
+
+        # 查询课程资源
+        all_resources = CourseResources.objects.filter(course=course)
+
+        return render(request, "course-video.html", {
+            "course": course,
+            "all_resources": all_resources,
+            "video": video,
         })

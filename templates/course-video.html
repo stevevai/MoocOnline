@@ -179,10 +179,10 @@
 		<div class="f-main clearfix">
 			<div class="main-course-left">
 					<div class="course-info">
-						<div class="course-title" style="font-size: 24px;">1-1 感受神秘的涟漪效果</div>
+						<div class="course-title" style="font-size: 24px;">{{ video.name }}</div>
 						
 						<div class="course-video">
-							<video src="/static/res/demo.mp4" width="100%" height="100%" controls preload></video>
+							<video src="{{ MEDIA_URL }}{{ video.video_file }}" width="100%" height="100%" controls preload></video>
 						</div>
 						
 						<div class="course-menu">
@@ -245,77 +245,25 @@
 				<h4 class="mt-50">所有章节</h4>
 				<div class="video-course-fix-parent">
 					<div class="video-course-fix">
-						<div class="chapter" style="padding: 0px ;border: none;">
-							<a href="javascript:void(0);" class="js-open">
-								<h3>
-									<strong class="div-left">第1章 课程介绍</strong>
-									<span class="drop-down">▼</span> 
-								</h3>
-							</a>
-							<ul class="chapter-sub" style="padding-left:10px;">
-								<a href="../course/video.html" > 
-									<li class="ellipsis video-li"><i class="icon-video">▶</i> 1-1 使用RecyclerView优雅实现复杂布局-课程介绍 (06:46)</li>
-								</a>
-								
-								<a href="/video/13038" > 
-									<li class="ellipsis  video-li"><i class="icon-video">▶</i> 1-2 包括录制到文件、播放文件，可以实现类似于微信的语音消息发送与播放 (06:46)</li>
-								</a>
-							</ul>
-						</div>
-					
-						<div class="chapter" style="padding: 0px ;border: none;">
-							<a href="javascript:void(0);" class="js-open">
-								<h3>
-									<strong class="div-left">第2章 课程介绍</strong>
-									<span class="drop-down">▼</span> 
-								</h3>
-							</a>
-							<ul class="chapter-sub" style="padding-left:10px;">
-								<a href="../course/video.html" > 
-									<li class="ellipsis video-li"><i class="icon-video">▶</i> 1-1 使用RecyclerView优雅实现复杂布局-课程介绍 (06:46)</li>
-								</a>
-								
-								<a href="/video/13038" > 
-									<li class="ellipsis  video-li"><i class="icon-video">▶</i> 1-2 包括录制到文件、播放文件，可以实现类似于微信的语音消息发送与播放 (06:46)</li>
-								</a>
-							</ul>
-						</div>
-					
-						<div class="chapter" style="padding: 0px ;border: none;">
-							<a href="javascript:void(0);" class="js-open">
-								<h3>
-									<strong class="div-left">第3章 课程介绍</strong>
-									<span class="drop-down">▼</span> 
-								</h3>
-							</a>
-							<ul class="chapter-sub" style="padding-left:10px;">
-								<a href="../course/video.html" > 
-									<li class="ellipsis video-li"><i class="icon-video">▶</i> 1-1 使用RecyclerView优雅实现复杂布局-课程介绍 (06:46)</li>
-								</a>
-								
-								<a href="/video/13038" > 
-									<li class="ellipsis  video-li"><i class="icon-video">▶</i> 1-2 包括录制到文件、播放文件，可以实现类似于微信的语音消息发送与播放 (06:46)</li>
-								</a>
-							</ul>
-						</div>
-					
-						<div class="chapter" style="padding: 0px ;border: none;">
-							<a href="javascript:void(0);" class="js-open">
-								<h3>
-									<strong class="div-left">第4章 课程介绍</strong>
-									<span class="drop-down">▼</span> 
-								</h3>
-							</a>
-							<ul class="chapter-sub" style="padding-left:10px;">
-								<a href="../course/video.html" > 
-									<li class="ellipsis video-li"><i class="icon-video">▶</i> 1-1 使用RecyclerView优雅实现复杂布局-课程介绍 (06:46)</li>
-								</a>
-								
-								<a href="/video/13038" > 
-									<li class="ellipsis  video-li"><i class="icon-video">▶</i> 1-2 包括录制到文件、播放文件，可以实现类似于微信的语音消息发送与播放 (06:46)</li>
-								</a>
-							</ul>
-						</div>
+
+                        {% for lession in course.get_course_lesson %}
+                            <div class="chapter" style="padding: 0px ;border: none;">
+
+                                <a href="javascript:void(0);" class="js-open">
+                                    <h3>
+                                        <strong class="div-left">{{ lession.name }}</strong>
+                                        <span class="drop-down">▼</span>
+                                    </h3>
+                                </a>
+                                <ul class="chapter-sub" style="padding-left:10px;">
+                                    {% for video in lession.get_lesson_video %}
+                                        <a href="{% url 'courses:video_play' video.id %}" >
+                                            <li class="ellipsis video-li"><i class="icon-video">▶</i> {{ video.name }} ({{ video.learn_times }}:00)</li>
+                                        </a>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endfor %}
 					</div>
 				</div>
 			</div>
