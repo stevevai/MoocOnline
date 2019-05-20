@@ -785,7 +785,7 @@ a:focus{outline:none;}
 	overflow: hidden;
 }
 .video-course-fix{
-	margin-top:-20px;
+	margin-top:3px;
 	height: 500px;
     overflow-x: hidden;
     width: 326px;;    /* 多出26像素是滚动条的位置，会被父容器盖住就看不到了 */

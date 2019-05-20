@@ -115,7 +115,7 @@ class CourseInfoView(LoginRequiredMixin, View):
 
         all_resources = CourseResources.objects.filter(course=course)
 
-        return render(request, "learn.html", {
+        return render(request, "course-info.html", {
             "course": course,
             "course_resources": all_resources,
         })

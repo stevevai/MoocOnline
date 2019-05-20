@@ -10,5 +10,6 @@ app_name = "courses"
 urlpatterns = [
     # 课程列表页
     path('list/', CourseListView.as_view(), name="course_list"),
-    re_path('info/(?P<course_id>\d+)/', CourseInfoView.as_view(), name="course_info")
+    re_path('info/(?P<course_id>\d+)/', CourseInfoView.as_view(), name="course_info"),
+    path('video/', TemplateView.as_view(template_name="course-video.html"),  name="course-video")
 ]
