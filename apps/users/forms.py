@@ -44,8 +44,7 @@ class ModifyPwdForm(forms.Form):
 
 # 修改用户信息
 class UserInfoForm(forms.ModelForm):
-
     class Meta:
         model = UserProfile
-        fields = ['nick_name','gender','address','mobile']
+        fields = ['nick_name', 'gender', 'address', 'mobile', 'signature']
 

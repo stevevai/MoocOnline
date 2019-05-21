@@ -9,7 +9,7 @@ from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import UserProfile
-from .forms import LoginForm, RegisterForm
+from .forms import LoginForm, RegisterForm, UserInfoForm
 from MoocOnline.settings import SECRET_KEY
 from util.email_send import send_register_email
 from .tasks import send_register_active_email
@@ -17,6 +17,7 @@ from .tasks import send_register_active_email
 
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from itsdangerous import SignatureExpired
+import json
 # Create your views here.
 
 
@@ -145,3 +146,22 @@ class ActiveUserView(View):
         except SignatureExpired as e:
             # 激活链接已过期
             return HttpResponse('激活链接已过期')
+
+
+# 用户个人信息view
+class UserInfoView(LoginRequiredMixin, View):
+    login_url = '/login/'
+    redirect_field_name = 'next'
+
+    def get(self, request):
+        return render(request, "usercenter-info.html", {
+        })
+
+    def post(self, request):
+        user_info_form = UserInfoForm(request.POST, instance=request.user)
+        if user_info_form.is_valid():
+            user_info_form.save()
+            return render(request, "usercenter-info.html", {})
+        else:
+            # 返回错误信息,json.dumps
+            return HttpResponse(json.dumps(user_info_form.errors), content_type='application/json')

@@ -1,6 +1,6 @@
 {% extends 'usercenter-base.html' %}
 {% load staticfiles %}
-{% block title %} 个人信息 | mtianyan慕课小站{% endblock %}
+{% block title %} 个人信息 | Mooc Online{% endblock %}
 
 {% block custom_bread %}
         <section>
@@ -39,7 +39,7 @@
                         <a class="button btn-green btn-w100" id="jsUserResetPwd" style="margin:80px auto;width:100px;">修改密码</a>
                     </div>
 				</div>
-				<form class="perinform" id="jsEditUserForm" autocomplete="off">
+				<form  action="{% url 'users:user_info' %}" method="post" autocomplete="off">
 					<ul class="right">
 						<li>昵&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称：
                            <input type="text" name="nick_name" id="nick_name" value="{{ request.user.nick_name|default_if_none:'' }}" maxlength="10">
@@ -68,7 +68,7 @@
                             <input type="text" name="signature" id="signature" placeholder="请输入你的个性签名" maxlength="50" value="{{ request.user.signature }}">
                         </li>
 						<li class="button heibtn">
-							<input type="button" id="jsEditUserBtn" value="保存">
+                            <input type="submit" value="保存">
 						</li>
 					</ul>
                     {% csrf_token %}

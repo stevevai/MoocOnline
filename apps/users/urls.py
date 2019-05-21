@@ -3,11 +3,12 @@
 
 from django.urls import path
 from django.views.generic import TemplateView
+from .views import UserInfoView
 
 
 app_name = "users"
 
 urlpatterns = [
     # 用户信息
-    path('info/', TemplateView.as_view(template_name="usercenter-info.html"), name="user_info")
+    path('info/', UserInfoView.as_view(), name="user_info")
 ]
