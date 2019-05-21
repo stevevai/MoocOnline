@@ -9,7 +9,7 @@ from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import UserProfile
-from .forms import LoginForm, RegisterForm, UserInfoForm
+from .forms import LoginForm, RegisterForm, UserInfoForm, UploadImageForm, ModifyPwdForm
 from MoocOnline.settings import SECRET_KEY
 from util.email_send import send_register_email
 from .tasks import send_register_active_email
@@ -165,3 +165,42 @@ class UserInfoView(LoginRequiredMixin, View):
         else:
             # 返回错误信息,json.dumps
             return HttpResponse(json.dumps(user_info_form.errors), content_type='application/json')
+
+
+# 用户上传图片的view:用于修改头像
+class UploadImageView(LoginRequiredMixin, View):
+    login_url = '/login/'
+    redirect_field_name = 'next'
+
+    def post(self, request):
+        # 这时候用户上传的文件就已经被保存到imageform了
+        # 不指定当前用户的话，系统会创建一个新用户
+        image_form = UploadImageForm(request.POST, request.FILES, instance=request.user)
+        if image_form.is_valid():
+            image_form.save()
+
+            return HttpResponse('{"status":"success"}', content_type='application/json')
+        else:
+            return HttpResponse('{"status":"fail"}', content_type='application/json')
+
+
+# 在个人中心修改用户密码
+class UpdatePwdView(View):
+    def post(self, request):
+        modiypwd_form = ModifyPwdForm(request.POST)
+        if modiypwd_form.is_valid():
+            pwd1 = request.POST.get("password1", "")
+            pwd2 = request.POST.get("password2", "")
+            # 如果两次密码不相等，返回错误信息
+            if pwd1 != pwd2:
+                return HttpResponse('{"status":"fail", "msg":"密码不一致"}', content_type='application/json')
+            # 如果密码一致
+            user = request.user
+            # 加密成密文
+            user.password = make_password(pwd2)
+            # save保存到数据库
+            user.save()
+            return HttpResponse('{"status":"success"}', content_type='application/json')
+        # 验证失败说明密码位数不够。
+        else:
+            return HttpResponse('{"status":"fail", "msg":"填写错误请检查"}', content_type='application/json')

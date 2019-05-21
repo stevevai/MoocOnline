@@ -48,3 +48,20 @@ class UserInfoForm(forms.ModelForm):
         model = UserProfile
         fields = ['nick_name', 'gender', 'address', 'mobile', 'signature']
 
+
+# 用于文件上传，修改头像
+class UploadImageForm(forms.ModelForm):
+
+    class Meta:
+        model = UserProfile
+        fields = ['image']
+
+
+# 修改密码
+class ModifyPwdForm(forms.Form):
+    password1 = forms.CharField(required=True, min_length=5)
+    password2 = forms.CharField(required=True, min_length=5)
+
+
+
+
