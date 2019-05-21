@@ -10,7 +10,8 @@ class UserProfile(AbstractUser):
         ("hd", u"后端开发工程师"), ("qd", u"前端开发工程师"),
         ("yd", u"移动开发工程师"), ("test", u"软件测试工程师"),
         ("linux", u"Linux系统工程师"), ("qz", u"全栈开发工程师"),
-        ("sf", u"算法工程师"), ("student", u"学生")
+        ("sf", u"算法工程师"), ("student", u"学生"),
+        ("sa", u"超级管理员"), ("admin", u"管理员")
     )
     nick_name = models.CharField(max_length=50, verbose_name=u"昵称", default="", blank=True)
     # birday = models.DateField(verbose_name=u"生日", null=True, blank=True)

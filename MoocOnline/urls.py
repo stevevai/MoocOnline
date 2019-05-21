@@ -40,5 +40,6 @@ urlpatterns = [
     # 课程相关
     path("course/", include('courses.urls', namespace="course")),
     # 配置文件上传的url,serve到某个路径下去找
-    re_path(r'^media/(?P<path>.*)', serve, {"document_root": MEDIA_ROOT})
+    re_path(r'^media/(?P<path>.*)', serve, {"document_root": MEDIA_ROOT}),
+    path("users/", include('users.urls', namespace="users"))
 ]
