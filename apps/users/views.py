@@ -8,10 +8,10 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from .models import UserProfile
+from .models import UserProfile, EmailVerifyRecord
 from .forms import LoginForm, RegisterForm, UserInfoForm, UploadImageForm, ModifyPwdForm
 from MoocOnline.settings import SECRET_KEY
-from util.email_send import send_register_email
+from util.email_send import send_update_email
 from .tasks import send_register_active_email
 # from celery_tasks.tasks import send_register_active_email
 
@@ -204,3 +204,37 @@ class UpdatePwdView(View):
         # 验证失败说明密码位数不够。
         else:
             return HttpResponse('{"status":"fail", "msg":"填写错误请检查"}', content_type='application/json')
+
+
+class SendEmailCodeView(LoginRequiredMixin, View):
+    '''
+    发送邮箱验证码
+    '''
+    def get(self,request):
+        # new email
+        email = request.GET.get("email", "")
+
+        # 不能是已注册的邮箱
+        if UserProfile.objects.filter(email=email):
+            return HttpResponse('{"email":"邮箱已经存在"}', content_type='application/json')
+        send_update_email(email)
+        return HttpResponse('{"status":"success"}', content_type='application/json')
+
+
+# 修改邮箱的view:
+class UpdateEmailView(LoginRequiredMixin, View):
+    login_url = '/login/'
+    redirect_field_name = 'next'
+
+    def post(self, request):
+        email = request.POST.get("email", "")
+        code = request.POST.get("code", "")
+
+        existed_records = EmailVerifyRecord.objects.filter(email=email, code=code, send_type='update_email')
+        if existed_records:
+            user = request.user
+            user.email = email
+            user.save()
+            return HttpResponse('{"status":"success"}', content_type='application/json')
+        else:
+            return HttpResponse('{"email":"验证码无效"}', content_type='application/json')

@@ -2,7 +2,7 @@ from django.core.mail import send_mail
 
 import random
 
-# from users.models import EmailVerifyRecord
+from users.models import EmailVerifyRecord
 from MoocOnline.settings import EMAIL_FROM
 
 
@@ -58,3 +58,20 @@ def send_register_email(email, token, send_type="register"):
             pass
 
 
+def send_update_email(email):
+    code = random_str(4)
+    # 实例化一个EmailVerifyRecord对象
+    email_record = EmailVerifyRecord()
+    # 生成随机的code放入链接
+    email_record.code = code
+    email_record.email = email
+    email_record.send_type = "update_email"
+
+    email_record.save()
+
+    email_title = "Mooc Online 修改邮箱验证码"
+    email_content = "你的邮箱验证码为：{0}".format(code)
+
+    send_status = send_mail(email_title, email_content, EMAIL_FROM, [email])
+    if send_status:
+        pass
