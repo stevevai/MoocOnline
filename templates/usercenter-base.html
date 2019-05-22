@@ -271,7 +271,6 @@
     $('.jsDeleteFav_course').on('click', function(){
         var _this = $(this),
             favid = _this.attr('data-favid');
-        alert(favid)
         $.ajax({
                 cache: false,
                 type: "POST",
@@ -314,7 +313,7 @@
             $.ajax({
                     cache: false,
                     type: "POST",
-                    url: "{% url "org:add_fav" %}",
+                    url: "{% url "users:add_fav" %}",
                     data: {
                         fav_type: 3,
                         fav_id: favid,

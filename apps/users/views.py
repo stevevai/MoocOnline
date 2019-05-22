@@ -11,7 +11,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import UserProfile, EmailVerifyRecord
 from courses.models import Course
 from teachers.models import Teacher
-from operation.models import UserFavourite
+from operation.models import UserFavourite, UserCourse
 from .forms import LoginForm, RegisterForm, UserInfoForm, UploadImageForm, ModifyPwdForm
 from MoocOnline.settings import SECRET_KEY
 from util.email_send import send_update_email
@@ -295,3 +295,57 @@ class AddFavView(View):
                 return HttpResponse('{"status":"success", "msg":"已收藏"}', content_type='application/json')
             else:
                 return HttpResponse('{"status":"fail", "msg":"收藏出错"}', content_type='application/json')
+
+
+# 个人中心页我的课程
+class MyCourseView(LoginRequiredMixin, View):
+    login_url = '/login/'
+    redirect_field_name = 'next'
+
+    def get(self, request):
+        # 记录用户学习状态，待做
+        user_courses = UserCourse.objects.filter(user=request.user)
+        return render(request, "usercenter-mycourse.html", {
+            "user_courses": user_courses,
+        })
+
+
+# 我收藏的授课讲师
+class MyFavTeacherView(LoginRequiredMixin, View):
+    login_url = '/login/'
+    redirect_field_name = 'next'
+
+    def get(self, request):
+        teacher_list = []
+        fav_teachers = UserFavourite.objects.filter(user=request.user, fav_type=2)
+        # 上面的fav_teachers只是存放了id。我们还需要通过id找到讲师对象
+        for fav_teacher in fav_teachers:
+            # 取出fav_id也就是机构的id。
+            teacher_id = fav_teacher.fav_id
+            # 获取这个教师对象
+            teacher = Teacher.objects.get(id=teacher_id)
+            teacher_list.append(teacher)
+        return render(request, "usercenter-fav-teacher.html", {
+            "teacher_list": teacher_list,
+        })
+
+
+# 我收藏的课程
+
+class MyFavCourseView(LoginRequiredMixin, View):
+    login_url = '/login/'
+    redirect_field_name = 'next'
+
+    def get(self, request):
+        course_list = []
+        fav_courses = UserFavourite.objects.filter(user=request.user, fav_type=1)
+        # 上面的fav_courses只是存放了id。我们还需要通过id找到机构对象
+        for fav_course in fav_courses:
+            # 取出fav_id也就是课程的id。
+            course_id = fav_course.fav_id
+            # 获取这个机构对象
+            course = Course.objects.get(id=course_id)
+            course_list.append(course)
+        return render(request, "usercenter-fav-course.html", {
+            "course_list": course_list,
+        })
