@@ -44,6 +44,7 @@ class UserFavourite(models.Model):
         verbose_name_plural = verbose_name
 
 
+# 用户点击观看视频或者开始学习后，则记录用户的学习状态
 class UserCourse(models.Model):
     user = models.ForeignKey(UserProfile, verbose_name=u"用户名", on_delete=models.CASCADE)
     course = models.ForeignKey(Course, verbose_name=u"课程", on_delete=models.CASCADE)
@@ -51,7 +52,6 @@ class UserCourse(models.Model):
     # 记录学习状态，分为已学完和未学完
     status = models.SmallIntegerField(default=0, choices=(("0", "未学完"), ("1", "已学完")), verbose_name=u"学习状态")
     add_time = models.DateTimeField(default=datetime.now, verbose_name=u"添加时间")
-
 
     class Meta:
         verbose_name = u"用户课程"

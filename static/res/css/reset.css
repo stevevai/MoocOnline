@@ -717,6 +717,17 @@ a:focus{outline:none;}
 	border-radius:4px;
 }
 
+.followed-btn{
+	display:inline-block;
+	height: 25px;
+	width: 60px;
+	line-height: 25px;
+	background-color: grey;
+	text-align: center;
+	color: #FFF;
+	border-radius:4px;
+}
+
 /**
 *评论-start
 **/

@@ -4,7 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 
 from .models import Course, CourseClassify, CourseClassify2, CourseResources, Video
-from operation.models import CourseComments
+from operation.models import CourseComments, UserFavourite
 
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 # Create your views here.
@@ -114,12 +114,24 @@ class CourseInfoView(LoginRequiredMixin, View):
         # 获取学过该课程用户学过的其他课程
         relate_courses = Course.objects.filter(id__in=course_ids).order_by("-click_nums")[:5]
         '''
+        # 收藏
+        have_fav_course = False
+        have_fav_teacher = False
+
+        # 判断是否已登录
+        if request.user.is_authenticated:
+            if UserFavourite.objects.filter(user=request.user, fav_id=course.id, fav_type=1):
+                have_fav_course = True
+            if UserFavourite.objects.filter(user=request.user, fav_id=course.teacher.id, fav_type=2):
+                have_fav_teacher = True
 
         all_resources = CourseResources.objects.filter(course=course)
 
         return render(request, "course-info.html", {
             "course": course,
             "course_resources": all_resources,
+            "have_fav_course": have_fav_course,
+            "have_fav_teacher": have_fav_teacher
         })
 
 

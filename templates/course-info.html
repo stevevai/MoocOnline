@@ -196,7 +196,13 @@
 								<div class="meta">课程时长</div>
 								<div class="meta-value">{{ course.learn_times }}分</div>
 							</div>
-							<a onclick="doFollow(this,${(course.id)!})" href="javascript:void(0)" class="following" style="float: right;margin-top:5px;" title="收藏">
+							<a onclick="add_fav(this,{{ course.id }},1)" href="javascript:void(0)"
+                                    {% if have_fav_course %}
+                                        class="followed"
+                                    {% else %}
+                                        class="following"
+                                    {% endif %}
+                               style="float: right;margin-top:5px;" title="收藏">
 							</a>
 						</div>
 						
@@ -247,7 +253,13 @@
 					<span class="lecturer-name">{{ course.teacher.name }}</span>
 					<span class="lecturer-title">{{ course.teacher.get_job_display }}</span>
 					<span class="lecturer-p" >{{ course.teacher.points }}</span>
-					<a href="javascript:void(0)" ><span class="follow-btn">关注+</span></a>
+					<a href="javascript:void(0)" onclick="add_fav(this,{{ course.teacher.id }},2)">
+                        {% if have_fav_teacher %}
+                            <span class="followed-btn">已关注</span>
+                        {% else %}
+                            <span class="follow-btn">关注+</span>
+                        {% endif %}
+                    </a>
 				</div>
 
 				<div class="course-info-tip">
@@ -307,7 +319,38 @@
 				});
 			});	
 		</script>
-		
+        <script type="text/javascript">
+        //收藏分享
+        function add_fav(current_elem, fav_id, fav_type){
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url:"{% url "users:add_fav" %}",
+                data:{'fav_id':fav_id, 'fav_type':fav_type},
+                async: true,
+                beforeSend:function(xhr, settings){
+                    xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+                },
+                success: function(data) {
+                    if(data.status == 'fail'){
+                        if(data.msg == '用户未登录'){
+                            window.location.href="/login/";
+                        }else{
+                            alert(data.msg)
+                        }
+
+                    }else if(data.status == 'success'){
+                       window.location.reload();
+                    }
+                },
+            });
+        }
+
+        $('#jsLeftBtn').on('click', function(){
+            add_fav($(this), {{ course.id }}, 1);
+        });
+
+        </script>
 	</body>
 	
 </html>
