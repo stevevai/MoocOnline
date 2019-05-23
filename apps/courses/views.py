@@ -3,6 +3,7 @@ from django.views.generic.base import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
+from django.db.models import Q  # 并集运算
 
 from .models import Course, CourseClassify, CourseClassify2, CourseResources, Video, Lesson
 from operation.models import CourseComments, UserFavourite, UserCourse
@@ -21,14 +22,12 @@ class CourseListView(View):
         all_courses = Course.objects.all().order_by("-add_time")
 
         # 课程全局搜索功能
-        '''
         search_keywords = request.GET.get('keywords', '')
         if search_keywords:
             # 在name字段进行操作,做like语句的操作。i代表不区分大小写
             all_courses = all_courses.filter(
                 Q(name__icontains=search_keywords) | Q(desc__icontains=search_keywords) | Q(
                     detail__icontains=search_keywords))
-        '''
 
         # 进行排序，分为最新和最热，默认是最新
         sort = request.GET.get('sort', "")
@@ -80,7 +79,7 @@ class CourseListView(View):
         return render(request, "course-list.html", {"all_courses": courses, "page_nums": page_nums,
                                                     "current_page": current_page, "classify": classify,
                                                     "classify2": classify2, "sort": sort, "c1": c1, "c2": c2,
-                                                    "is_easy": is_easy})
+                                                    "is_easy": is_easy, "search_keywords": search_keywords})
         # return render(request, "course-list.html", {"all_courses": courses, "sort": sort, "hot_courses": hot_courses,
         #                                           "search_keywords": search_keywords})
 

@@ -213,7 +213,7 @@ class SendEmailCodeView(LoginRequiredMixin, View):
     '''
     发送邮箱验证码
     '''
-    def get(self,request):
+    def get(self, request):
         # new email
         email = request.GET.get("email", "")
 

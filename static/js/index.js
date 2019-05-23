@@ -1,3 +1,13 @@
+//顶部搜索栏搜索方法
+function search_click(){
+    var keywords = $('#search_keywords').val(),
+        request_url = '';
+    if(keywords == ""){
+        return
+    }
+    request_url = "/course/list?keywords="+keywords
+    window.location.href = request_url
+}
 
 var swiper = new Swiper('.banner-img', {
     pagination: '.swiper-pagination',
@@ -37,3 +47,13 @@ $('.teachers a').hover(function(){
 	$(this).find('p.nickname,p.job').toggleClass('hide');
 	$(this).find('p.teacher-info').toggleClass('teacher-info-hover');
 })
+
+ $('#jsSearchBtn').on('click',function(){
+        search_click()
+    });
+    //搜索表单键盘事件
+    $("#search_keywords").keydown(function(event){
+        if(event.keyCode == 13){
+             $('#jsSearchBtn').trigger('click');
+        }
+    });
