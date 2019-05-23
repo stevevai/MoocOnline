@@ -303,7 +303,6 @@ class MyCourseView(LoginRequiredMixin, View):
     redirect_field_name = 'next'
 
     def get(self, request):
-        # 记录用户学习状态，待做
         user_courses = UserCourse.objects.filter(user=request.user)
         return render(request, "usercenter-mycourse.html", {
             "user_courses": user_courses,

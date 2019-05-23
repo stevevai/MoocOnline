@@ -160,12 +160,14 @@ class VideoPlayView(LoginRequiredMixin, View):
         '''
         记录学习状态
         '''
-        user_courses = UserCourse.objects.filter(user=request.user, course=course)
+        user_courses = UserCourse.objects.filter(user=request.user, course=course)[0: 1].get()
         # 尚未点击开始学习，则不记录学习状态
         if not user_courses:
             pass
         else:
-            user_courses = UserCourse(user=request.user, course=course, section=video)
+            # 修改学习进度
+            # user_courses = UserCourse(user=request.user, course=course, section=video)
+            user_courses.section = video
             user_courses.save()
 
         # 查询课程资源
