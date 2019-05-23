@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 from datetime import datetime
+from teachers.models import Teacher
 
 
 # Create your models here.
@@ -13,7 +14,12 @@ class UserProfile(AbstractUser):
         ("yd", u"移动开发工程师"), ("test", u"软件测试工程师"),
         ("linux", u"Linux系统工程师"), ("qz", u"全栈开发工程师"),
         ("sf", u"算法工程师"), ("student", u"学生"),
-        ("sa", u"超级管理员"), ("admin", u"管理员")
+        ("sa", u"超级管理员"), ("admin", u"管理员"),
+        ("teacher", u"教师")
+    )
+    type_list = (
+        (0, u"超级管理员"), (1, u"管理员"),
+        (2, u"教师"), (3, u"普通用户")
     )
     nick_name = models.CharField(max_length=50, verbose_name=u"昵称", default="", blank=True)
     # birday = models.DateField(verbose_name=u"生日", null=True, blank=True)
@@ -25,6 +31,9 @@ class UserProfile(AbstractUser):
     signature = models.CharField(max_length=128, default="", blank=True)
     image = models.ImageField(upload_to="users/images/%Y/%m", default="image/default_s.png", max_length=100,
                               verbose_name=u"用户头像")
+    user_type = models.SmallIntegerField(choices=type_list, verbose_name=u"用户类型", default=3)
+    # 为教师创建新账号，与教师表中的数据相关联
+    teacher = models.ForeignKey(Teacher, verbose_name=u"教师", on_delete=models.SET_NULL, null=True)
 
     class Meta:
         verbose_name = u"用户信息"

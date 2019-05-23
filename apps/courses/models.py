@@ -139,12 +139,3 @@ class CourseResources(models.Model):
 
     def __str__(self):
         return self.name
-
-
-# 一张表分两个model管理，继承Course
-class BannerCourse(Course):
-    class Meta:
-        verbose_name = "轮播课程"
-        verbose_name_plural = verbose_name
-        # 设置proxy = true会具有model的功能，但不会生成表
-        proxy = True

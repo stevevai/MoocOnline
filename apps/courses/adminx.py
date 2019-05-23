@@ -1,7 +1,7 @@
 import xadmin
 
 
-from .models import Course, Lesson, Video, CourseResources, CourseClassify2, CourseClassify, BannerCourse
+from .models import Course, Lesson, Video, CourseResources, CourseClassify2, CourseClassify
 
 
 # 课程直接添加章节
@@ -40,24 +40,6 @@ class CourseResourceInline(object):
     extra = 0
 
 
-# Course的admin管理器
-class BannerCourseAdmin(object):
-    list_display = ['name', 'desc', 'degree', 'learn_times', 'students']
-    search_fields = ['name', 'desc', 'degree', 'students']
-    list_filter = ['name', 'desc', 'degree', 'learn_times', 'students']
-    # ordering = {''}
-    # readonly_fields =['']
-    exclude = ['fav_nums']
-    # 课程直接添加章节
-    inlines = [LessonInline, CourseResourceInline]
-
-    # 重载queryset方法。过滤列表中的数据
-    def queryset(self):
-        qs = super(BannerCourseAdmin, self).queryset()
-        qs = qs.filter(is_banner=True)
-        return qs
-
-
 class CourseAdmin(object):
     list_display = ['name', 'desc', 'degree', 'learn_times',]
     search_fields = ['name', 'desc', 'detail', 'degree']
@@ -72,11 +54,13 @@ class CourseAdmin(object):
     # 配置ueditor,在ueditor.py中get
     # style_fields = {"detail": "ueditor"}
 
-    # 过滤列表中的数据
+    # 如果是教师用户，则需要过滤列表中的数据
     def queryset(self):
         qs = super(CourseAdmin, self).queryset()
-        qs = qs.filter(is_banner=False)
-        return qs
+        if self.request.user.is_superuser:
+            return qs
+        else:
+            return qs.filter(teacher=self.request.user.teacher)
 
 
 class LessonAdmin(object):
@@ -101,7 +85,6 @@ xadmin.site.register(Course, CourseAdmin)
 xadmin.site.register(Lesson, LessonAdmin)
 xadmin.site.register(Video, VideoAdmin)
 xadmin.site.register(CourseResources, CourseResourceAdmin)
-xadmin.site.register(BannerCourse, BannerCourseAdmin)
 xadmin.site.register(CourseClassify, CourseClassifyAdmin)
 xadmin.site.register(CourseClassify2, CourseClassify2Admin)
 
