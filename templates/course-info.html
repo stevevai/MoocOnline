@@ -178,11 +178,23 @@
 						<div class="course-title">{{ course.name }}</div>
 						
 						<div class="course-meta">
-							<a href="${s.base}/course/video.html" class="learn-btn" >继续学习</a>
+							<a href="{% url "course:course_learn" course.id %}" class="learn-btn" >
+                                {% if  have_learn %}
+                                    继续学习
+                                {% else %}
+                                    开始学习
+                                {% endif %}
+                            </a>
 							
 							<div class="static-item"  >
-								<div class="meta">上次学到</div>
-								<div class="meta-value">1-1 感受神秘的涟漪效果之美感受神秘的涟漪效果之美</div>
+                                {% if have_learn %}
+                                    <div class="meta">上次学到</div>
+
+                                {% else %}
+                                    <div class="meta"></div>
+                                {% endif %}
+                                    <div class="meta-value">{{ progress }}</div>
+
 							</div>
 							<div class="static-item"  >
 								<div class="meta">学习人数</div>

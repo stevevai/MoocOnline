@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from django.views.generic.base import View
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
 
-from .models import Course, CourseClassify, CourseClassify2, CourseResources, Video
-from operation.models import CourseComments, UserFavourite
+from .models import Course, CourseClassify, CourseClassify2, CourseResources, Video, Lesson
+from operation.models import CourseComments, UserFavourite, UserCourse
 
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 # Create your views here.
@@ -96,12 +97,19 @@ class CourseInfoView(LoginRequiredMixin, View):
         '''
 
         # 查询用户是否关联了该门课程
-        '''
+        have_learn = False
+
         user_courses = UserCourse.objects.filter(user=request.user, course=course)
-        if not user_courses:
-            user_courses = UserCourse(user=request.user, course=course)
-            user_courses.save()
-        '''
+        progress = ""
+        if user_courses:
+            have_learn = True
+            # 找出最新的一条学习记录
+            user_courses = UserCourse.objects.filter(user=request.user, course=course).order_by("-add_time")[0:1].get()
+            progress = user_courses.section.name
+
+        else:
+            progress = "尚未学习本课程"
+
         '''
         # 选出学了这门课的学生关系
         user_courses = UserCourse.objects.filter(course=course)
@@ -131,7 +139,9 @@ class CourseInfoView(LoginRequiredMixin, View):
             "course": course,
             "course_resources": all_resources,
             "have_fav_course": have_fav_course,
-            "have_fav_teacher": have_fav_teacher
+            "have_fav_teacher": have_fav_teacher,
+            "have_learn": have_learn,
+            "progress": progress
         })
 
 
@@ -147,8 +157,20 @@ class VideoPlayView(LoginRequiredMixin, View):
         # 查询对应的course
         course = video.lesson.course
 
+        '''
+        记录学习状态
+        '''
+        user_courses = UserCourse.objects.filter(user=request.user, course=course)
+        # 尚未点击开始学习，则不记录学习状态
+        if not user_courses:
+            pass
+        else:
+            user_courses = UserCourse(user=request.user, course=course, section=video)
+            user_courses.save()
+
         # 查询课程资源
         all_resources = CourseResources.objects.filter(course=course)
+        # 只显示当前章节下的评论
         all_comments = CourseComments.objects.filter(video=video).order_by("-add_time")
 
         return render(request, "course-video.html", {
@@ -159,7 +181,7 @@ class VideoPlayView(LoginRequiredMixin, View):
         })
 
 
-# 课程评论，还需要编写一个显示章节评论的View
+# 课程全部评论
 class CommentsView(LoginRequiredMixin, View):
     login_url = '/login/'
     redirect_field_name = 'next'
@@ -200,3 +222,35 @@ class AddCommentsView(View):
             return HttpResponse('{"status":"success", "msg":"评论成功"}', content_type='application/json')
         else:
             return HttpResponse('{"status":"fail", "msg":"评论失败"}', content_type='application/json')
+
+
+class CourseLearnView(LoginRequiredMixin, View):
+    login_url = '/login/'
+    redirect_field_name = 'next'
+
+    def get(self, request, course_id):
+        course = Course.objects.get(id=int(course_id))
+        video_id = 0
+
+        user_courses = UserCourse.objects.filter(user=request.user, course=course)
+
+        # 开始学习
+        if not user_courses:
+            lesson = Lesson.objects.filter(course=course).first()
+            video = Video.objects.filter(lesson=lesson).first()
+            user_courses = UserCourse(user=request.user, course=course, section=video)
+            user_courses.save()
+            course.stu_nums += 1
+            course.save()
+            # 跳转第一个视频
+            video_id = video.id
+            return HttpResponseRedirect('/course/video/%s/' % video_id)
+
+        # 继续学习
+        else:
+            # 找出最新的一条学习记录
+            user_courses = UserCourse.objects.filter(user=request.user, course=course).order_by("-add_time")[0:1].get()
+            video_id = user_courses.section.id
+            return HttpResponseRedirect('/course/video/%s/' % video_id)
+
+
