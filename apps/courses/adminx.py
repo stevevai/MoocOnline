@@ -45,6 +45,7 @@ class CourseAdmin(object):
     search_fields = ['name', 'desc', 'detail', 'degree']
     list_filter = ['name', 'desc', 'degree', 'learn_times']
     # ordering = ['-click_nums']      # 默认排序
+    relfield_style = 'fk-ajax'  # 当有外键指向时，会以ajax方式加载。下拉搜索框
     readonly_fields = ['fav_nums']    # 只读,不能修改
     # exclude = ['']  # 详情页不显示
     # 课程页直接添加章节

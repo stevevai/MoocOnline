@@ -46,11 +46,13 @@ INSTALLED_APPS = [
     'captcha',
     'DjangoUeditor',
     'pure_pagination',
+    # 'haystack'  # 注册全文检索框架
     # 注册apps
     'users',
     'teachers',
     'courses',
-    'operation'
+    'operation',
+    'article'
 ]
 
 # 继承Django的User模型，自定义
@@ -219,3 +221,17 @@ PAGINATION_SETTINGS = {
 # 超过了这个值，会先保存在磁盘的临时文件中
 # 先设定成50MB
 FILE_UPLOAD_MAX_MEMORY_SIZE = 50*1024*1024
+
+'''
+# 全文检索框架的配置
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        # 使用whoosh引擎
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
+    },
+}
+
+# 当添加、修改、删除数据时，自动生成索引
+HAYSTACK_SIGNAL_PROCESSOR ='haystack.signals.RealtimeSignalProcessor'
+'''
