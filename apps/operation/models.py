@@ -4,7 +4,11 @@ from datetime import datetime
 
 from users.models import UserProfile
 from courses.models import Course, Video
+
+from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 # Create your models here.
+
 
 
 # 轮播图
@@ -31,6 +35,17 @@ class CourseComments(models.Model):
     class Meta:
         verbose_name = u"课程评论"
         verbose_name_plural = verbose_name
+
+
+class UserNote(models.Model):
+    user = models.ForeignKey(UserProfile, verbose_name=u"用户名", on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, verbose_name=u"课程", on_delete=models.CASCADE)
+    # 章节
+    video = models.ForeignKey(Video, verbose_name=u"章节", on_delete=models.CASCADE, null=True)
+    # notes = RichTextField()
+    # 使用这种类型可以上传图片
+    notes = RichTextUploadingField()
+    add_time = models.DateTimeField(default=datetime.now, verbose_name=u"添加时间")
 
 
 class UserFavourite(models.Model):

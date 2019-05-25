@@ -37,6 +37,7 @@ urlpatterns = [
     path("captcha/", include('captcha.urls')),
     # 富文本编辑器
     path('ueditor/', include('DjangoUeditor.urls')),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
     # 课程相关
     path("course/", include('courses.urls', namespace="course")),
     # 配置文件上传的url,serve到某个路径下去找

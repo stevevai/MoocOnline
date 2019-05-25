@@ -3,7 +3,7 @@ from django.conf.urls import url
 from django.views.generic import TemplateView
 
 # from .views import CourseListView, CourseDetailView, CourseInfoView, CommentsView, AddCommentsView, VideoPlayView
-from .views import CourseListView, CourseInfoView, VideoPlayView, CommentsView, AddCommentsView, CourseLearnView
+from .views import CourseListView, CourseInfoView, VideoPlayView, CommentsView, AddCommentsView, CourseLearnView, NotesView, AddNotesView
 
 app_name = "courses"
 
@@ -16,5 +16,7 @@ urlpatterns = [
     re_path('comments/(?P<course_id>\d+)/', CommentsView.as_view(), name="course_comments"),
     # 添加课程评论,已经把参数放到post当中了
     path('add_comment/', AddCommentsView.as_view(), name="add_comment"),
-    re_path('learn/(?P<course_id>\d+)/', CourseLearnView.as_view(), name="course_learn")
+    re_path('learn/(?P<course_id>\d+)/', CourseLearnView.as_view(), name="course_learn"),
+    re_path('note/(?P<video_id>\d+)/', NotesView.as_view(), name="course_note"),
+    path('add_note/', AddNotesView.as_view(), name="add_note")
 ]

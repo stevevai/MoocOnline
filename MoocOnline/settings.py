@@ -47,6 +47,9 @@ INSTALLED_APPS = [
     'DjangoUeditor',
     'pure_pagination',
     'taggit',
+    'ckeditor',
+    # 添加上传图片功能
+    'ckeditor_uploader',
     # 'haystack'  # 注册全文检索框架
     # 注册apps
     'users',
@@ -236,3 +239,37 @@ HAYSTACK_CONNECTIONS = {
 # 当添加、修改、删除数据时，自动生成索引
 HAYSTACK_SIGNAL_PROCESSOR ='haystack.signals.RealtimeSignalProcessor'
 '''
+
+# ckeditor settings
+CKEDITOR_UPLOAD_PATH = "notes_images/"
+CKEDITOR_CONFIGS = {
+    # django-ckeditor默认使用default配置
+    'default': {
+        # 编辑器宽度自适应
+        'width':'auto',
+        'height':'250px',
+        # tab键转换空格数
+        'tabSpaces': 4,
+        # 工具栏风格
+        'toolbar': 'Custom',
+        # 工具栏按钮
+        'toolbar_Custom': [
+            # 表情 代码块
+            ['Smiley', 'CodeSnippet'],
+            # 图片
+            ['Image'],
+            # 字体风格
+            ['Bold', 'Italic', 'Underline', 'RemoveFormat', 'Blockquote'],
+            # 字体颜色
+            ['TextColor', 'BGColor'],
+            # 链接
+            ['Link', 'Unlink'],
+            # 列表
+            ['NumberedList', 'BulletedList'],
+            # 最大化
+            ['Maximize']
+        ],
+        # 加入代码块插件
+        'extraPlugins': ','.join(['codesnippet', 'prism', 'widget', 'lineutils']),
+    }
+}

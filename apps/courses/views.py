@@ -6,7 +6,8 @@ from django.urls import reverse
 from django.db.models import Q  # 并集运算
 
 from .models import Course, CourseClassify, CourseClassify2, CourseResources, Video, Lesson
-from operation.models import CourseComments, UserFavourite, UserCourse
+from operation.models import CourseComments, UserFavourite, UserCourse, UserNote
+from .forms import UserNoteForm
 
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 # Create your views here.
@@ -255,3 +256,52 @@ class CourseLearnView(LoginRequiredMixin, View):
             return HttpResponseRedirect('/course/video/%s/' % video_id)
 
 
+# 课程全部评论
+class NotesView(LoginRequiredMixin, View):
+    login_url = '/login/'
+    redirect_field_name = 'next'
+
+    def get(self, request, video_id):
+        video = Video.objects.get(id=int(video_id))
+        # 查询对应的course
+        course = video.lesson.course
+        all_comments = CourseComments.objects.filter(video=video).order_by("-add_time")
+        # 查询我的笔记
+        all_notes = UserNote.objects.filter(user=request.user, course=course, video=video)
+
+        # 引入写笔记的表单
+        note_form = UserNoteForm()
+
+        return render(request, "course-note.html", {
+            "course": course,
+            "video": video,
+            "all_comments": all_comments,
+            "all_notes": all_notes,
+            "note_form": note_form
+        })
+
+
+# ajax方式添加笔记
+class AddNotesView(View):
+    def post(self, request):
+        if not request.user.is_authenticated:
+            # 未登录时返回json提示未登录，跳转到登录页面是在ajax中做的
+            return HttpResponse('{"status":"fail", "msg":"用户未登录"}', content_type='application/json')
+        course_id = request.POST.get("course_id", 0)
+        video_id = request.POST.get("video_id", 0)
+        notes = request.POST.get("notes", "")
+        if int(course_id) > 0 and notes:
+            user_notes = UserNote()
+            # get只能取出一条数据，如果有多条抛出异常。没有数据也抛异常
+            # filter取一个列表出来，queryset。没有数据返回空的queryset不会抛异常
+            course = Course.objects.get(id=int(course_id))
+            video = Video.objects.get(id=int(video_id))
+            # 存入对象
+            user_notes.course = course
+            user_notes.notes = notes
+            user_notes.video = video
+            user_notes.user = request.user
+            user_notes.save()
+            return HttpResponse('{"status":"success", "msg":"评论成功"}', content_type='application/json')
+        else:
+            return HttpResponse('{"status":"fail", "msg":"评论失败"}', content_type='application/json')
