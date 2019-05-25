@@ -4,6 +4,8 @@ from datetime import datetime
 from teachers.models import Teacher
 
 from DjangoUeditor.models import UEditorField
+# Django-taggit
+from taggit.managers import TaggableManager
 
 
 # Create your models here.
@@ -54,7 +56,7 @@ class Course(models.Model):
     # 富文本编辑器
     # detail = UEditorField(verbose_name=u"课程详情",width=600, height=300, imagePath="courses/ueditor/",
     # filePath="courses/ueditor/", default='')
-    detail = models.TextField(verbose_name=u"课程详情",default='')
+    detail = models.TextField(verbose_name=u"课程详情", default='')
     degree = models.CharField(choices=(("cj", "初级"), ("zj", "中级"), ("gj", "高级")), max_length=2, verbose_name=u"难度")
     learn_times = models.IntegerField(default=0, verbose_name=u"学习时长(分钟)")
     teacher = models.ForeignKey(Teacher, verbose_name=u"讲师", null=True, blank=True, on_delete=models.CASCADE)
@@ -66,6 +68,8 @@ class Course(models.Model):
     # category = models.CharField(max_length=20, default=u"", verbose_name=u"课程类别")
     # 加一张课程与标签的中间表
     # tag = models.CharField(max_length=15, verbose_name=u"课程标签", default=u"")
+    # 标签
+    tags = TaggableManager(verbose_name=u"课程标签", blank=True)
     you_need_know = models.TextField(default="", verbose_name=u"课程须知")
     teacher_tell = models.TextField(default="", verbose_name=u"老师告诉你")
     is_banner = models.BooleanField(default=False, verbose_name=u"是否轮播")

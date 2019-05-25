@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'captcha',
     'DjangoUeditor',
     'pure_pagination',
+    'taggit',
     # 'haystack'  # 注册全文检索框架
     # 注册apps
     'users',
