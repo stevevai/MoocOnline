@@ -4,7 +4,7 @@ from datetime import datetime
 
 
 # 博客文章数据模型
-class ArticlePost(models.Model):
+class Article(models.Model):
     author = models.ForeignKey(UserProfile, on_delete=models.CASCADE, verbose_name=u"文章作者")
     title = models.CharField(max_length=100, verbose_name=u"文章标题")
     body = models.TextField(verbose_name=u"文章内容")

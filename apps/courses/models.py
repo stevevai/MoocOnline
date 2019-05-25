@@ -37,7 +37,7 @@ class CourseClassify(models.Model):
 # 二级分类
 class CourseClassify2(models.Model):
     name = models.CharField(max_length=20, verbose_name=u"二级分类名称")
-    parent_classify = models.ForeignKey(CourseClassify, verbose_name=u"一级分类", on_delete=models.SET_NULL, null=True)
+    parent_classify = models.ForeignKey(CourseClassify, verbose_name=u"一级分类", on_delete=models.CASCADE, null=True)
     add_time = models.DateTimeField(default=datetime.now, verbose_name=u"添加时间")
 
     class Meta:
