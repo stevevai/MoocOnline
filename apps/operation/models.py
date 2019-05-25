@@ -7,14 +7,19 @@ from courses.models import Course, Video
 
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
+from stdimage.models import StdImageField
+from stdimage.utils import UploadToUUID
 # Create your models here.
-
 
 
 # 轮播图
 class Banner(models.Model):
     title = models.CharField(max_length=100, verbose_name=u"标题")
-    image = models.ImageField(upload_to="banner/%Y/%m", verbose_name=u"轮播图", max_length=100)
+    # image = models.ImageField(upload_to="banner/%Y/%m", verbose_name=u"轮播图", max_length=100)
+    image = StdImageField(max_length=100,
+                          upload_to=UploadToUUID(path=datetime.now().strftime('banner/%Y/%m')),
+                          verbose_name=u"轮播图",
+                          variations={'thumbnail': {'width': 100, 'height': 75}})
     url = models.URLField(max_length=200, verbose_name=u"访问地址")
     index = models.IntegerField(default=0, verbose_name=u"顺序")
     add_time = models.DateTimeField(default=datetime.now, verbose_name=u"添加时间")
@@ -23,6 +28,17 @@ class Banner(models.Model):
         verbose_name = u"轮播图"
         verbose_name_plural = verbose_name
 
+    def image_img(self):
+        if self.image:
+            return str('<img src="%s" />' % self.image.thumbnail.url)
+        else:
+            return u'上传图片'
+
+    image_img.short_description = '轮播图'
+    image_img.allow_tags = True
+    
+    def __str__(self):
+        return '{0}(位于第{1}位)'.format(self.title, self.index)
 
 class CourseComments(models.Model):
     user = models.ForeignKey(UserProfile, verbose_name=u"用户名", on_delete=models.CASCADE)

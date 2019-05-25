@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'ckeditor',
     # 添加上传图片功能
     'ckeditor_uploader',
+    'stdimage',     # 图片缩略图
     # 'haystack'  # 注册全文检索框架
     # 注册apps
     'users',
@@ -210,7 +211,7 @@ PREFIX_URL = 'http://'
 MEDIA_URL = PREFIX_URL + QINIU_BUCKET_DOMAIN + "/media/"
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media').replace("\\", "/")
 MEDIA_ROOT = 'media/'
-DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuMediaStorage'
+DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuStorage'
 
 
 # 分页
