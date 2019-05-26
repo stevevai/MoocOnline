@@ -40,13 +40,21 @@ class CourseListView(View):
 
         # 课程分类
         c1 = request.GET.get('c1', "")
+        c1_temp = c1
         if c1:
-            all_courses = all_courses.filter(classify_root__name=c1)
+            if c1 == '算法':
+                c1_temp = '算法&数学'
+            elif c1 == '运维':
+                c1_temp = '运维&测试'
+            all_courses = all_courses.filter(classify_root__name=c1_temp)
 
         # 二级分类
         c2 = request.GET.get('c2', "")
+        c2_temp = c2
         if c2:
-            all_courses = all_courses.filter(classify_detail__name=c2)
+            if c2 == 'HTMLCSS':
+                c2_temp = 'HTML/CSS'
+            all_courses = all_courses.filter(classify_detail__name=c2_temp)
 
         # 根据degree来筛选
         is_easy = request.GET.get('is_easy', "")

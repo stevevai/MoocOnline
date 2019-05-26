@@ -96,20 +96,48 @@
 			<div class="category clearfix">
 				<div class="fangxiang">方向：</div>
 				<div class="fangxiang-content">
-					<a href="" class="menu-select">全部</a>
-                    {% for cagotory in classify %}
-					<a href="">{{ cagotory.name }}</a>
-                    {% endfor %}
+
+                    <a href="?sort={{ sort }}&c1=&iseasy={{ is_easy }}" class="{% if c1 == '' or c1 is null %}menu-select{% endif %}">全部</a>
+
+					<a href="?sort={{ sort }}&c1=前端开发&iseasy={{ is_easy }}" class="{% if c1 == '前端开发' %}menu-select{% endif %}">前端开发</a>
+
+					<a href="?sort={{ sort }}&c1=后端开发&iseasy={{ is_easy }}" class="{% if c1 == '后端开发' %}menu-select{% endif %}">后端开发</a>
+
+					<a href="?sort={{ sort }}&c1=算法&iseasy={{ is_easy }}" class="{% if c1 == '算法' %}menu-select{% endif %}">算法&amp;数学</a>
+
+					<a href="?sort={{ sort }}&c1=运维&iseasy={{ is_easy }}" class="{% if c1 == '运维' %}menu-select{% endif %}">运维&amp;测试</a>
+
+					<a href="?sort={{ sort }}&c1=数据库&iseasy={{ is_easy }}" class="{% if c1 == '数据库' %}menu-select{% endif %}">数据库</a>
+
 				</div>
 				
 			</div>
 			<div class="category clearfix">
 				<div class="fangxiang">分类：</div>
 				<div class="fangxiang-content">
-					<a href="" class="menu-select">全部</a>
-                    {% for catogory2 in classify2 %}
-					<a href="">{{ catogory2.name }}</a>
-                    {% endfor %}
+					<a href="?sort={{ sort }}&c1={{ c1 }}&c2=&iseasy={{ is_easy }}" class="{% if c2 == '' or c2 is null %}menu-select{% endif %}" >全部</a>
+                    {% if c1 == '前端开发' or c1 == '' or c1 is null %}
+                        <a href="?sort={{ sort }}&c1={{ c1 }}&c2=HTMLCSS&iseasy={{ is_easy }}" class="{% if c2 == 'HTMLCSS'  %}menu-select{% endif %}">HTML/CSS</a>
+					    <a href="?sort={{ sort }}&c1={{ c1 }}&c2=Bootstrap&iseasy={{ is_easy }}" class="{% if c2 == 'Bootstrap'  %}menu-select{% endif %}">Bootstrap</a>
+                    {% endif %}
+                    {% if c1 == '后端开发' or c1 == '' or c1 is null %}
+					    <a href="?sort={{ sort }}&c1={{ c1 }}&c2=Java&iseasy={{ is_easy }}" class="{% if c2 == 'Java'  %}menu-select{% endif %}">Java</a>
+                        <a href="?sort={{ sort }}&c1={{ c1 }}&c2=Python&iseasy={{ is_easy }}" class="{% if c2 == 'Python'  %}menu-select{% endif %}">Python</a>
+                        <a href="?sort={{ sort }}&c1={{ c1 }}&c2=Django&iseasy={{ is_easy }}" class="{% if c2 == 'Django'  %}menu-select{% endif %}">Django</a>
+                    {% endif %}
+                    {% if c1 == '算法' or c1 == '' or c1 is null %}
+                        <a href="?sort={{ sort }}&c1={{ c1 }}&c2=算法与数据结构&iseasy={{ is_easy }}" class="{% if c2 == '算法与数据结构'  %}menu-select{% endif %}">算法与数据结构</a>
+                        <a href="?sort={{ sort }}&c1={{ c1 }}&c2=数学&iseasy={{ is_easy }}" class="{% if c2 == '数学'  %}menu-select{% endif %}">数学</a>
+                    {% endif %}
+                    {% if c1 == '运维' or c1 == '' or c1 is null %}
+                        <a href="?sort={{ sort }}&c1={{ c1 }}&c2=Linux&iseasy={{ is_easy }}" class="{% if c2 == 'Linux'  %}menu-select{% endif %}">Linux</a>
+                        <a href="?sort={{ sort }}&c1={{ c1 }}&c2=测试&iseasy={{ is_easy }}" class="{% if c2 == '测试'  %}menu-select{% endif %}">测试</a>
+                    {% endif %}
+                    {% if c1 == '数据库' or c1 == '' or c1 is null %}
+                        <a href="?sort={{ sort }}&c1={{ c1 }}&c2=MySQL&iseasy={{ is_easy }}" class="{% if c2 == 'MySQL'  %}menu-select{% endif %}">MySQL</a>
+                        <a href="?sort={{ sort }}&c1={{ c1 }}&c2=Oracle&iseasy={{ is_easy }}" class="{% if c2 == 'Oracle'  %}menu-select{% endif %}">Oracle</a>
+                        <a href="?sort={{ sort }}&c1={{ c1 }}&c2=SQL Server&iseasy={{ is_easy }}" class="{% if c2 == 'SQL Server'  %}menu-select{% endif %}">SQL Server</a>
+                    {% endif %}
 				</div>
 				
 			</div>
@@ -121,7 +149,7 @@
 		<div class="main-wrap">
 			<div class="main-title">
 				<div class="hot">
-					<a href="?sort=last&c1={{ c1 }}&c2={{ c2 }}&iseasy={{ is_easy }}" class="{% if sort == "last" or sort is null %}
+					<a href="?sort=last&c1={{ c1 }}&c2={{ c2 }}&iseasy={{ is_easy }}" class="{% if sort == "last" or sort is null or sort == '' %}
 					a-select{% endif %}">最新</a>
 					<a href="?sort=pop&c1={{ c1 }}&c2={{ c2 }}&iseasy={{ is_easy }}" {% ifequal sort 'pop' %}class="a-select"{% endifequal %}>最热</a>
 				</div>
