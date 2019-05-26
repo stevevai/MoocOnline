@@ -117,105 +117,20 @@
 		<div class="banner-wrap">
 				<div class="banner-img">
 					<div class="swiper-wrapper">
-			            <div class="swiper-slide" data-swiper-autoplay="3000" style="background-image:url(/static/img/lunbo1.jpg)"></div>
-			            <div class="swiper-slide" data-swiper-autoplay="3000" style="background-image:url(/static/img/lunbo2.jpg)"></div>
-			            <div class="swiper-slide" data-swiper-autoplay="3000" style="background-image:url(/static/img/lunbo3.jpg)"></div>
-			            <div class="swiper-slide" data-swiper-autoplay="3000" style="background-image:url(/static/img/lunbo4.jpg)"></div>
-			            <div class="swiper-slide" data-swiper-autoplay="3000" style="background-image:url(/static/img/lunbo5.jpg)"></div>
-			            <div class="swiper-slide" data-swiper-autoplay="3000" style="background-image:url(/static/img/lunbo.jpg)"></div>
+                        {% for banner in all_banner %}
+			                <div class="swiper-slide" data-swiper-autoplay="3000" style="background-image:url({{ MEDIA_URL }}{{ banner.image }})"></div>
+                        {% endfor %}
 			        </div>
-			        <!-- Add Pagination -->
+
 			        <div class="swiper-pagination swiper-pagination-white"></div>
-			        <!-- Add Arrows -->
+
 			        <div class="swiper-button-next swiper-button-white"></div>
 			        <div class="swiper-button-prev swiper-button-white"></div>
 				</div>
 		</div>
 	</div>
-	
-	<!-- 实战推荐 -->
-	<div class="shizhan">
-		<div class="shizhan-wrap">
-			<h3 class="shizhan-title">
-				<span class="i-shizhan-l"></span>
-				<em>实</em>/<em>战</em>/<em>推</em>/<em>荐</em>
-				<span class="i-shizhan-r"></span>
-			</h3>
-			<div class="shizhan-content">
-				<a href="#" class="content-item mr18">
-					<div class="img">
-						<span class="tag">Python</span>
-						<img src="/static/img/shizhan1.jpg" alt="">
-					</div>
-					<p class="shizhan-desc">全网最热Python3入门+进阶 更快上手实际开发</p>
-					<div class="card-info">
-						<span>实战</span>
-						<span>初级</span>
-						<span><i class="icon icon-user">&#xe646;</i>2289</span>	
-						<span style="margin-right: 0px;color: #ff9900;"><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i></span>
-					</div>
-					<p class="price">￥366.00</p>
-				</a>
-				<a href="#" class="content-item mr18">
-					<div class="img">
-						<span class="tag">Java</span>
-						<img src="/static/img/shizhan2.jpg" alt="">
-					</div>
-					<p class="shizhan-desc">Java企业级电商项目架构演进之路 Tomcat集群与Redis分布式</p>
-					<div class="card-info">
-						<span>实战</span>
-						<span>初级</span>
-						<span><i class="icon icon-user">&#xe646;</i>517</span>	
-						<span style="margin-right: 0px;color: #ff9900;"><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i></span>
-					</div>
-					<p class="price">￥399.00</p>
-				</a>
-				<a href="#" class="content-item mr18">
-					<div class="img">
-						<span class="tag">Java</span>
-						<img src="/static/img/shizhan3.jpg" alt="">
-					</div>
-					<p class="shizhan-desc">Java深入微服务原理该着房产销售平台</p>
-					<div class="card-info">
-						<span>实战</span>
-						<span>初级</span>
-						<span><i class="icon icon-user">&#xe646;</i>81</span>	
-						<span style="margin-right: 0px;color: #ff9900;"><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i></span>
-					</div>
-					<p class="price">￥366.00</p>
-				</a>
-				<a href="#" class="content-item mr18">
-					<div class="img">
-						<span class="tag">HTML/CSS</span>
-						<img src="/static/img/shizhan4.jpg" alt="">
-					</div>
-					<p class="shizhan-desc">前端跳槽面试必备技巧</p>
-					<div class="card-info">
-						<span>实战</span>
-						<span>初级</span>
-						<span><i class="icon icon-user">&#xe646;</i>2289</span>	
-						<span style="margin-right: 0px;color: #ff9900;"><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i></span>
-					</div>
-					<p class="price">￥366.00</p>
-				</a>
-				<a href="#" class="content-item">
-					<div class="img">
-						<span class="tag">Java</span>
-						<img src="/static/img/shizhan5.jpg" alt="">
-					</div>
-					<p class="shizhan-desc">Spring Boot企业微信点餐系统</p>
-					<div class="card-info">
-						<span>实战</span>
-						<span>初级</span>
-						<span><i class="icon icon-user">&#xe646;</i>2289</span>	
-						<span style="margin-right: 0px;color: #ff9900;"><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i></span>
-					</div>
-					<p class="price">￥348.00</p>
-				</a>
-			</div>
-		</div>
-	</div>
-	<!-- 新上好课 -->
+
+    <!-- 新上好课 -->
 	<div class="newcourse">
 		<div class="newcourse-wrap">
 			<h3 class="newcourse-title">
@@ -225,152 +140,55 @@
 			</h3>
 			<div class="newcourse-content">
 				<div class="line-content clearfix">
-					<a href="#" class="content-item mr18">
-						<div class="img">
-							<span class="tag">Python</span>
-							<img src="/static/img/shizhan1.jpg" alt="">
-						</div>
-						<p class="shizhan-desc">全网最热Python3入门+进阶 更快上手实际开发</p>
-						<div class="card-info">
-							<span>实战</span>
-							<span>初级</span>
-							<span><i class="icon icon-user">&#xe646;</i>2289</span>	
-							<span style="margin-right: 0px;color: #ff9900;"><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i></span>
-						</div>
-						<p class="price">￥366.00</p>
-					</a>
-					<a href="#" class="content-item mr18">
-						<div class="img">
-							<span class="tag">Java</span>
-							<img src="/static/img/shizhan2.jpg" alt="">
-						</div>
-						<p class="shizhan-desc">Java企业级电商项目架构演进之路 Tomcat集群与Redis分布式</p>
-						<div class="card-info">
-							<span>实战</span>
-							<span>初级</span>
-							<span><i class="icon icon-user">&#xe646;</i>517</span>	
-							<span style="margin-right: 0px;color: #ff9900;"><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i></span>
-						</div>
-						<p class="price">￥399.00</p>
-					</a>
-					<a href="#" class="content-item mr18">
-						<div class="img">
-							<span class="tag">Java</span>
-							<img src="/static/img/shizhan3.jpg" alt="">
-						</div>
-						<p class="shizhan-desc">Java深入微服务原理该着房产销售平台</p>
-						<div class="card-info">
-							<span>实战</span>
-							<span>初级</span>
-							<span><i class="icon icon-user">&#xe646;</i>81</span>	
-							<span style="margin-right: 0px;color: #ff9900;"><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i></span>
-						</div>
-						<p class="price">￥366.00</p>
-					</a>
-					<a href="#" class="content-item mr18">
-						<div class="img">
-							<span class="tag">HTML/CSS</span>
-							<img src="/static/img/shizhan4.jpg" alt="">
-						</div>
-						<p class="shizhan-desc">前端跳槽面试必备技巧</p>
-						<div class="card-info">
-							<span>实战</span>
-							<span>初级</span>
-							<span><i class="icon icon-user">&#xe646;</i>2289</span>	
-							<span style="margin-right: 0px;color: #ff9900;"><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i></span>
-						</div>
-						<p class="price">￥366.00</p>
-					</a>
-					<a href="#" class="content-item">
-						<div class="img">
-							<span class="tag">Java</span>
-							<img src="/static/img/shizhan5.jpg" alt="">
-						</div>
-						<p class="shizhan-desc">Spring Boot企业微信点餐系统</p>
-						<div class="card-info">
-							<span>实战</span>
-							<span>初级</span>
-							<span><i class="icon icon-user">&#xe646;</i>2289</span>	
-							<span style="margin-right: 0px;color: #ff9900;"><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i></span>
-						</div>
-						<p class="price">￥348.00</p>
-					</a>
-				</div>
-				<div class="line-content clearfix">
-					<a href="#" class="content-item mr18">
+					{% for course in new_courses %}
+				    <a href="{% url 'course:course_info' course.id %}" {% if forloop.counter|divisibleby:'5' %}class="content-item"{% else %}class="content-item mr18"{% endif %}>
 					<div class="img">
-						<span class="tag">Python</span>
-						<img src="/static/img/shizhan1.jpg" alt="">
+						<span class="tag">{{ course.classify_detail.name }}</span>
+						<img src="{{ MEDIA_URL }}{{ course.image }}" alt="">
 					</div>
-					<p class="shizhan-desc">全网最热Python3入门+进阶 更快上手实际开发</p>
+					<p class="shizhan-desc">{{ course.desc }}</p>
 					<div class="card-info">
-						<span>实战</span>
-						<span>初级</span>
-						<span><i class="icon icon-user">&#xe646;</i>2289</span>	
+
+						<span>{{ course.get_degree_display }}</span>
+						<span><i class="icon icon-user">&#xe646;</i>{{ course.stu_nums }}</span>
 						<span style="margin-right: 0px;color: #ff9900;"><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i></span>
 					</div>
-					<p class="price">￥366.00</p>
-					</a>
-					<a href="#" class="content-item mr18">
-						<div class="img">
-							<span class="tag">Java</span>
-							<img src="/static/img/shizhan2.jpg" alt="">
-						</div>
-						<p class="shizhan-desc">Java企业级电商项目架构演进之路 Tomcat集群与Redis分布式</p>
-						<div class="card-info">
-							<span>实战</span>
-							<span>初级</span>
-							<span><i class="icon icon-user">&#xe646;</i>517</span>	
-							<span style="margin-right: 0px;color: #ff9900;"><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i></span>
-						</div>
-						<p class="price">￥399.00</p>
-					</a>
-					<a href="#" class="content-item mr18">
-						<div class="img">
-							<span class="tag">Java</span>
-							<img src="/static/img/shizhan3.jpg" alt="">
-						</div>
-						<p class="shizhan-desc">Java深入微服务原理该着房产销售平台</p>
-						<div class="card-info">
-							<span>实战</span>
-							<span>初级</span>
-							<span><i class="icon icon-user">&#xe646;</i>81</span>	
-							<span style="margin-right: 0px;color: #ff9900;"><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i></span>
-						</div>
-						<p class="price">￥366.00</p>
-					</a>
-					<a href="#" class="content-item mr18">
-						<div class="img">
-							<span class="tag">HTML/CSS</span>
-							<img src="/static/img/shizhan4.jpg" alt="">
-						</div>
-						<p class="shizhan-desc">前端跳槽面试必备技巧</p>
-						<div class="card-info">
-							<span>实战</span>
-							<span>初级</span>
-							<span><i class="icon icon-user">&#xe646;</i>2289</span>	
-							<span style="margin-right: 0px;color: #ff9900;"><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i></span>
-						</div>
-						<p class="price">￥366.00</p>
-					</a>
-					<a href="#" class="content-item">
-						<div class="img">
-							<span class="tag">Java</span>
-							<img src="/static/img/shizhan5.jpg" alt="">
-						</div>
-						<p class="shizhan-desc">Spring Boot企业微信点餐系统</p>
-						<div class="card-info">
-							<span>实战</span>
-							<span>初级</span>
-							<span><i class="icon icon-user">&#xe646;</i>2289</span>	
-							<span style="margin-right: 0px;color: #ff9900;"><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i></span>
-						</div>
-						<p class="price">￥348.00</p>
-					</a>
+				</a>
+				{% endfor %}
 				</div>
+
 			</div>
 		</div>
 	</div>
+
+	<!-- 实战推荐 -->
+	<div class="shizhan">
+		<div class="shizhan-wrap">
+			<h3 class="shizhan-title">
+				<span class="i-shizhan-l"></span>
+				<em>热</em>/<em>门</em>/<em>课</em>/<em>程</em>
+				<span class="i-shizhan-r"></span>
+			</h3>
+			<div class="shizhan-content">
+                {% for course in courses %}
+				    <a href="{% url 'course:course_info' course.id %}" {% if forloop.counter|divisibleby:'5' %}class="content-item"{% else %}class="content-item mr18"{% endif %}>
+					<div class="img">
+						<span class="tag">{{ course.classify_detail.name }}</span>
+						<img src="{{ MEDIA_URL }}{{ course.image }}" alt="">
+					</div>
+					<p class="shizhan-desc">{{ course.desc }}</p>
+					<div class="card-info">
+
+						<span>{{ course.get_degree_display }}</span>
+						<span><i class="icon icon-user">&#xe646;</i>{{ course.stu_nums }}</span>
+						<span style="margin-right: 0px;color: #ff9900;"><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i></span>
+					</div>
+				</a>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+
     
 
 	<!-- footer -->

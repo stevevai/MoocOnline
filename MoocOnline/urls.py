@@ -21,12 +21,12 @@ from django.views.static import serve
 
 import xadmin
 
-from users.views import LoginView, RegisterView, ActiveUserView, LogoutView
+from users.views import LoginView, RegisterView, ActiveUserView, LogoutView, IndexView
 from .settings import MEDIA_ROOT
 
 urlpatterns = [
     path('xadmin/', xadmin.site.urls),
-    path('', TemplateView.as_view(template_name="index.html"), name="index"),
+    path('', IndexView.as_view(), name="index"),
     path('login/', LoginView.as_view(), name="login"),
     path('logout/', LogoutView.as_view(), name="logout"),
     path('register/', RegisterView.as_view(), name="register"),
