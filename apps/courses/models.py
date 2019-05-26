@@ -129,19 +129,19 @@ class Video(models.Model):
         verbose_name = u"视频"
         verbose_name_plural = verbose_name
 
+    '''
     # 重载save()方法
     def save(self):
         # 调用父类方法
         super(Video, self).save()
-        '''
-            添加或修改视频时重新计算课程时长
-        '''
+        
         course = self.lesson.course
         learn_time = 0
         for lesson in course.get_course_lesson():
             for video in lesson.get_lesson_video():
                 learn_time += video.learn_times
         course.save()
+    '''
 
     def __str__(self):
         return self.name

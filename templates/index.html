@@ -49,73 +49,65 @@
 				</div>
 			</li>
 			<-->
-            <!--
-			<li class="login">
+
+
+			 {% if request.user.is_authenticated %}
+             <li class="user-card-box fl">
+                    <a href="" class="user-card-item tc">
+                        <img src="{{ MEDIA_URL }}{{ request.user.image }}" alt="" class="vm" />
+                    </a>
+                    <div class="g-user-card">
+                        <div class="card-inner">
+                            <div class="card-top">
+                                <a href="">
+                                    <img src="{{ MEDIA_URL }}{{ request.user.image }}" alt="" />
+                                </a>
+                                <div class="card-top-right-box">
+                                    <a href="" class="name">{{ request.user.nick_name }}</a>
+                                    <p class="meta clearfix">
+                                        <a href="">经验 <b id="js-user-mp">30</b></a>
+                                        <a href=""> 积分 <b id="js-user-credit">0</b></a>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="user-center-box">
+                                <ul class="clearfix">
+                                    <li>
+                                        <a href="{% url 'users:mycourse' %}">
+                                            <span class="iconfont icon-gaojing"></span>
+                                            &nbsp;我的课程
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'users:user_info' %}">
+                                            <span class="iconfont icon-gaojing"></span>
+                                            &nbsp;个人中心
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                            <div class="card-history">
+                                <div class="history-item">
+                                    <p class="tit">CSS深入理解之vertical-align</p>
+                                    <p>CSS深入理解之vertical-alignjjinhgyft</p>
+                                    <a href="" class="go-cart">继续</a>
+                                </div>
+                                <span class="iconfont icon-clock"></span>
+                            </div>
+                            <p class="card-sets">
+                                <a href="{% url 'logout' %}">安全退出</a>
+                            </p>
+                        </div>
+                    </div>
+                </li>
+            {% else %}
+                 <li class="login">
 				<a href="{% url 'login' %}">登录</a>
 
 				<a href="{% url 'register' %}">注册</a>
 			</li>
-			-->
-             <li class="user-card-box fl">
-                        <a href="" class="user-card-item tc">
-                            <img src="/static/images/use-card.jpg" alt="" class="vm" />
-                        </a>
-                        <div class="g-user-card">
-                            <div class="card-inner">
-                                <div class="card-top">
-                                    <a href="">
-                                        <img src="/static/images/use-card.jpg" alt="" />
-                                    </a>
-                                    <div class="card-top-right-box">
-                                        <a href="" class="name">cnlylove</a>
-                                        <p class="meta clearfix">
-                                            <a href="">经验 <b id="js-user-mp">30</b></a>
-                                            <a href=""> 积分 <b id="js-user-credit">0</b></a>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="user-center-box">
-                                    <ul class="clearfix">
-                                        <li>
-                                            <a href="">
-                                                <span class="iconfont icon-gaojing">&#xe603;</span>
-                                                &nbsp;我的课程
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="">
-                                                <span class="iconfont icon-gaojing">&#xe603;</span>
-                                                &nbsp;我的课程
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="">
-                                                <span class="iconfont icon-gaojing">&#xe603;</span>
-                                                &nbsp;我的课程
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="">
-                                                <span class="iconfont icon-gaojing">&#xe603;</span>
-                                                &nbsp;我的课程
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="card-history">
-                                    <div class="history-item">
-                                        <p class="tit">CSS深入理解之vertical-align</p>
-                                        <p>CSS深入理解之vertical-alignjjinhgyft</p>
-                                        <a href="" class="go-cart">继续</a>
-                                    </div>
-                                    <span class="iconfont icon-clock">&#xe61b;</span>
-                                </div>
-                                <p class="card-sets">
-                                    <a href="">安全退出</a>
-                                </p>
-                            </div>
-                        </div>
-                    </li>
+            {% endif %}
 
 
 		</ul>
