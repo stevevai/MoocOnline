@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     # 添加上传图片功能
     'ckeditor_uploader',
     'stdimage',     # 图片缩略图
-    # 'haystack'  # 注册全文检索框架
+    'haystack',  # 注册全文检索框架
     # 注册apps
     'users',
     'teachers',
@@ -166,7 +166,7 @@ EMAIL_HOST_USER = 'silentlight1997@163.com'
 EMAIL_HOST_PASSWORD = 'zxcvbnm6025680'
 EMAIL_USE_TLS = False
 # 发件人
-EMAIL_FROM = '慕课在线<silentlight1997@163.com>'
+EMAIL_FROM = 'Mooc Online<silentlight1997@163.com>'
 
 
 # 配置Broker中间人
@@ -227,7 +227,7 @@ PAGINATION_SETTINGS = {
 # 先设定成50MB
 FILE_UPLOAD_MAX_MEMORY_SIZE = 50*1024*1024
 
-'''
+
 # 全文检索框架的配置
 HAYSTACK_CONNECTIONS = {
     'default': {
@@ -239,7 +239,7 @@ HAYSTACK_CONNECTIONS = {
 
 # 当添加、修改、删除数据时，自动生成索引
 HAYSTACK_SIGNAL_PROCESSOR ='haystack.signals.RealtimeSignalProcessor'
-'''
+
 
 # ckeditor settings
 CKEDITOR_UPLOAD_PATH = "notes_images/"

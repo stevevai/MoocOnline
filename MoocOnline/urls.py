@@ -43,5 +43,6 @@ urlpatterns = [
     # 配置文件上传的url,serve到某个路径下去找
     re_path(r'^media/(?P<path>.*)', serve, {"document_root": MEDIA_ROOT}),
     path("users/", include('users.urls', namespace="users")),
-    path('article/', include('article.urls', namespace='article'))
+    path('article/', include('article.urls', namespace='article')),
+    path("search/", include('haystack.urls'))
 ]

@@ -7,7 +7,7 @@ from DjangoUeditor.models import UEditorField
 # Django-taggit
 from taggit.managers import TaggableManager
 
-
+# from model_utils import FieldTracker
 # Create your models here.
 
 
@@ -72,7 +72,7 @@ class Course(models.Model):
     tags = TaggableManager(verbose_name=u"课程标签", blank=True)
     you_need_know = models.TextField(default="", verbose_name=u"课程须知")
     teacher_tell = models.TextField(default="", verbose_name=u"老师告诉你")
-    is_banner = models.BooleanField(default=False, verbose_name=u"是否轮播")
+    # is_banner = models.BooleanField(default=False, verbose_name=u"是否轮播")
     add_time = models.DateTimeField(default=datetime.now, verbose_name=u"添加时间")
 
     class Meta:
@@ -123,9 +123,25 @@ class Video(models.Model):
     # 使用分钟做后台记录(存储最小单位)前台转换
     learn_times = models.IntegerField(default=0, verbose_name=u"学习时长(分钟数)")
 
+    # learn_times_tracker = FieldTracker(fields=['learn_times'])
+
     class Meta:
         verbose_name = u"视频"
         verbose_name_plural = verbose_name
+
+    # 重载save()方法
+    def save(self):
+        # 调用父类方法
+        super(Video, self).save()
+        '''
+            添加或修改视频时重新计算课程时长
+        '''
+        course = self.lesson.course
+        learn_time = 0
+        for lesson in course.get_course_lesson():
+            for video in lesson.get_lesson_video():
+                learn_time += video.learn_times
+        course.save()
 
     def __str__(self):
         return self.name

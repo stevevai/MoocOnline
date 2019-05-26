@@ -47,7 +47,7 @@ class CourseAdmin(object):
     # ordering = ['-click_nums']      # 默认排序
     relfield_style = 'fk-ajax'  # 当有外键指向时，会以ajax方式加载。下拉搜索框
     readonly_fields = ['fav_nums']    # 只读,不能修改
-    # exclude = ['']  # 详情页不显示
+    exclude = ['learn_times']  # 详情页不显示；管理员添加视频时，触发器自动更新
     # 课程页直接添加章节
     inlines = [LessonInline, CourseResourcesInline]
     # 可以在列表上快速修改内容
