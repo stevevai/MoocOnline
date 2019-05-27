@@ -11,7 +11,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import UserProfile, EmailVerifyRecord
 from courses.models import Course
 from teachers.models import Teacher
-from operation.models import UserFavourite, UserCourse
+from operation.models import UserFavourite, UserCourse, Banner
 from .forms import LoginForm, RegisterForm, UserInfoForm, UploadImageForm, ModifyPwdForm
 from MoocOnline.settings import SECRET_KEY
 from util.email_send import send_update_email
@@ -149,6 +149,23 @@ class ActiveUserView(View):
         except SignatureExpired as e:
             # 激活链接已过期
             return HttpResponse('激活链接已过期')
+
+
+# 首页view
+class IndexView(View):
+    def get(self, request):
+        # 取出轮播图
+        all_banner = Banner.objects.all().order_by('index')[:3]
+        # 热门课程
+        courses = Course.objects.all().order_by('-stu_nums')[:5]
+        # 新上好课
+        new_courses = Course.objects.all().order_by('-add_time')[:10]
+
+        return render(request, 'index.html', {
+            "all_banner": all_banner,
+            "courses": courses,
+            "new_courses": new_courses
+        })
 
 
 # 用户个人信息view

@@ -33,7 +33,7 @@ class Teacher(models.Model):
     add_time = models.DateTimeField(default=datetime.now)
 
     class Meta:
-        verbose_name = u"教师"
+        verbose_name = u"教师信息"
         verbose_name_plural = verbose_name
 
     # 统计该教师的课程数量
