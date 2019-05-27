@@ -17,12 +17,12 @@
 
 展望：
 
-- 框架更改：Django rest framework
+- Django rest framework
 - Web app移动端适配
 - 全局搜索（搜索引擎，建索引），加快搜索速度
 - 部署在Nginx服务器上
 - docker部署
-- 课程推荐算法优化
+- 课程推荐算法
 
 </br>
 
