@@ -193,26 +193,14 @@ CACHES = {
         }
     }
 }
+
 # 配置session存储，放在Redis数据库中
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "default"
 
-
-# 七牛云
-QINIU_ACCESS_KEY = 'pk3wExyXusE2dmmCvzHwUt8hNNJ18DPQ7Ugxgxmh'
-QINIU_SECRET_KEY = 'YbCAmuSMAOACPB3APY7xKG2SjzUuhLNISvQnt1q2'
-QINIU_BUCKET_NAME = 'mooc-online'
-QINIU_BUCKET_DOMAIN = 'prpg634cf.bkt.clouddn.com'
-QINIU_SECURE_URL = False
-
-
-PREFIX_URL = 'http://'
-# 文件系统更改
-MEDIA_URL = PREFIX_URL + QINIU_BUCKET_DOMAIN + "/media/"
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media').replace("\\", "/")
-MEDIA_ROOT = 'media/'
-DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuStorage'
-
+# 使用默认的文件系统
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media').replace("\\", "/")
 
 # 分页
 PAGINATION_SETTINGS = {

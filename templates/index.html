@@ -130,6 +130,34 @@
 		</div>
 	</div>
 
+    <!-- 实战推荐 -->
+	<div class="shizhan">
+		<div class="shizhan-wrap">
+			<h3 class="shizhan-title">
+				<span class="i-shizhan-l"></span>
+				<em>热</em>/<em>门</em>/<em>课</em>/<em>程</em>
+				<span class="i-shizhan-r"></span>
+			</h3>
+			<div class="shizhan-content">
+                {% for course in courses %}
+				    <a href="{% url 'course:course_info' course.id %}" {% if forloop.counter|divisibleby:'5' %}class="content-item"{% else %}class="content-item mr18"{% endif %}>
+					<div class="img">
+						<span class="tag">{{ course.classify_detail.name }}</span>
+						<img src="{{ MEDIA_URL }}{{ course.image }}" alt="">
+					</div>
+					<p class="shizhan-desc">{{ course.desc }}</p>
+					<div class="card-info">
+
+						<span>{{ course.get_degree_display }}</span>
+						<span><i class="icon icon-user">&#xe646;</i>{{ course.stu_nums }}</span>
+						<span style="margin-right: 0px;color: #ff9900;"><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i></span>
+					</div>
+				</a>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+
     <!-- 新上好课 -->
 	<div class="newcourse">
 		<div class="newcourse-wrap">
@@ -161,33 +189,7 @@
 		</div>
 	</div>
 
-	<!-- 实战推荐 -->
-	<div class="shizhan">
-		<div class="shizhan-wrap">
-			<h3 class="shizhan-title">
-				<span class="i-shizhan-l"></span>
-				<em>热</em>/<em>门</em>/<em>课</em>/<em>程</em>
-				<span class="i-shizhan-r"></span>
-			</h3>
-			<div class="shizhan-content">
-                {% for course in courses %}
-				    <a href="{% url 'course:course_info' course.id %}" {% if forloop.counter|divisibleby:'5' %}class="content-item"{% else %}class="content-item mr18"{% endif %}>
-					<div class="img">
-						<span class="tag">{{ course.classify_detail.name }}</span>
-						<img src="{{ MEDIA_URL }}{{ course.image }}" alt="">
-					</div>
-					<p class="shizhan-desc">{{ course.desc }}</p>
-					<div class="card-info">
 
-						<span>{{ course.get_degree_display }}</span>
-						<span><i class="icon icon-user">&#xe646;</i>{{ course.stu_nums }}</span>
-						<span style="margin-right: 0px;color: #ff9900;"><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i></span>
-					</div>
-				</a>
-				{% endfor %}
-			</div>
-		</div>
-	</div>
 
     
 

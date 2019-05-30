@@ -24,10 +24,13 @@ class CourseClassify2InLine(object):
 
 class CourseClassifyAdmin(object):
     inlines = [CourseClassify2InLine]
+    list_display = ['name', 'add_time']
+    model_icon = 'fa fa-book'
 
 
 class CourseClassify2Admin(object):
-    pass
+    list_display = ['parent_classify', 'name', 'add_time']
+    model_icon = 'fa fa-book'
 
 
 class LessonInline(object):
@@ -41,17 +44,18 @@ class CourseResourceInline(object):
 
 
 class CourseAdmin(object):
-    list_display = ['name', 'desc', 'degree', 'learn_times',]
+    list_display = ['name', 'desc', 'degree', 'learn_times', 'teacher']
     search_fields = ['name', 'desc', 'detail', 'degree']
     list_filter = ['name', 'desc', 'degree', 'learn_times']
     # ordering = ['-click_nums']      # 默认排序
     relfield_style = 'fk-ajax'  # 当有外键指向时，会以ajax方式加载。下拉搜索框
-    readonly_fields = ['fav_nums']    # 只读,不能修改
+    readonly_fields = ['fav_nums', 'stu_nums']    # 只读,不能修改
     exclude = ['learn_times']  # 详情页不显示；管理员添加视频时，触发器自动更新
     # 课程页直接添加章节
     inlines = [LessonInline, CourseResourcesInline]
     # 可以在列表上快速修改内容
     list_editable = ['degree', 'desc']
+    model_icon = 'fa fa-cloud'
     # 配置ueditor,在ueditor.py中get
     # style_fields = {"detail": "ueditor"}
 
@@ -68,18 +72,21 @@ class LessonAdmin(object):
     list_display = ['course', 'name', 'add_time']
     search_fields = ['course', 'name']
     list_filter = ['course__name', 'name', 'add_time']      # 由外键course的name字段过滤
+    model_icon = 'fa fa-folder'
 
 
 class VideoAdmin(object):
     list_display = ['lesson', 'name', 'add_time']
     search_fields = ['lesson', 'name']
     list_filter = ['lesson', 'name', 'add_time']
+    model_icon = 'fa fa-video-camera'
 
 
 class CourseResourceAdmin(object):
     list_display = ['course', 'name', 'download', 'add_time']
     search_fields = ['course', 'name', 'download']
     list_filter = ['course', 'name', 'download', 'add_time']
+    model_icon = 'fa fa-file'
 
 
 xadmin.site.register(Course, CourseAdmin)
