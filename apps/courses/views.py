@@ -5,11 +5,12 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.db.models import Q  # 并集运算
 
-from .models import Course, CourseClassify, CourseClassify2, CourseResources, Video, Lesson
+from .models import Course, CourseClassify, CourseClassify2, CourseResources, Video, Lesson, CourseWiki
 from operation.models import CourseComments, UserFavourite, UserCourse, UserNote
 from .forms import UserNoteForm
 
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
+import markdown
 # Create your views here.
 
 
@@ -206,6 +207,32 @@ class CommentsView(LoginRequiredMixin, View):
             "course": course,
             "course_resources": all_resources,
             "all_comments": all_comments,
+        })
+
+
+# 课程Wiki
+class WikiView(LoginRequiredMixin, View):
+    login_url = '/login/'
+    redirect_field_name = 'next'
+
+    def get(self, request, course_id):
+        course = Course.objects.get(id=int(course_id))
+        course_wiki = CourseWiki.objects.get(course=course)
+
+        all_resources = CourseResources.objects.filter(course=course)
+        # 将markdown语法渲染成html样式
+        course_wiki.wiki = markdown.markdown(course_wiki.wiki,
+                                         extensions=[
+                                             # 包含 缩写、表格等常用扩展
+                                             'markdown.extensions.extra',
+                                             # 语法高亮扩展
+                                             'markdown.extensions.codehilite',
+                                         ])
+        # all_comments = CourseComments.objects.all()
+        return render(request, "course-wiki.html", {
+            "course": course,
+            "course_resources": all_resources,
+            "wiki": course_wiki,
         })
 
 

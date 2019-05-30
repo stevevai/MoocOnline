@@ -44,5 +44,6 @@ urlpatterns = [
     re_path(r'^media/(?P<path>.*)', serve, {"document_root": MEDIA_ROOT}),
     path("users/", include('users.urls', namespace="users")),
     path('article/', include('article.urls', namespace='article')),
-    path("search/", include('haystack.urls'))
+    path("search/", include('haystack.urls')),
+    path("mdeditor/", include('mdeditor.urls'))
 ]

@@ -4,6 +4,7 @@ from datetime import datetime
 from teachers.models import Teacher
 
 from DjangoUeditor.models import UEditorField
+from mdeditor.fields import MDTextField
 # Django-taggit
 from taggit.managers import TaggableManager
 
@@ -145,6 +146,19 @@ class Video(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class CourseWiki(models.Model):
+    course = models.ForeignKey(Course, verbose_name=u"课程", on_delete=models.CASCADE)
+    wiki = MDTextField()
+    add_time = models.DateTimeField(default=datetime.now, verbose_name=u"添加时间")
+
+    def __str__(self):
+        return self.course.name+"Wiki"
+
+    class Meta:
+        verbose_name = "课程Wiki"
+        verbose_name_plural = verbose_name
 
 
 class CourseResources(models.Model):

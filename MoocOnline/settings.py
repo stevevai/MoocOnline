@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'stdimage',     # 图片缩略图
     'haystack',  # 注册全文检索框架
+    'mdeditor',       # markdown
     # 注册apps
     'users',
     'teachers',

@@ -1,7 +1,7 @@
 import xadmin
 
 
-from .models import Course, Lesson, Video, CourseResources, CourseClassify2, CourseClassify
+from .models import Course, Lesson, Video, CourseResources, CourseClassify2, CourseClassify, CourseWiki
 
 
 # 课程直接添加章节
@@ -82,6 +82,11 @@ class VideoAdmin(object):
     model_icon = 'fa fa-video-camera'
 
 
+class WikiAdmin(object):
+    list_display = ['course', 'wiki', 'add_time']
+    model_icon = 'fa fa-wikipedia-w'
+
+
 class CourseResourceAdmin(object):
     list_display = ['course', 'name', 'download', 'add_time']
     search_fields = ['course', 'name', 'download']
@@ -95,4 +100,4 @@ xadmin.site.register(Video, VideoAdmin)
 xadmin.site.register(CourseResources, CourseResourceAdmin)
 xadmin.site.register(CourseClassify, CourseClassifyAdmin)
 xadmin.site.register(CourseClassify2, CourseClassify2Admin)
-
+xadmin.site.register(CourseWiki, WikiAdmin)
