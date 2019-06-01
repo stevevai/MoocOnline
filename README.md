@@ -4,14 +4,14 @@
 毕业设计，基于Python设计与实现一个专注于编程教育的在线学习平台
 
 - [x] 首页轮播图，课程列表显示
-- [ ] 首页数据Redis缓存
+- [ ] ~~首页数据Redis缓存~~
 - [x] Xadmin后台优化（图标，显示
 - [x] 课程分页bug修改
 - [ ] 发现页（界面同首页，无轮播图，分为猜你喜欢（基于课程二级分类筛选），相似推荐（基于用户）
-- [ ] 课程wiki,markdown语法
+- [x] 课程wiki,markdown语法
 - [ ] 修改前端页面中的链接
-- [ ] 前端页面优化，统一页头页尾，logo,font，页脚粘性
-- [ ] 配置一份文件存储在本地的settings.py文件，在manage.py中引入，将七牛云已上传的文件备份一份到本地
+- [ ] 前端页面优化，统一页头页尾，logo,font，页脚粘性，分页样式
+- [x] 配置一份文件存储在本地的settings.py文件，在manage.py中引入，将七牛云已上传的文件备份一份到本地
 - [x] 项目开发总结
 - [x] 查阅相关论文和资料
 - [ ] ~~404,500页面配置~~
@@ -36,7 +36,12 @@
 
 2. 为了演示时的效果，浏览器的缓存不要清除，且网页打开要比较流畅
 
-   
+3. 测试的数据要正经一点
+
+4. 演示流程要顺畅
+
+
+
 
 ## 项目总结
 
@@ -55,19 +60,19 @@
 
 ### 第三方库
 
-| Name                   | Github repository                                            |
-| ---------------------- | ------------------------------------------------------------ |
-| xadmin                 | <https://github.com/sshwsfc/xadmin>                          |
-| django-crispy-forms    | <https://github.com/django-crispy-forms/django-crispy-forms> |
-| django-simple-captcha  | <https://github.com/mbi/django-simple-captcha>               |
-| django-ckeditor        | <https://github.com/django-ckeditor/django-ckeditor>         |
-| django-qiniu-storage   | <https://github.com/glasslion/django-qiniu-storage>          |
-| django-pure-pagination | <https://github.com/jamespacileo/django-pure-pagination>     |
-| django-stdimage        | <https://github.com/codingjoe/django-stdimage>               |
-| django-redis           | <https://github.com/niwinz/django-redis>                     |
-| itsdangerous           | <https://github.com/pallets/itsdangerous>                    |
-| Pillow                 | <https://github.com/python-pillow/Pillow>                    |
-| PyMySQL                | <https://github.com/PyMySQL/PyMySQL>                         |
+| Name                   | Github repository                                          |
+| ---------------------- | ---------------------------------------------------------- |
+| xadmin                 | <https://github.com/sshwsfc/xadmin>                        |
+| django-crispy-forms    | https://github.com/django-crispy-forms/django-crispy-forms |
+| django-simple-captcha  | https://github.com/mbi/django-simple-captcha>              |
+| django-ckeditor        | https://github.com/django-ckeditor/django-ckeditor         |
+| django-qiniu-storage   | https://github.com/glasslion/django-qiniu-storage>         |
+| django-pure-pagination | https://github.com/jamespacileo/django-pure-pagination     |
+| django-stdimage        | https://github.com/codingjoe/django-stdimage               |
+| django-redis           | https://github.com/niwinz/django-redis                     |
+| itsdangerous           | https://github.com/pallets/itsdangerous>                   |
+| Pillow                 | https://github.com/python-pillow/Pillow>                   |
+| PyMySQL                | https://github.com/PyMySQL/PyMySQL                         |
 
 ### 参考资料
 
@@ -95,7 +100,8 @@
 | 加入apps目录的搜索路径                               | <https://blog.csdn.net/dcrmg/article/details/79546962>       |
 | 自定义用户类，数据库同步异常                         | <https://www.cnblogs.com/zhangjpn/articles/6694480.html>     |
 | Celery版本的问题                                     | <https://foofish.net/celery_windows_error.html>              |
-|                                                      | <https://www.jianshu.com/p/c44ace7da5bf>                     |
+| 文件上传                                             | <https://www.jianshu.com/p/c44ace7da5bf>                     |
+| Xadmin后台引入Markdown编辑器                         | <https://cloud.tencent.com/developer/article/1421730>        |
 
 ### 前端设计
 
@@ -109,8 +115,9 @@
 
 ### 优秀博客
 
-| 追梦人物的博客 | <https://www.zmrenwu.com/>                    |
+| Name              | Website                                                 |
 | -------------- | --------------------------------------------- |
+| 追梦人物的博客 | <https://www.zmrenwu.com/>                    |
 | 刘江的博客     | <http://www.liujiangblog.com/course/django/2> |
 | 杜赛的个人网站 | <https://www.dusaiphoto.com/>                 |
 
