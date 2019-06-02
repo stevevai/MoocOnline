@@ -96,6 +96,9 @@ class CourseListView(View):
 
 # 处理课程章节信息页面的view
 class CourseInfoView(LoginRequiredMixin, View):
+    login_url = '/login/'
+    redirect_field_name = 'next'
+
     def get(self, request, course_id):
         # 此处的id为表默认为我们添加的值。
         course = Course.objects.get(id=int(course_id))
