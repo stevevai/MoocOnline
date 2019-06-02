@@ -168,6 +168,32 @@ class IndexView(View):
         })
 
 
+# 推荐View
+class RecommendView(LoginRequiredMixin, View):
+    login_url = '/login/'
+    redirect_field_name = 'next'
+
+    def get(self, request):
+        # 猜你喜欢
+        # courses = Course.objects.all().order_by('-stu_nums')[:5]
+        # 查询用户学习过的课程
+        user_courses = UserCourse.objects.filter(user=request.user)
+        course_ids = [user_course.course_id for user_course in user_courses]
+        all_user_courses = Course.objects.filter(id__in=course_ids)
+        # 提取一级分类
+        course_tags = [course.classify_root_id for course in all_user_courses]
+        # course_tags = [course.tags.name for course in all_user_courses]
+
+        recommend_courses = Course.objects.filter(classify_root_id__in=course_tags)
+        # 优质课程
+        good_courses = Course.objects.all().order_by('-fav_nums')[:5]
+
+        return render(request, 'discovery.html', {
+            "courses": recommend_courses,
+            "new_courses": good_courses
+        })
+
+
 # 用户个人信息view
 class UserInfoView(LoginRequiredMixin, View):
     login_url = '/login/'

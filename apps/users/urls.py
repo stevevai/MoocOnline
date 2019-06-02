@@ -4,7 +4,7 @@
 from django.urls import path
 from django.views.generic import TemplateView
 from .views import UserInfoView, UploadImageView, UpdatePwdView, SendEmailCodeView, UpdateEmailView,\
-    AddFavView, MyFavCourseView, MyFavTeacherView , MyCourseView
+    AddFavView, MyFavCourseView, MyFavTeacherView , MyCourseView, RecommendView
 
 
 app_name = "users"
@@ -24,5 +24,6 @@ urlpatterns = [
     # 我收藏的授课讲师
     path('myfav/teacher/', MyFavTeacherView.as_view(), name="myfav_teacher"),
     # 我收藏的课程
-    path('myfav/course/', MyFavCourseView.as_view(), name="myfav_course")
+    path('myfav/course/', MyFavCourseView.as_view(), name="myfav_course"),
+    path('discovery/', RecommendView.as_view(), name="discovery")
 ]

@@ -1,285 +1,199 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>慕课网-发现</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<!-- 兼容移动设备 -->
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<meta name="format-detection" content="telephone=no">
-	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-	<meta http-equiv="Pragma" content="no-cache" />
-	<!-- 让IE的文档渲染模式永远都是最新的 -->
-	<meta http-equiv="X-UA-Compatible" content="IE=Edge，chrome=1">
-	<meta http-equiv="Expires" content="0" />
-	<link rel="stylesheet" type="text/css" href="css/swiper-3.4.2.min.css">
-	<link rel="stylesheet" type="text/css" href="css/common.css">
-	<link rel="stylesheet" type="text/css" href="css/discovery.css">
-	<link rel="stylesheet" type="text/css" href="css/footer.css">
-	<style>
-.menu .item a,.download,.shop-cart,.login a,.login{
-	color: #9ca0a4;
-}
-.menu .item a:hover{
-	color: #fff;
-}
-.menu .item a.menu-item-select{
-	color: #fff;
-}
-.search-area{
-	border-bottom: 1px solid #6a7076;
-}
-.search-input{
-	color: #fff;
-}
-</style>
+<title>Mooc Online - 免费编程教育</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- 兼容移动设备 -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<!-- 让IE的文档渲染模式永远都是最新的 -->
+<meta http-equiv="X-UA-Compatible" content="IE=Edge，chrome=1">
+<meta http-equiv="Expires" content="0" />
+<link rel="stylesheet" type="text/css" href="/static/css/swiper-3.4.2.min.css">
+<link rel="stylesheet" type="text/css" href="/static/css/common.css">
+<link rel="stylesheet" type="text/css" href="/static/css/index.css">
+<link rel="stylesheet" href="/static/css/style/common.css" />
 </head>
 <body>
 	<!-- header菜单栏 -->
-	<div class="header header-black">
-		<a class="home" href="index.html" title="慕课网">
-			<img src="img/logo_black.png" alt="">
+	<div class="header header-white">
+    <div class="header-wrap">
+		<a class="home" href="{% url 'index' %}" title="Mooc Online">
+			<img src="/static/img/logo_196x106.png" alt="">
 		</a>
+
 		<ul class="menu">
-			<li class="item"><a href="course-list.html">免费课程</a></li>
-			<li class="item"><a href="careerpath.html">职业路径</a></li>
-			<li class="item"><a href="shizhan.html">实战</a></li>
-			<li class="item"><a href="ask.html">猿问</a></li>
-			<li class="item"><a href="discovery.html" class=" menu-item-select">发现</a></li>
+            <li class="item"><a href="{% url 'index' %}">首页</a></li>
+			<li class="item"><a href="{% url 'course:course_list' %}">免费课程</a></li>
+			<li class="item"><a href="{% url 'users:discovery' %}">发现</a></li>
 		</ul>
-		<div class="search-area">
-			<input class="search-input" type="text">
-			<div class="search-btn"><i class="icon icon-search">&#xe63d;</i></div>
+        <div class="search-area">
+			<input class="search-input" id="search_keywords" value="" type="text">
+			<div class="search-btn" id="jsSearchBtn"><i class="icon icon-search">&#xe63d;</i></div>
 		</div>
 		<ul class="header-unlogin clearfix">
-			<li class="download">
-				<a href="#">下载APP</a>
-				<div class="download-detail">
-					<img src="img/appload.png" height='100%' alt="">
-					<div class="load-wenzi">
-						<p class="title">扫描下载慕课网APP</p>
-						<p class="ios"><i class="icon">&#xe616;</i>App Store下载</p>
-						<p class="android"><i class="icon">&#xe640;</i>Android下载</p>
+			<!--<li class="shop-cart">
+				<i class="icon icon-cart">&#xe61d;</i>
+				<span>购物车</span>
+				<div class="shop-cart-detail hide">
+					<p class="title"><span>我的购物车</span><span>已加入0门课程</span></p>
+					<div class="content">
+						<span><i class="icon">&#xe61d;</i></span>
+						<p>购物车空空如也</p>
+						<span></span>
+						<p>快去这里选购你中意的课程</p>
+						<a href="#">实战课程</a>
+						<a href="#">职业路径</a>
 					</div>
+					<p class="about-order"><a href="">我的订单中心</a><span>去购物车</span></p>
 				</div>
 			</li>
-			<li class="shop-cart">
-				<a href="#" class="dark">
-					<i class="icon icon-cart">&#xe61d;</i>
-					<span>购物车</span>
-					<div class="shop-cart-detail">
-						<p class="title"><object><a href="#" class="to-my-cart">我的购物车</a></object><span class="already">已加入0门课程</span></p>
-						<div class="content">
-							<span><i class="icon">&#xe61d;</i></span>
-							<p>购物车空空如也</p>
-							<span></span>
-							<p>快去这里选购你中意的课程</p>
-							<object><a href="#">实战课程</a></object>
-							<object><a href="#">职业路径</a></object>
-						</div>
-						<p class="about-order"><object><a href="">我的订单中心</a></object><span>去购物车</span></p>
+			<-->
+
+
+			 {% if request.user.is_authenticated %}
+             <li class="user-card-box fl">
+                    <a href="" class="user-card-item tc">
+                        <img src="{{ MEDIA_URL }}{{ request.user.image }}" alt="" class="vm" />
+                    </a>
+                    <div class="g-user-card">
+                        <div class="card-inner">
+                            <div class="card-top">
+                                <a href="">
+                                    <img src="{{ MEDIA_URL }}{{ request.user.image }}" alt="" />
+                                </a>
+                                <div class="card-top-right-box">
+                                    <a href="" class="name">{{ request.user.nick_name }}</a>
+                                    <p class="meta clearfix">
+                                        <a href="">经验 <b id="js-user-mp">30</b></a>
+                                        <a href=""> 积分 <b id="js-user-credit">0</b></a>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="user-center-box">
+                                <ul class="clearfix">
+                                    <li>
+                                        <a href="{% url 'users:mycourse' %}">
+                                            <span class="iconfont icon-gaojing"></span>
+                                            &nbsp;我的课程
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'users:user_info' %}">
+                                            <span class="iconfont icon-gaojing"></span>
+                                            &nbsp;个人中心
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+
+                            <p class="card-sets">
+                                <a href="{% url 'logout' %}">安全退出</a>
+                            </p>
+                        </div>
+                    </div>
+                </li>
+            {% else %}
+                 <li class="login">
+				<a href="{% url 'login' %}">登录</a>
+
+				<a href="{% url 'register' %}">注册</a>
+			</li>
+            {% endif %}
+
+
+		</ul>
+    </div>
+	</div>
+
+    <!-- 实战推荐 -->
+	<div class="shizhan">
+		<div class="shizhan-wrap">
+			<h3 class="shizhan-title">
+				<span class="i-shizhan-l"></span>
+				<em>猜</em>/<em>你</em>/<em>喜</em>/<em>欢</em>
+				<span class="i-shizhan-r"></span>
+			</h3>
+			<div class="shizhan-content">
+                {% for course in courses %}
+				    <a href="{% url 'course:course_info' course.id %}" {% if forloop.counter|divisibleby:'5' %}class="content-item"{% else %}class="content-item mr18"{% endif %}>
+					<div class="img">
+						<span class="tag">{{ course.classify_detail.name }}</span>
+						<img src="{{ MEDIA_URL }}{{ course.image }}" alt="">
+					</div>
+					<p class="shizhan-desc">{{ course.desc }}</p>
+					<div class="card-info">
+
+						<span>{{ course.get_degree_display }}</span>
+						<span><i class="icon icon-user">&#xe646;</i>{{ course.stu_nums }}</span>
+						<span style="margin-right: 0px;color: #ff9900;"><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i></span>
 					</div>
 				</a>
-			</li>
-			<li class="login">
-				<a href="#">登录</a>
-				/
-				<a href="#">注册</a>
-			</li>
-		</ul>
-	</div>
-	
-	<!-- 主要内容：三部分 -->
-	<div class="content">
-		<div class="content-wrap clearfix">
-			<div class="left l">
-				<a href="" class="left-select"><span>动态</span><i class="icon">&#xe623;</i></a>
-				<a href=""><span>分享</span></a>
-				<a href=""><span>职场</span></a>
-				<a href=""><span>前沿</span></a>
-				<a href=""><span>话题</span></a>
-			</div>
-			<div class="mid l">
-				<div class="mid-banner">
-					<div class="swiper-wrapper">
-			            <div class="swiper-slide" data-swiper-autoplay="3000" style="background-image:url(img/mid-banner1.jpg);background-size: 100% 100%">
-			            	<div class="banner-title">前端跳槽面试那些事</div>
-			            </div>
-			            <div class="swiper-slide" data-swiper-autoplay="3000" style="background-image:url(img/mid-banner2.jpg);background-size: 100% 100%"><div class="banner-title">前端跳槽面试那些事</div></div>
-			            <div class="swiper-slide" data-swiper-autoplay="3000" style="background-image:url(img/mid-banner3.jpg);background-size: 100% 100%"><div class="banner-title">前端跳槽面试那些事</div></div>
-			        </div>
-			        <!-- Add Pagination -->
-			        
-			        <div class="swiper-pagination swiper-pagination-white"></div>
-			      	
-				</div>
-
-				<!-- 手记列表 -->
-				<div class="shouji-list">
-					<div class="shouji">
-						<a href="" class="shouji_author"><img src="img/shoouji_img.jpg" alt=""></a>
-						<div class="shouji-content">
-							<p><span class="author">MTbaby</span>发表了手记<span class="date">59分钟前</span></p>
-							<div class="shouji-main-content">
-								<img src="img/shouji_img1.jpg" alt="">
-								<div class="main-content-wenzi">
-									<p>python爬虫实践——零基础快速入门（二）爬取豆瓣电影</p>
-									<p>爬虫又称为网页蜘蛛，是一种程序或脚本。 但重点在于，它能够按照一定的规则，自动获取网页信息。 爬虫的基本原理——通用框架 1.挑选aaaa</p>
-									<p><span>前沿</span><span>Python</span><span>浏览 329</span></p>
-								</div>
-								<p class="comment"><a href=""><i class="icon">&#xe626;</i></a><span>10</span>
-								   <a href=""><i class="icon">&#xe64c;</i></a><span>99</span>
-								   <a href=""><i class="icon">&#xe62e;</i></a><span>21</span></p>
-							</div>
-						</div>
-					</div>
-					<div class="shouji">
-						<a href="" class="shouji_author"><img src="img/shoouji_img.jpg" alt=""></a>
-						<div class="shouji-content">
-							<p><span class="author">MTbaby</span>发表了手记<span class="date">59分钟前</span></p>
-							<div class="shouji-main-content">
-								<img src="img/shouji_img1.jpg" alt="">
-								<div class="main-content-wenzi">
-									<p>python爬虫实践——零基础快速入门（二）爬取豆瓣电影</p>
-									<p>爬虫又称为网页蜘蛛，是一种程序或脚本。 但重点在于，它能够按照一定的规则，自动获取网页信息。 爬虫的基本原理——通用框架 1.挑选aaaa</p>
-									<p><span>前沿</span><span>Python</span><span>浏览 329</span></p>
-								</div>
-								<p class="comment"><a href=""><i class="icon">&#xe626;</i></a><span>10</span>
-								   <a href=""><i class="icon">&#xe64c;</i></a><span>99</span>
-								   <a href=""><i class="icon">&#xe62e;</i></a><span>21</span></p>
-							</div>
-						</div>
-					</div>
-					<div class="shouji">
-						<a href="" class="shouji_author"><img src="img/shoouji_img.jpg" alt=""></a>
-						<div class="shouji-content">
-							<p><span class="author">MTbaby</span>发表了手记<span class="date">59分钟前</span></p>
-							<div class="shouji-main-content">
-								<img src="img/shouji_img1.jpg" alt="">
-								<div class="main-content-wenzi">
-									<p>python爬虫实践——零基础快速入门（二）爬取豆瓣电影</p>
-									<p>爬虫又称为网页蜘蛛，是一种程序或脚本。 但重点在于，它能够按照一定的规则，自动获取网页信息。 爬虫的基本原理——通用框架 1.挑选aaaa</p>
-									<p><span>前沿</span><span>Python</span><span>浏览 329</span></p>
-								</div>
-								<p class="comment"><a href=""><i class="icon">&#xe626;</i></a><span>10</span>
-								   <a href=""><i class="icon">&#xe64c;</i></a><span>99</span>
-								   <a href=""><i class="icon">&#xe62e;</i></a><span>21</span></p>
-							</div>
-						</div>
-					</div>
-				</div>
-
-			</div>
-			<div class="right r">
-				<div class="right-unlogin">
-					<h4>学习发现，发现自我</h4>
-					<div class="right-btns">
-						<a href="">发手记</a>
-						<div class="shu"></div>
-						<a href="">发动态</a>
-					</div>
-					
-				</div>
-				<div class="tuijian">
-					<p class="tuijian-title">
-						<span>推荐任务</span><span>换一换<i class="icon">&#xe636;</i></span>
-					</p>
-					<div class="avators clearfix">
-						<div class="person mr20">
-							<img src="img/star1.jpg" alt="">
-							<p>老卫</p>
-							<p style="color: #93999f;">全栈工程师</p>
-						</div>
-						<div class="person mr20">
-							<img src="img/star1.jpg" alt="">
-							<p>老卫</p>
-							<p style="color: #93999f;">全栈工程师</p>
-						</div>
-						<div class="person">
-							<img src="img/star1.jpg" alt="">
-							<p>老卫</p>
-							<p style="color: #93999f;">全栈工程师</p>
-						</div>
-						<div class="person mr20">
-							<img src="img/star1.jpg" alt="">
-							<p>老卫</p>
-							<p style="color: #93999f;">全栈工程师</p>
-						</div>
-						<div class="person mr20">
-							<img src="img/star1.jpg" alt="">
-							<p>老卫</p>
-							<p style="color: #93999f;">全栈工程师</p>
-						</div>
-						<div class="person">
-							<img src="img/star1.jpg" alt="">
-							<p>老卫</p>
-							<p style="color: #93999f;">全栈工程师</p>
-						</div>
-						<div class="person mr20">
-							<img src="img/star1.jpg" alt="">
-							<p>老卫</p>
-							<p style="color: #93999f;">全栈工程师</p>
-						</div>
-						<div class="person mr20">
-							<img src="img/star1.jpg" alt="">
-							<p>老卫</p>
-							<p style="color: #93999f;">全栈工程师</p>
-						</div>
-						<div class="person">
-							<img src="img/star1.jpg" alt="">
-							<p>老卫</p>
-							<p style="color: #93999f;">全栈工程师</p>
-						</div>
-					</div>
-				</div>
+				{% endfor %}
 			</div>
 		</div>
 	</div>
+
+    <!-- 新上好课 -->
+	<div class="newcourse">
+		<div class="newcourse-wrap">
+			<h3 class="newcourse-title">
+				<span class="i-newcourse-l"></span>
+				<em>优</em>/<em>质</em>/<em>课</em>/<em>程</em>
+				<span class="i-newcourse-r"></span>
+			</h3>
+			<div class="newcourse-content">
+				<div class="line-content clearfix">
+					{% for course in new_courses %}
+				    <a href="{% url 'course:course_info' course.id %}" {% if forloop.counter|divisibleby:'5' %}class="content-item"{% else %}class="content-item mr18"{% endif %}>
+					<div class="img">
+						<span class="tag">{{ course.classify_detail.name }}</span>
+						<img src="{{ MEDIA_URL }}{{ course.image }}" alt="">
+					</div>
+					<p class="shizhan-desc">{{ course.desc }}</p>
+					<div class="card-info">
+
+						<span>{{ course.get_degree_display }}</span>
+						<span><i class="icon icon-user">&#xe646;</i>{{ course.stu_nums }}</span>
+						<span style="margin-right: 0px;color: #ff9900;"><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i><i class="icon icon-star">&#xe676;</i></span>
+					</div>
+				</a>
+				{% endfor %}
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+
+
+
 	<!-- footer -->
-	<div class="footer footer-black">
+	<div class="footer">
 		<div class="footer-wrap">
 			<div class="blog">
 				<div class="mr22 chat">
-					
+
 				</div>
 			</div>
-			<div class="footer-links links-white">
-				<a href="#">企业合作</a>
-				<a href="#">人才招聘</a>
-				<a href="#">联系我们</a>
-				<a href="#">讲师招聘</a>
-				<a href="#">常见问题</a>
-				<a href="#">意见反馈</a>
-				<a href="#">慕课大学</a>
-				<a href="#">友情链接</a>
+			<div class="footer-links">
+				<a href="">联系我们</a>
+				<a href="">常见问题</a>
+				<a href="">意见反馈</a>
+				<a href="">友情链接</a>
 			</div>
-			<p>© 2018 imooc.com  京ICP备 13046642号-2</p>
+			<p>© 2019 http://silentlight.tk</p>
 		</div>
 	</div>
-	<!-- 侧边栏 -->
-	<div class="info">
-		<div class="info-wrap">
-			<div class="info-block b"><i class="icon">&#xe61e;</i></div>
-			<div class="info-block b"><i class="icon">&#xe619;</i></div>
-			<div class="info-block b"><i class="icon">&#xe61a;</i>
-		
-			</div>
-			<div class="info-block"><i class="icon">&#xe62b;</i>
-				
-			</div>
-		</div>
-		
-	</div>
+
+<script type="text/javascript" src="/static/js/deco-common.js"></script>
+<script type="text/javascript" src="/static/js/jquery-3.2.0.min.js"></script>
+<script type="text/javascript" src="/static/js/swiper-3.4.2.min.js"></script>
+<script type="text/javascript" src="/static/js/index.js"></script>
+
 </body>
-<script type="text/javascript" src="js/jquery-3.2.0.min.js"></script>
-<script type="text/javascript" src="js/swiper-3.4.2.min.js"></script>
-<script>
-var swiper = new Swiper('.mid-banner', {
-    pagination: '.swiper-pagination',
-    paginationClickable: '.swiper-pagination',
-    nextButton: '.swiper-button-next',
-    prevButton: '.swiper-button-prev',
-    effect: 'slide',
-    loop:true,
-});
-</script>
 </html>
