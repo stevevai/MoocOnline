@@ -14,6 +14,8 @@
 <link rel="stylesheet" type="text/css" href="/static/css/common.css">
 <link rel="stylesheet" type="text/css" href="/static/css/freecourse.css">
 <link rel="stylesheet" type="text/css" href="/static/css/footer.css">
+<link rel="stylesheet" type="text/css" href="/static/css/index.css">
+<link rel="stylesheet" href="/static/css/style/common.css" />
 <style>
 .menu .item a,.download,.shop-cart,.login a,.login{
 	color: #9ca0a4;
@@ -24,71 +26,110 @@
 .menu .item a.menu-item-select{
 	color: #fff;
 }
-.search-area{
-	border-bottom: 1px solid #6a7076;
-}
 .search-input{
 	color: #fff;
 }
-
 .blank{
     height: 180px;
 }
+.header-blue{
+    background: #393D49;
+}
+
 </style>
     <!-- blank 没有搜索结果时中间留白 -->
 </head>
 <body>
 	<!-- header菜单栏 -->
-	<div class="header header-black">
-		<a class="home" href="index.html" title="慕课网">
+	<div class="header header-blue">
+    <div class="header-wrap">
+		<a class="home" href="{% url 'index' %}" title="Mooc Online">
 			<img src="/static/img/logo_196x106.png" alt="">
 		</a>
+
 		<ul class="menu">
-			<li class="item"><a href="{% url 'course:course_list' %}" class=" menu-item-select">免费课程</a></li>
-			<li class="item"><a href="shizhan.html">实战</a></li>
-			<li class="item"><a href="ask.html">猿问</a></li>
+            <li class="item"><a href="shizhan.html">首页</a></li>
+			<li class="item"><a href="{% url 'course:course_list' %}">免费课程</a></li>
 			<li class="item"><a href="discovery.html">发现</a></li>
 		</ul>
-		<div class="search-area">
-			<input class="search-input" type="text">
-			<div class="search-btn"><i class="icon icon-search">&#xe63d;</i></div>
+        <div class="search-area">
+			<input class="search-input" id="search_keywords" value="" type="text">
+			<div class="search-btn" id="jsSearchBtn"><i class="icon icon-search">&#xe63d;</i></div>
 		</div>
 		<ul class="header-unlogin clearfix">
-			<li class="download">
-				<a href="#">下载APP</a>
-				<div class="download-detail">
-					<img src="/static/img/appload.png" height='100%' alt="">
-					<div class="load-wenzi">
-						<p class="title">扫描下载慕课网APP</p>
-						<p class="ios"><i class="icon">&#xe616;</i>App Store下载</p>
-						<p class="android"><i class="icon">&#xe640;</i>Android下载</p>
+			<!--<li class="shop-cart">
+				<i class="icon icon-cart">&#xe61d;</i>
+				<span>购物车</span>
+				<div class="shop-cart-detail hide">
+					<p class="title"><span>我的购物车</span><span>已加入0门课程</span></p>
+					<div class="content">
+						<span><i class="icon">&#xe61d;</i></span>
+						<p>购物车空空如也</p>
+						<span></span>
+						<p>快去这里选购你中意的课程</p>
+						<a href="#">实战课程</a>
+						<a href="#">职业路径</a>
 					</div>
+					<p class="about-order"><a href="">我的订单中心</a><span>去购物车</span></p>
 				</div>
 			</li>
-			<li class="shop-cart">
-				<a href="#" class="dark">
-					<i class="icon icon-cart">&#xe61d;</i>
-					<span>购物车</span>
-					<div class="shop-cart-detail">
-						<p class="title"><object><a href="#" class="to-my-cart">我的购物车</a></object><span class="already">已加入0门课程</span></p>
-						<div class="content">
-							<span><i class="icon">&#xe61d;</i></span>
-							<p>购物车空空如也</p>
-							<span></span>
-							<p>快去这里选购你中意的课程</p>
-							<object><a href="#">实战课程</a></object>
-							<object><a href="#">职业路径</a></object>
-						</div>
-						<p class="about-order"><object><a href="">我的订单中心</a></object><span>去购物车</span></p>
-					</div>
-				</a>
+			<-->
+
+
+			 {% if request.user.is_authenticated %}
+             <li class="user-card-box fl">
+                    <a href="" class="user-card-item tc">
+                        <img src="{{ MEDIA_URL }}{{ request.user.image }}" alt="" class="vm" />
+                    </a>
+                    <div class="g-user-card">
+                        <div class="card-inner">
+                            <div class="card-top">
+                                <a href="">
+                                    <img src="{{ MEDIA_URL }}{{ request.user.image }}" alt="" />
+                                </a>
+                                <div class="card-top-right-box">
+                                    <a href="" class="name">{{ request.user.nick_name }}</a>
+                                    <p class="meta clearfix">
+                                        <a href="">经验 <b id="js-user-mp">30</b></a>
+                                        <a href=""> 积分 <b id="js-user-credit">0</b></a>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="user-center-box">
+                                <ul class="clearfix">
+                                    <li>
+                                        <a href="{% url 'users:mycourse' %}">
+                                            <span class="iconfont icon-gaojing"></span>
+                                            &nbsp;我的课程
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'users:user_info' %}">
+                                            <span class="iconfont icon-gaojing"></span>
+                                            &nbsp;个人中心
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+
+                            <p class="card-sets">
+                                <a href="{% url 'logout' %}">安全退出</a>
+                            </p>
+                        </div>
+                    </div>
+                </li>
+            {% else %}
+                 <li class="login">
+				<a href="{% url 'login' %}">登录</a>
+
+				<a href="{% url 'register' %}">注册</a>
 			</li>
-			<li class="login">
-				<a href="#">登录</a>
-				/
-				<a href="#">注册</a>
-			</li>
+            {% endif %}
+
+
 		</ul>
+    </div>
 	</div>
 	<!-- 菜单栏 -->
 	<div class="menu-content">
@@ -232,15 +273,12 @@
 				</div>
 			</div>
 			<div class="footer-links links-white">
-				<a href="#">企业合作</a>
-				<a href="#">人才招聘</a>
-				<a href="#">联系我们</a>
-				<a href="#">讲师招聘</a>
-				<a href="#">常见问题</a>
-				<a href="#">意见反馈</a>
-				<a href="#">友情链接</a>
+				<a href="">联系我们</a>
+				<a href="">常见问题</a>
+				<a href="">意见反馈</a>
+				<a href="">友情链接</a>
 			</div>
-			<p>© 2018 imooc.com</p>
+			<p>© 2019 silentlight.tk</p>
 		</div>
 	</div>
 	<!-- 侧边栏 -->
@@ -260,4 +298,7 @@
 </body>
 <script type="text/javascript" src="/static/js/jquery-3.2.0.min.js"></script>
 <script type="text/javascript" src="/static/js/common.js"></script>
+<script type="text/javascript" src="/static/js/deco-common.js"></script>
+<script type="text/javascript" src="/static/js/swiper-3.4.2.min.js"></script>
+<script type="text/javascript" src="/static/js/index.js"></script>
 </html>

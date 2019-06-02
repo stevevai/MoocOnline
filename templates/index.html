@@ -19,15 +19,17 @@
 <body>
 	<!-- header菜单栏 -->
 	<div class="header header-white">
+    <div class="header-wrap">
 		<a class="home" href="{% url 'index' %}" title="Mooc Online">
 			<img src="/static/img/logo_196x106.png" alt="">
 		</a>
+
 		<ul class="menu">
+            <li class="item"><a href="shizhan.html">首页</a></li>
 			<li class="item"><a href="{% url 'course:course_list' %}">免费课程</a></li>
-			<li class="item"><a href="shizhan.html">手记</a></li>
 			<li class="item"><a href="discovery.html">发现</a></li>
 		</ul>
-		<div class="search-area">
+        <div class="search-area">
 			<input class="search-input" id="search_keywords" value="" type="text">
 			<div class="search-btn" id="jsSearchBtn"><i class="icon icon-search">&#xe63d;</i></div>
 		</div>
@@ -87,14 +89,7 @@
 
                                 </ul>
                             </div>
-                            <div class="card-history">
-                                <div class="history-item">
-                                    <p class="tit">CSS深入理解之vertical-align</p>
-                                    <p>CSS深入理解之vertical-alignjjinhgyft</p>
-                                    <a href="" class="go-cart">继续</a>
-                                </div>
-                                <span class="iconfont icon-clock"></span>
-                            </div>
+
                             <p class="card-sets">
                                 <a href="{% url 'logout' %}">安全退出</a>
                             </p>
@@ -111,6 +106,7 @@
 
 
 		</ul>
+    </div>
 	</div>
 	<!-- banner -->
     <div class="banner">
@@ -203,12 +199,11 @@
 			</div>
 			<div class="footer-links">
 				<a href="">联系我们</a>
-				<a href="">讲师招聘</a>
 				<a href="">常见问题</a>
 				<a href="">意见反馈</a>
 				<a href="">友情链接</a>
 			</div>
-			<p>© 2018 imooc.com</p>
+			<p>© 2019 http://silentlight.tk</p>
 		</div>
 	</div>
 

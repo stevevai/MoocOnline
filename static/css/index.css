@@ -1,6 +1,10 @@
 .header,.banner,.shizhan,.newcourse,.rumen,.skill,.tech,.ask,.teacher,.allstar,.footer{
 	min-width: 1152px;
 }
+.header-wrap{
+	width: 1218px;
+	margin: 0 auto;
+}
 .search-btn,.more a,.question,.shop-cart,.download,.home{
 	cursor: pointer;
 }
@@ -698,6 +702,7 @@ h3 em{
 .footer{
 	height: 132px;
 	padding: 36px 0px;
+	text-align: center;
 }
 .footer-wrap{
 	width: 1152px;

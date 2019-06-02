@@ -6,10 +6,10 @@
 	    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
 		<meta name="keywords" content="">
 		<meta name="description" content="">
-		<title>在线网校学习平台</title>
-		
-		<link href="/static/res//css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-		<link href="/static/res//css/reset.css" rel="stylesheet" type="text/css"/>
+		<title>Mooc Online - 免费编程教育</title>
+
+		<link href="/static/res/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+		<link href="/static/res/css/reset.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" type="text/css" href="/static/css/common.css">
         <link rel="stylesheet" type="text/css" href="/static/css/index.css">
         <link rel="stylesheet" href="/static/css/style/common.css" />
@@ -18,12 +18,12 @@
         <script type="text/javascript" src="/static/js/index.js"></script>
 		<script type="text/javascript" src="/static/res//js/jquery-1.11.3.min.js"></script>
 		<script type="text/javascript" src="/static/res//js/bootstrap.min.js"></script>
-		
+
 		<!--[if lt IE 9]>
 		  <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 		  <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
-		
+
 		<link rel="icon" type="image/png" href="/static/res//i/ico.png" sizes="16x16">
 		<script type="text/javascript">
 		CONETXT_PATH = '';
@@ -40,14 +40,18 @@
 	max-width: 100%;
 	margin-bottom: 50px;
 }
+.header-wrap{
+	width: 1250px;
+	margin: 0 auto;
+}
 .div-left{
     float: left;
 }
-
 </style>
 	<body>
 		<!-- header菜单栏 -->
 	<div class="header header-white">
+        <div class="header-wrap">
 		<a class="home" href="{% url 'index' %}" title="Mooc Online">
 			<img src="/static/img/logo_196x106.png" alt="">
 		</a>
@@ -60,6 +64,7 @@
 			<input class="search-input" type="text">
 			<div class="search-btn"><i class="icon icon-search">&#xe63d;</i></div>
 		</div>
+            </div>
 	</div>
 		<script type="text/javascript">
 			function login(){
@@ -95,7 +100,7 @@
 		                }
 		            }, 0);
 		        });
-				//课程分类展示 
+				//课程分类展示
 				$(".category").popover({
 		            trigger:'manual',
 		            placement : 'right',
@@ -117,66 +122,12 @@
 			});
 		</script>
 		<!-- 头部-end -->
-		
-		<!-- 登录注册-start -->
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"  style="position:fixed; top:30%;">
-		    <div class="modal-dialog" role="document">
-		        <div class="modal-content">
-		        
-		            <div class="modal-header">
-		                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		                    <span aria-hidden="true" style="font-size:18px;">×</span>
-		                </button>
-		                <h4 class="modal-title"  id="loginTitle"  style="float: left; color: #337Ab7;cursor: pointer; " onclick="login();">登 录</h4>
-		                <h4 class="modal-title"  id="registeTitle"  style="float: left;margin-left: 20px;cursor: pointer;" onclick="registe();">注 册</h4>
-		                <div class="clearfix"></div>
-		            </div>
-		            
-		            <div class="modal-body">
-		               	<form id="loginForm" class="form-horizontal" style="padding: 0px 20px;">
-		                      <div class="form-group">
-		                          <input type="email" class="form-control"  id="username"  placeholder="用户名">
-		                      </div>
-		                      <div class="form-group help">
-		                          <input type="password" class="form-control"  id="password"  placeholder="密　码">
-		                      </div>
-		                      <div class="form-group">
-		                          <label>
-		                           <input type="checkbox" value="None" id="checkbox1" name="check">
-		                           <span class="text" style="color: #787D82;font-size: 14px;">下次自动登录</span>
-		                          </label>
-		                      </div>
-		                      
-		                      <a href="javascript:void(0)">
-		                      	<div class="header-login-btn">登 录</div>
-		                      </a>
-		                  </form>
-		                  
-		                   <form id="registeForm" class="form-horizontal" style="padding: 0px 20px;display: none;">
-		                       <div class="form-group">
-		                           <input type="email" class="form-control"  id="username"  placeholder="用户名">
-		                       </div>
-		                       <div class="form-group help">
-		                           <input type="password" class="form-control"  id="password"  placeholder="密　码">
-		                       </div>
-		                       <a href="javascript:void(0)">
-		                      	<div class="header-login-btn">注 册</div>
-		                       </a>
-		                   </form>
-		                  
-		            </div>
-					
-		        </div>
-		    </div>
-		</div>
-		<!-- 登录注册-end -->
-		
 		<div class="f-main clearfix">
 			<!-- 基本信息 -->
 			<div class="main-course-left">
 					<div class="course-info">
 						<div class="course-title">{{ course.name }}</div>
-						
+
 						<div class="course-meta">
 							<a href="{% url "course:course_learn" course.id %}" class="learn-btn" >
                                 {% if  have_learn %}
@@ -185,7 +136,7 @@
                                     开始学习
                                 {% endif %}
                             </a>
-							
+
 							<div class="static-item"  >
                                 {% if have_learn %}
                                     <div class="meta">上次学到</div>
@@ -217,26 +168,26 @@
                                style="float: right;margin-top:5px;" title="收藏">
 							</a>
 						</div>
-						
+
 						<div class="course-brief">
 								{{ course.detail }}
 						</div>
-						
+
 						<div class="course-menu">
 							<a  href=""><span class="menu-item cur">章节</span></a>
 							<a  href="course-comment.html"><span class="menu-item">评论</span></a>
 						</div>
 				</div>
 				<!-- 基本信息-end -->
-				
-				<!-- 课程章节 - start -->		
+
+				<!-- 课程章节 - start -->
 				<div>
                     {% for lession in course.get_course_lesson %}
 						<div class="chapter">
 							<a href="javascript:void(0);" class="js-open">
 								<h3>
 									<strong class="div-left"><div class="icon-chapter">=</div> {{ lession.name }}</strong>
-									<span class="drop-down">▼</span> 
+									<span class="drop-down">▼</span>
 								</h3>
 							</a>
 
@@ -254,12 +205,12 @@
                     {% endfor %}
 				</div>
 
-				<!-- 课程章节 - end -->		
+				<!-- 课程章节 - end -->
 			</div>
-			
-			<!-- 教师信息&推荐课程 - start -->		
+
+			<!-- 教师信息&推荐课程 - start -->
 			<div class="main-course-right"  >
-				
+
 				<div class="lecturer-item" style="width: 100%;">
 					<img class="lecturer-uimg" src="{{ MEDIA_URL }}{{ course.teacher.image }}">
 					<span class="lecturer-name">{{ course.teacher.name }}</span>
@@ -290,17 +241,16 @@
 				    <a href="{{ MEDIA_URL }}{{ course_resource.download }}" class="mb-5"><li class="ellipsis oc-color-hover">{{ course_resource.name }}</li></a>
                  {% endfor %}
 			</div>
-			<!-- 教师信息&推荐课程 - end -->		
-			
+			<!-- 教师信息&推荐课程 - end -->
+
 		</div>
-		
+
 		<!-- 页脚-start -->
 		<div class="f-footer">
 			<div class="f-footer-box clearfix">
 				<div class="footer-link">
-					<a href="javascript:void(0);"  target="_blank" title="企业合作">企业合作</a> 
-					<a href="javascript:void(0);" target="_blank" title="联系我们">联系我们</a> 
-					<a href="javascript:void(0);" target="_blank" title="常见问题">常见问题</a> 
+					<a href="javascript:void(0);" target="_blank" title="联系我们">联系我们</a>
+					<a href="javascript:void(0);" target="_blank" title="常见问题">常见问题</a>
 					<a href="javascript:void(0);" target="_blank" title="意见反馈">意见反馈</a>
 					<a href="javascript:void(0);" target="_blank" title="友情链接">友情链接</a>
 				</div>
@@ -310,7 +260,7 @@
 			</div>
 		</div>
 		<!-- 页脚-end-->
-		
+
 		<script type="text/javascript">
 			$(function(){
 				$('.chapter li').hover(function(){
@@ -318,7 +268,7 @@
 				},function(){
 					$(this).find('.icon-video').css('color','#777');
 				});
-				
+
 				$('.js-open').click(function(){
 					var display = $(this).parent().find('ul').css('display');
 					if(display == 'none'){
@@ -329,7 +279,7 @@
 						$(this).find('.drop-down').html('▲');
 					}
 				});
-			});	
+			});
 		</script>
         <script type="text/javascript">
         //收藏分享
@@ -350,19 +300,16 @@
                         }else{
                             alert(data.msg)
                         }
-
                     }else if(data.status == 'success'){
                        window.location.reload();
                     }
                 },
             });
         }
-
         $('#jsLeftBtn').on('click', function(){
             add_fav($(this), {{ course.id }}, 1);
         });
-
         </script>
 	</body>
-	
+
 </html>

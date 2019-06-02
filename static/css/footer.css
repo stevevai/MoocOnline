@@ -40,6 +40,9 @@
 .footer-black{
 	background: #000;
 }
+.footer-gray{
+	background: grey;
+}
 .links-white a{
 	color: #fff;
 }

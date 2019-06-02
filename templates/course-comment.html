@@ -6,7 +6,7 @@
 	    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
 		<meta name="keywords" content="">
 		<meta name="description" content="">
-		<title>在线网校学习平台</title>
+		<title>Mooc Online - 免费编程教育</title>
 		
 		<link href="/static/res/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 		<link href="/static/res/css/reset.css" rel="stylesheet" type="text/css"/>
@@ -46,6 +46,10 @@
         max-width: 100%;
         margin-bottom: 50px;
     }
+    .header-wrap{
+	width: 1250px;
+	margin: 0 auto;
+}
     .div-left{
         float: left;
     }
@@ -60,6 +64,7 @@
 	<body>
 		<!-- header菜单栏 -->
 	<div class="header header-white">
+        <div class="header-wrap">
 		<a class="home" href="{% url 'index' %}" title="Mooc Online">
 			<img src="/static/img/logo_196x106.png" alt="">
 		</a>
@@ -72,6 +77,7 @@
 			<input class="search-input" type="text">
 			<div class="search-btn"><i class="icon icon-search">&#xe63d;</i></div>
 		</div>
+            </div>
 	</div>
 		<script type="text/javascript">
 			function login(){
@@ -267,23 +273,21 @@
 			
 		</div>
 		
+		<!-- 页脚-start -->
 		<div class="f-footer">
-	<div class="f-footer-box clearfix">
-		
-		<div class="footer-link">
-			<a href="javascript:void(0);"  target="_blank" title="企业合作">企业合作</a> 
-			<a href="javascript:void(0);" target="_blank" title="联系我们">联系我们</a> 
-			<a href="javascript:void(0);" target="_blank" title="常见问题">常见问题</a> 
-			<a href="javascript:void(0);" target="_blank" title="意见反馈">意见反馈</a>
-			<a href="javascript:void(0);" target="_blank" title="友情链接">友情链接</a>
+			<div class="f-footer-box clearfix">
+				<div class="footer-link">
+					<a href="javascript:void(0);" target="_blank" title="联系我们">联系我们</a>
+					<a href="javascript:void(0);" target="_blank" title="常见问题">常见问题</a>
+					<a href="javascript:void(0);" target="_blank" title="意见反馈">意见反馈</a>
+					<a href="javascript:void(0);" target="_blank" title="友情链接">友情链接</a>
+				</div>
+				<div class="footer-copyright">
+					<span>©&nbsp;2017&nbsp; 备案 </span>
+				</div>
+			</div>
 		</div>
-		
-		<div class="footer-copyright">
-			<span>©&nbsp;2017&nbsp; 备案 </span>
-		</div>
-		
-	</div>
-</div>
+		<!-- 页脚-end-->
 				
 	</body>
 	
