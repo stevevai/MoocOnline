@@ -33,15 +33,16 @@
 				<div class="group_list brief">
                     {% for user_course in user_courses %}
 
-                    <div class="module1_5 box">
-                            <a href="{% url 'course:course_info' user_course.course.id %}">
-                                <img width="214" height="190" class="scrollLoading" src="{{ MEDIA_URL }}{{ user_course.course.image }}"/>
-                            </a>
-                            <div class="des">
-                                <a href="{% url 'course:course_info' user_course.course.id %}"><h2>{{ user_course.course.name }}</h2></a>
-                            </div>
+                        <div class="module1_5  course-card" style="margin: 30px 10px;">
+					<div class="course-img">
+                        <a href="{% url "course:course_info" user_course.course.id %}">
+						    <img src="{{ MEDIA_URL }}{{ user_course.course.image }}" alt="">
+                        </a>
+					</div>
 
-                        </div>
+                    <p class="course-name"> {{ user_course.course.name }}</p>
+					<p class="course-desc">{{ user_course.course.desc }}</p>
+				</div>
                     {% endfor %}
 
 				</div>
