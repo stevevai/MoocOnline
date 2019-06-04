@@ -174,6 +174,8 @@ class RecommendView(LoginRequiredMixin, View):
     redirect_field_name = 'next'
 
     def get(self, request):
+        # 取出轮播图
+        all_banner = Banner.objects.all().order_by('index')[:3]
         # 猜你喜欢
         # courses = Course.objects.all().order_by('-stu_nums')[:5]
         # 查询用户学习过的课程
@@ -189,6 +191,7 @@ class RecommendView(LoginRequiredMixin, View):
         good_courses = Course.objects.all().order_by('-fav_nums')[:5]
 
         return render(request, 'discovery.html', {
+            "all_banner": all_banner,
             "courses": recommend_courses,
             "new_courses": good_courses
         })
