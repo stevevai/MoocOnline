@@ -200,7 +200,7 @@
 
 							<div class="static-item"  >
 								<div class="meta">上次学到</div>
-								<div class="meta-value">1-1 感受神秘的涟漪效果之美感受神秘的涟漪效果之美</div>
+								<div class="meta-value">1-1 1-1 Bootstrap入门</div>
 							</div>
 							<div class="static-item"  >
 								<div class="meta">学习人数</div>
@@ -214,7 +214,7 @@
 								<div class="meta">课程时长</div>
 								<div class="meta-value">{{ course.learn_times }}分</div>
 							</div>
-							<a onclick="doFollow(this,${(course.id)!})" href="javascript:void(0)" class="following" style="float: right;margin-top:5px;" title="收藏">
+							<a onclick="doFollow(this,${(course.id)!})" href="javascript:void(0)" class="followed" style="float: right;margin-top:5px;" title="收藏">
 							</a>
 						</div>
 
@@ -223,8 +223,9 @@
 						</div>
 
 						<div class="course-menu">
-							<a  href=""><span class="menu-item">章节</span></a>
-							<a  href="course-comment.html"><span class="menu-item cur">评论</span></a>
+							<a  href="{% url 'course:course_info' course.id %}"><span class="menu-item">章节</span></a>
+							<a  href="{% url 'course:course_comments' course.id %}"><span class="menu-item cur">评论</span></a>
+                            <a  href="{% url 'course:course_wiki' course.id %}"><span class="menu-item">Wiki</span></a>
 						</div>
 				</div>
 				

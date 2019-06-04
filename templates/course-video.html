@@ -197,17 +197,17 @@
 						</div>
 						
 						<div class="course-menu">
-							<a  href="javascript:void(0)"><span class="menu-item  cur">评论</span></a>
-                            <a  href=""><span class="menu-item">手记</span></a>
+							<a  href="{% url 'course:video_play' video.id %}"><span class="menu-item  cur">讨论区</span></a>
+                            <a  href="{% url 'course:course_note' video.id %}"><span class="menu-item">手记</span></a>
 						</div>
 				</div>
 
                 <!--发布评论-->
                     <div id="js-pub-container" class="issques clearfix js-form">
                         <div class="wgt-ipt-wrap pub-editor-wrap " id="js-pl-input-fake">
-                            <textarea id="js-pl-textarea" class="" placeholder="扯淡、吐槽、表扬、鼓励……想说啥就说啥！" ></textarea>
+                            <textarea id="js-pl-textarea" class="" placeholder="请写下你在学习本章节遇到的问题或疑惑" ></textarea>
                         </div>
-                        <input type="button" id="js-pl-submit" class="pub-btn" data-cid="452" value="发表评论">
+                        <input type="button" id="js-pl-submit" class="pub-btn" data-cid="452" value="发布问题">
                         <p class="global-errortip js-global-error"></p>
                     </div>
 

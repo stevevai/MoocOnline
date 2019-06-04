@@ -174,8 +174,9 @@
 						</div>
 
 						<div class="course-menu">
-							<a  href=""><span class="menu-item cur">章节</span></a>
-							<a  href="course-comment.html"><span class="menu-item">评论</span></a>
+							<a  href="{% url 'course:course_info' course.id %}"><span class="menu-item cur">章节</span></a>
+							<a  href="{% url 'course:course_comments' course.id %}"><span class="menu-item">评论</span></a>
+                            <a  href="{% url 'course:course_wiki' course.id %}"><span class="menu-item">Wiki</span></a>
 						</div>
 				</div>
 				<!-- 基本信息-end -->

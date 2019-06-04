@@ -205,8 +205,8 @@
 						</div>
 						
 						<div class="course-menu">
-							<a  href="javascript:void(0)"><span class="menu-item">评论</span></a>
-                             <a  href=""><span class="menu-item cur">手记</span></a>
+							<a  href="{% url 'course:video_play' video.id %}"><span class="menu-item">讨论区</span></a>
+                             <a  href="{% url 'course:course_note' video.id %}"><span class="menu-item cur">手记</span></a>
 						</div>
 				</div>
 
