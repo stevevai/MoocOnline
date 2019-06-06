@@ -180,15 +180,25 @@ class RecommendView(LoginRequiredMixin, View):
         # courses = Course.objects.all().order_by('-stu_nums')[:5]
         # 查询用户学习过的课程
         user_courses = UserCourse.objects.filter(user=request.user)
-        course_ids = [user_course.course_id for user_course in user_courses]
-        all_user_courses = Course.objects.filter(id__in=course_ids)
-        # 提取一级分类
-        course_tags = [course.classify_root_id for course in all_user_courses]
-        # course_tags = [course.tags.name for course in all_user_courses]
+        # 如果已经有学习记录
+        if user_courses:
+            course_ids = [user_course.course_id for user_course in user_courses]
+            all_user_courses = Course.objects.filter(id__in=course_ids)
+            # 提取一级分类
+            course_tags = [course.classify_root_id for course in all_user_courses]
+            # course_tags = [course.tags.name for course in all_user_courses]
 
-        recommend_courses = Course.objects.filter(classify_root_id__in=course_tags)
-        if recommend_courses.count()>5:
-            recommend_courses = recommend_courses[:5]
+            recommend_courses = Course.objects.filter(classify_root_id__in=course_tags)
+            # 不要推荐用户已经学过的课程
+            recommend_courses = recommend_courses.exclude(id__in=course_ids)
+            # 随机选5个
+            if recommend_courses.count() > 5:
+                recommend_courses = recommend_courses.order_by('?')[:5]
+
+        # 如果是新用户
+        else:
+            recommend_courses = Course.objects.all().order_by("-stu_nums").order_by('?')[:5]
+
         # 优质课程
         good_courses = Course.objects.all().order_by('-fav_nums')[:5]
 

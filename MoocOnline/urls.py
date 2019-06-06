@@ -47,4 +47,4 @@ urlpatterns = [
     path('article/', include('article.urls', namespace='article')),
     path("search/", include('haystack.urls')),
     path("mdeditor/", include('mdeditor.urls'))
-] + static(MEDIA_URL, document_root=MEDIA_ROOT) # 没有这一句无法显示上传的图片
+] + static(MEDIA_URL, document_root=MEDIA_ROOT)     # 没有这一句无法显示上传的图片
