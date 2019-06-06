@@ -14,8 +14,8 @@ from teachers.models import Teacher
 from operation.models import UserFavourite, UserCourse, Banner
 from .forms import LoginForm, RegisterForm, UserInfoForm, UploadImageForm, ModifyPwdForm
 from MoocOnline.settings import SECRET_KEY
-from util.email_send import send_update_email
-from .tasks import send_register_active_email
+from util.email_send import send_update_email, send_register_active_email
+# from .tasks import send_register_active_email
 # from celery_tasks.tasks import send_register_active_email
 
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
@@ -120,8 +120,8 @@ class RegisterView(View):
             token = token.decode('utf8')
 
             # 发送邮件
-            # send_register_email(email, token, "register")
-            send_register_active_email.delay(email, user_name, token)  # 异步发送邮件
+            send_register_active_email(email, user_name, token)
+            # send_register_active_email.delay(email, user_name, token)  # 异步发送邮件
 
             # 邮件发送成功
             return render(request, "send_success.html")
@@ -187,6 +187,8 @@ class RecommendView(LoginRequiredMixin, View):
         # course_tags = [course.tags.name for course in all_user_courses]
 
         recommend_courses = Course.objects.filter(classify_root_id__in=course_tags)
+        if recommend_courses.count()>5:
+            recommend_courses = recommend_courses[:5]
         # 优质课程
         good_courses = Course.objects.all().order_by('-fav_nums')[:5]
 

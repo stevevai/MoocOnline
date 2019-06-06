@@ -306,7 +306,7 @@ class NotesView(LoginRequiredMixin, View):
         course = video.lesson.course
         all_comments = CourseComments.objects.filter(video=video).order_by("-add_time")
         # 查询我的笔记
-        all_notes = UserNote.objects.filter(user=request.user, course=course, video=video)
+        all_notes = UserNote.objects.filter(user=request.user, course=course, video=video).order_by("-add_time")
 
         # 引入写笔记的表单
         note_form = UserNoteForm()

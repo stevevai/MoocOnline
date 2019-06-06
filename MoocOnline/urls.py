@@ -18,11 +18,12 @@ from django.urls import path, re_path
 from django.views.generic import TemplateView
 from django.conf.urls import include
 from django.views.static import serve
+from django.conf.urls.static import static
 
 import xadmin
 
 from users.views import LoginView, RegisterView, ActiveUserView, LogoutView, IndexView
-from .settings import MEDIA_ROOT
+from .settings import MEDIA_ROOT, MEDIA_URL
 
 urlpatterns = [
     path('xadmin/', xadmin.site.urls),
@@ -46,4 +47,4 @@ urlpatterns = [
     path('article/', include('article.urls', namespace='article')),
     path("search/", include('haystack.urls')),
     path("mdeditor/", include('mdeditor.urls'))
-]
+] + static(MEDIA_URL, document_root=MEDIA_ROOT) # 没有这一句无法显示上传的图片

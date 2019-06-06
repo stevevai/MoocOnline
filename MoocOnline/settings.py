@@ -232,6 +232,9 @@ HAYSTACK_SIGNAL_PROCESSOR ='haystack.signals.RealtimeSignalProcessor'
 
 # ckeditor settings
 CKEDITOR_UPLOAD_PATH = "notes_images/"
+CKEDITOR_BROWSE_SHOW_DIRS = True
+CKEDITOR_RESTRICT_BY_USER = True
+CKEDITOR_IMAGE_BACKEND = 'pillow'
 CKEDITOR_CONFIGS = {
     # django-ckeditor默认使用default配置
     'default': {

@@ -17,6 +17,19 @@ def random_str(random_length=8):
     return str
 
 
+def send_register_active_email(email, username, token):
+
+    email_title = "MOOC Online注册激活"
+    email_content = ""
+    html_message = '<h1>%s，欢迎您成为MOOC Online注册会员</h1>' \
+                   '请点击下面的链接激活您的账号: </br><a href="http://127.0.0.1:8000/active/%s">' \
+                   'http://127.0.0.1:8000/active/%s</a>' \
+                   ' ，链接将在30分钟后失效' % (username, token, token)
+
+    # 使用Django内置函数来发送邮件
+    send_mail(email_title, email_content, EMAIL_FROM, [email], html_message=html_message)
+
+
 def send_register_email(email, token, send_type="register"):
     # email_record = EmailVerifyRecord()
     code = random_str(16)
