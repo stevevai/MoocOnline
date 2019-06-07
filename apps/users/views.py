@@ -21,6 +21,7 @@ from util.email_send import send_update_email, send_register_active_email
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from itsdangerous import SignatureExpired
 import json
+from django.core.cache import cache
 # Create your views here.
 
 
@@ -153,16 +154,35 @@ class ActiveUserView(View):
 
 # 首页view
 class IndexView(View):
+
     def get(self, request):
         # 取出轮播图
-        all_banner = Banner.objects.all().order_by('index')[:3]
-        # 热门课程
-        courses = Course.objects.all().order_by('-stu_nums')[:5]
-        # 新上好课
-        new_courses = Course.objects.all().order_by('-add_time')[:10]
+        # all_banner = Banner.objects.all().order_by('index')[:3]
+        '''
+        引入缓存
+        '''
+
+        # 设置key
+        course_key = 'course'
+        new_course_key = 'new_course'
+
+        # 判断key是否存在cache中，存在则在cache中取，不存在则查询数据库
+        if course_key in cache:
+            courses = cache.get(course_key)
+        else:
+            # 热门课程
+            courses = Course.objects.all().order_by('-stu_nums')[:5]
+            cache.set(course_key, courses, 24*60*60)
+
+        if new_course_key in cache:
+            new_courses = cache.get(new_course_key)
+        else:
+            # 新上好课
+            new_courses = Course.objects.all().order_by('-add_time')[:10]
+            cache.set(new_course_key, new_courses, 24 * 60 * 60)
 
         return render(request, 'index.html', {
-            "all_banner": all_banner,
+            # "all_banner": all_banner,
             "courses": courses,
             "new_courses": new_courses
         })
