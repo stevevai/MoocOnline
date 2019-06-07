@@ -194,11 +194,23 @@
 						<div class="course-title">{{ course.name }}</div>
 
 						<div class="course-meta">
-							<a href="${s.base}/course/video.html" class="learn-btn" >继续学习</a>
+							<a href="{% url "course:course_learn" course.id %}" class="learn-btn" >
+                                {% if  have_learn %}
+                                    继续学习
+                                {% else %}
+                                    开始学习
+                                {% endif %}
+                            </a>
 
 							<div class="static-item"  >
-								<div class="meta">上次学到</div>
-								<div class="meta-value">1-1 Bootstrap入门</div>
+                                {% if have_learn %}
+                                    <div class="meta">上次学到</div>
+
+                                {% else %}
+                                    <div class="meta"></div>
+                                {% endif %}
+                                    <div class="meta-value">{{ progress }}</div>
+
 							</div>
 							<div class="static-item"  >
 								<div class="meta">学习人数</div>
@@ -212,7 +224,14 @@
 								<div class="meta">课程时长</div>
 								<div class="meta-value">{{ course.learn_times }}分</div>
 							</div>
-							<a onclick="doFollow(this,${(course.id)!})" href="javascript:void(0)" class="followed" style="float: right;margin-top:5px;" title="收藏">
+							<a onclick="add_fav(this,{{ course.id }},1)" href="javascript:void(0)"
+                                    {% if have_fav_course %}
+                                        class="followed"
+                                    {% else %}
+                                        class="following"
+                                    {% endif %}
+                               style="float: right;margin-top:5px;" title="收藏">
+							</a>
 							</a>
 						</div>
 
@@ -222,7 +241,6 @@
 
 						<div class="course-menu">
 							<a  href="{% url 'course:course_info' course.id %}"><span class="menu-item">章节</span></a>
-							<a  href="{% url 'course:course_comments' course.id %}"><span class="menu-item">评论</span></a>
                             <a  href="{% url 'course:course_wiki' course.id %}"><span class="menu-item cur">Wiki</span></a>
 
 						</div>
@@ -242,7 +260,13 @@
 					<span class="lecturer-name">{{ course.teacher.name }}</span>
 					<span class="lecturer-title">{{ course.teacher.get_job_display }}</span>
 					<span class="lecturer-p" >{{ course.teacher.points }}</span>
-					<a href="javascript:void(0)" ><span class="follow-btn">关注+</span></a>
+					<a href="javascript:void(0)" onclick="add_fav(this,{{ course.teacher.id }},2)">
+                        {% if have_fav_teacher %}
+                            <span class="followed-btn">已关注</span>
+                        {% else %}
+                            <span class="follow-btn">关注+</span>
+                        {% endif %}
+                    </a>
 				</div>
 
                         <div class="course-info-tip">
@@ -278,7 +302,35 @@
 			</div>
 		</div>
 		<!-- 页脚-end-->
-				
+	<script type="text/javascript">
+        //收藏分享
+        function add_fav(current_elem, fav_id, fav_type){
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url:"{% url "users:add_fav" %}",
+                data:{'fav_id':fav_id, 'fav_type':fav_type},
+                async: true,
+                beforeSend:function(xhr, settings){
+                    xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+                },
+                success: function(data) {
+                    if(data.status == 'fail'){
+                        if(data.msg == '用户未登录'){
+                            window.location.href="/login/";
+                        }else{
+                            alert(data.msg)
+                        }
+                    }else if(data.status == 'success'){
+                       window.location.reload();
+                    }
+                },
+            });
+        }
+        $('#jsLeftBtn').on('click', function(){
+            add_fav($(this), {{ course.id }}, 1);
+        });
+        </script>
 	</body>
 	
 </html>

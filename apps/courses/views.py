@@ -122,18 +122,6 @@ class CourseInfoView(LoginRequiredMixin, View):
         else:
             progress = "尚未学习本课程"
 
-        '''
-        # 选出学了这门课的学生关系
-        user_courses = UserCourse.objects.filter(course=course)
-        # 从关系中取出user_id
-        user_ids = [user_course.user_id for user_course in user_courses]
-        # 这些用户学了的课程,外键会自动有id，取到字段,两个下划线代表我传进来的是一个list
-        all_user_courses = UserCourse.objects.filter(user_id__in=user_ids)
-        # 取出所有课程id
-        course_ids = [all_user_course.course_id for all_user_course in all_user_courses]
-        # 获取学过该课程用户学过的其他课程
-        relate_courses = Course.objects.filter(id__in=course_ids).order_by("-click_nums")[:5]
-        '''
         # 收藏
         have_fav_course = False
         have_fav_teacher = False
@@ -222,6 +210,31 @@ class WikiView(LoginRequiredMixin, View):
         course = Course.objects.get(id=int(course_id))
         course_wiki = CourseWiki.objects.get(course=course)
 
+        # 查询用户是否关联了该门课程
+        have_learn = False
+
+        user_courses = UserCourse.objects.filter(user=request.user, course=course)
+        progress = ""
+        if user_courses:
+            have_learn = True
+            # 找出最新的一条学习记录
+            user_courses = UserCourse.objects.filter(user=request.user, course=course).order_by("-add_time")[0:1].get()
+            progress = user_courses.section.name
+
+        else:
+            progress = "尚未学习本课程"
+
+        # 收藏
+        have_fav_course = False
+        have_fav_teacher = False
+
+        # 判断是否已登录
+        if request.user.is_authenticated:
+            if UserFavourite.objects.filter(user=request.user, fav_id=course.id, fav_type=1):
+                have_fav_course = True
+            if UserFavourite.objects.filter(user=request.user, fav_id=course.teacher.id, fav_type=2):
+                have_fav_teacher = True
+
         all_resources = CourseResources.objects.filter(course=course)
         # 将markdown语法渲染成html样式
         course_wiki.wiki = markdown.markdown(course_wiki.wiki,
@@ -236,6 +249,10 @@ class WikiView(LoginRequiredMixin, View):
             "course": course,
             "course_resources": all_resources,
             "wiki": course_wiki,
+            "have_fav_course": have_fav_course,
+            "have_fav_teacher": have_fav_teacher,
+            "have_learn": have_learn,
+            "progress": progress
         })
 
 
