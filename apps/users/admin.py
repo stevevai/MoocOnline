@@ -4,9 +4,10 @@ from users.models import UserProfile
 
 # Register your models here.
 
-
+'''
 class UserAdmin(admin.ModelAdmin):
     pass
 
 
 admin.site.register(UserProfile, UserAdmin)       # 注册admin
+'''

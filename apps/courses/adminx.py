@@ -84,7 +84,7 @@ class VideoAdmin(object):
 
 class WikiAdmin(object):
     list_display = ['course', 'wiki', 'add_time']
-    model_icon = 'fa fa-wikipedia-w'
+    model_icon = 'fa fa-leaf'
 
 
 class CourseResourceAdmin(object):
