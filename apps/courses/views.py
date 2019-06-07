@@ -295,14 +295,18 @@ class CourseLearnView(LoginRequiredMixin, View):
         # 开始学习
         if not user_courses:
             lesson = Lesson.objects.filter(course=course).first()
-            video = Video.objects.filter(lesson=lesson).first()
-            user_courses = UserCourse(user=request.user, course=course, section=video)
-            user_courses.save()
-            course.stu_nums += 1
-            course.save()
-            # 跳转第一个视频
-            video_id = video.id
-            return HttpResponseRedirect('/course/video/%s/' % video_id)
+            if lesson:
+                video = Video.objects.filter(lesson=lesson).first()
+                user_courses = UserCourse(user=request.user, course=course, section=video)
+                user_courses.save()
+                course.stu_nums += 1
+                course.save()
+                # 跳转第一个视频
+                video_id = video.id
+                return HttpResponseRedirect('/course/video/%s/' % video_id)
+            # 没有章节的异常情况
+            else:
+                return HttpResponseRedirect('/course/info/%s/' % course_id)
 
         # 继续学习
         else:
