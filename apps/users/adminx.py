@@ -19,8 +19,8 @@ class BaseSetting(object):
 class GlobalSettings(object):
     site_title = "后台管理系统"
     site_footer = "Mooc Online"
-    # menu_style = "accordion"   # 可折叠
-
+    menu_style = "accordion"   # 可折叠
+    '''
     def get_site_menu(self):
         return (
             {'title': '用户管理', 'menus': (
@@ -43,6 +43,7 @@ class GlobalSettings(object):
                 {'title': '日志记录', 'icon': 'fa fa-cog', 'url': self.get_model_url(Log, 'changelist')},
             )}
         )
+    '''
 
 
 class UserProfileAdmin(UserAdmin):
