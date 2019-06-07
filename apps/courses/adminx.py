@@ -29,7 +29,7 @@ class CourseClassifyAdmin(object):
 
 
 class CourseClassify2Admin(object):
-    list_display = ['parent_classify', 'name', 'add_time']
+    list_display = ['name', 'parent_classify', 'add_time']
     model_icon = 'fa fa-book'
 
 
@@ -69,29 +69,61 @@ class CourseAdmin(object):
 
 
 class LessonAdmin(object):
-    list_display = ['course', 'name', 'add_time']
-    search_fields = ['course', 'name']
-    list_filter = ['course__name', 'name', 'add_time']      # 由外键course的name字段过滤
+    list_display = ['name', 'course', 'add_time']
+    search_fields = ['course__name', 'name']
+    list_filter = ['course', 'name', 'add_time']      # 由外键course的name字段过滤
     model_icon = 'fa fa-folder'
+
+    # 如果是教师用户，则需要过滤列表中的数据
+    def queryset(self):
+        qs = super(LessonAdmin, self).queryset()
+        if self.request.user.is_superuser:
+            return qs
+        else:
+            return qs.filter(course__teacher=self.request.user.teacher)
 
 
 class VideoAdmin(object):
-    list_display = ['lesson', 'name', 'add_time']
-    search_fields = ['lesson', 'name']
-    list_filter = ['lesson', 'name', 'add_time']
+    list_display = ['name', 'get_course', 'lesson', 'add_time']
+    search_fields = ['lesson__name', 'lesson__course__name', 'name']
+    list_filter = ['lesson', 'lesson__course', 'name', 'add_time']
     model_icon = 'fa fa-video-camera'
+
+    # 如果是教师用户，则需要过滤列表中的数据
+    def queryset(self):
+        qs = super(VideoAdmin, self).queryset()
+        if self.request.user.is_superuser:
+            return qs
+        else:
+            return qs.filter(lesson__course__teacher=self.request.user.teacher)
 
 
 class WikiAdmin(object):
     list_display = ['course', 'wiki', 'add_time']
     model_icon = 'fa fa-leaf'
 
+    # 如果是教师用户，则需要过滤列表中的数据
+    def queryset(self):
+        qs = super(WikiAdmin, self).queryset()
+        if self.request.user.is_superuser:
+            return qs
+        else:
+            return qs.filter(course__teacher=self.request.user.teacher)
+
 
 class CourseResourceAdmin(object):
-    list_display = ['course', 'name', 'download', 'add_time']
-    search_fields = ['course', 'name', 'download']
+    list_display = ['name', 'course', 'add_time']
+    search_fields = ['course__name', 'name', 'download']
     list_filter = ['course', 'name', 'download', 'add_time']
     model_icon = 'fa fa-file'
+
+    # 如果是教师用户，则需要过滤列表中的数据
+    def queryset(self):
+        qs = super(CourseResourceAdmin, self).queryset()
+        if self.request.user.is_superuser:
+            return qs
+        else:
+            return qs.filter(course__teacher=self.request.user.teacher)
 
 
 xadmin.site.register(Course, CourseAdmin)
