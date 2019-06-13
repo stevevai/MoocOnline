@@ -1,56 +1,14 @@
 # MoocOnline
 
-
-毕业设计，基于Python设计与实现一个专注于编程教育的在线学习平台
-
-- [x] 首页轮播图，课程列表显示
-- [ ] ~~首页数据Redis缓存~~
-- [ ] Xadmin后台优化（图标，显示
-- [x] 课程分页bug修改
-- [x] 发现页（界面同首页，无轮播图，分为猜你喜欢（基于课程二级分类筛选），相似推荐（基于用户）
-- [x] 课程wiki,markdown语法
-- [x] 修改前端页面中的链接
-- [x] 前端页面优化，统一页头页尾
-- [x] 配置一份文件存储在本地的settings.py文件，在manage.py中引入，将七牛云已上传的文件备份一份到本地
-- [x] 项目开发总结
-- [x] 查阅相关论文和资料
-- [x] 登录提示
-- [ ] 视频数据，课程数据
-- [ ] ~~404,500页面配置~~
-- [ ] ~~docker部署（最好在Linux虚拟机上玩~~
-
-</br>
-
-展望：
-
-- Django rest framework
-- Web app移动端适配
-- 全局搜索（搜索引擎，建索引），加快搜索速度
-- 部署在Nginx服务器上
-- docker部署
-- 课程推荐算法
-
-</br>
-
-其它需要注意的问题：
-
-1. 测试的数据集要有多大？
-
-2. 为了演示时的效果，浏览器的缓存不要清除，且网页打开要比较流畅
-
-3. 测试的数据要正经一点
-
-4. 演示流程要顺畅
-
-
+开发环境：Python 3.6 + Django 2.1 + MySQL 5.6
 
 
 ## 项目总结
 
 ### 相关技术
 
-| **Name**                        | **Offical website**                           |
-| ------------------------------- | --------------------------------------------- |
+| Name                           | Offical website                           |
+| :------------------------------ | --------------------------------------------- |
 | Python                          | <https://www.python.org/>                     |
 | Django                          | <https://docs.djangoproject.com/zh-hans/2.2/> |
 | MySQL                           | <https://www.mysql.com/>                      |
@@ -58,16 +16,18 @@
 | Celery                          | <http://www.celeryproject.org/>               |
 | Nginx                           | <https://nginx.org/en/>                       |
 | Bootstrap                       | <http://www.bootcss.com/>                     |
-| HTML/CSS/JavaScript/jQuery/Ajax |                                               |
+| HTML/CSS/JavaScript/jQuery/Ajax | ...                                           |
 
 ### 第三方库
 
 | Name                   | Github repository                                          |
-| ---------------------- | ---------------------------------------------------------- |
+| :--------------------- | ---------------------------------------------------------- |
+| Django                 | <https://www.djangoproject.com/>                           |
 | xadmin                 | <https://github.com/sshwsfc/xadmin>                        |
 | django-crispy-forms    | https://github.com/django-crispy-forms/django-crispy-forms |
 | django-simple-captcha  | https://github.com/mbi/django-simple-captcha>              |
 | django-ckeditor        | https://github.com/django-ckeditor/django-ckeditor         |
+| django-mkeditor        | <https://github.com/pylixm/django-mdeditor>                |
 | django-qiniu-storage   | https://github.com/glasslion/django-qiniu-storage>         |
 | django-pure-pagination | https://github.com/jamespacileo/django-pure-pagination     |
 | django-stdimage        | https://github.com/codingjoe/django-stdimage               |
@@ -75,6 +35,9 @@
 | itsdangerous           | https://github.com/pallets/itsdangerous>                   |
 | Pillow                 | https://github.com/python-pillow/Pillow>                   |
 | PyMySQL                | https://github.com/PyMySQL/PyMySQL                         |
+| Markdown               | <https://python-markdown.github.io/>                       |
+| redis                  | https://github.com/andymccurdy/redis-py                    |
+| celery                 | <http://celeryproject.org/>                                |
 
 ### 参考资料
 
@@ -107,15 +70,16 @@
 
 ### 前端设计
 
-| Name              | Website                                                 |
-| ----------------- | ------------------------------------------------------- |
-| Boostrap模板      | <https://www.froala.com/design-blocks/docs/get-started> |
-| Boostrap模板      | <https://startbootstrap.com/#template>                  |
-| Boostrap表单验证  | <https://formvalidation.io/>                            |
-| Boostrap主题      | <https://bootswatch.com/>                               |
-| Bootstrap中文文档 | <https://v3.bootcss.com/>                               |
+| Name                 | Website                                                 |
+| :------------------- | :------------------------------------------------------ |
+| 仿慕课网             | <https://github.com/scyuan/mooc>                        |
+| Froala Design Blocks | <https://www.froala.com/design-blocks/docs/get-started> |
+| Start Bootstrap      | <https://startbootstrap.com/#template>                  |
+| 表单验证             | <https://jqueryvalidation.org/>                         |
+| Boostrap themes      | <https://bootswatch.com/>                               |
+| Bootstrap中文文档    | <https://v3.bootcss.com/>                               |
 
-### 优秀博客
+### 博客
 
 | Name              | Website                                                 |
 | -------------- | --------------------------------------------- |
@@ -123,3 +87,11 @@
 | 刘江的博客     | <http://www.liujiangblog.com/course/django/2> |
 | 杜赛的个人网站 | <https://www.dusaiphoto.com/>                 |
 
+### 展望
+
+- Django rest framework
+- Web app移动端适配
+- 全局搜索（搜索引擎，建索引）
+- Nginx部署
+- Docker部署
+- 课程推荐算法优化
