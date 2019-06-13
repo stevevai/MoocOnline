@@ -1,5 +1,7 @@
 # MoocOnline
 
+毕设项目：基于Python的编程类在线教育平台
+
 开发环境：Python 3.6 + Django 2.1 + MySQL 5.6
 
 
@@ -8,7 +10,7 @@
 ### 相关技术
 
 | Name                           | Offical website                           |
-| :------------------------------ | --------------------------------------------- |
+| :------------------------------ | :-------------------------------------------- |
 | Python                          | <https://www.python.org/>                     |
 | Django                          | <https://www.djangoproject.com/> |
 | MySQL                           | <https://www.mysql.com/>                      |
@@ -42,7 +44,7 @@
 ### 官方文档
 
 | Name         | website                                                      |
-| :----------- | ------------------------------------------------------------ |
+| :----------- | :----------------------------------------------------------- |
 | Django       | https://docs.djangoproject.com/zh-hans/2.2/                  |
 | Xadmin       | <https://sshwsfc.github.io/xadmin/                           |
 | Celery       | <http://docs.jinkan.org/docs/celery/getting-started/introduction.html#id3> |
@@ -51,7 +53,7 @@
 ### 参考资料
 
 | Name                                                 | Website                                                      |
-| :--------------------------------------------------- | ------------------------------------------------------------ |
+| :--------------------------------------------------- | :----------------------------------------------------------- |
 | Python升级3.6强力Django+杀手级Xadmin打造在线教育平台 | <https://coding.imooc.com/class/78.html>                     |
 | Java SSM快速开发仿慕课网在线教育平台                 | <https://coding.imooc.com/class/110.html>                    |
 | 传播智客2018年Django天天生鲜项目                     | <https://github.com/shihao1010/tiantianshengxian>            |
