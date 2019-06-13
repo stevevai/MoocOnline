@@ -29,7 +29,7 @@ class UserProfile(AbstractUser):
     address = models.CharField(max_length=100, default="", verbose_name=u"地址")
     mobile = models.CharField(max_length=11, null=True, blank=True)     # blank = True 代表表单非必填，null = True 属于数据库范畴
     signature = models.CharField(max_length=128, default="", blank=True)
-    image = models.ImageField(upload_to="users/images/%Y/%m", default="image/default_s.png", max_length=100,
+    image = models.ImageField(upload_to="users/images/%Y/%m", default="image/default_tx.jpg", max_length=100,
                               verbose_name=u"用户头像")
     user_type = models.SmallIntegerField(choices=type_list, verbose_name=u"用户类型", default=3)
     # 为教师创建新账号，与教师表中的数据相关联

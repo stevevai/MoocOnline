@@ -11,12 +11,12 @@ app_name = "courses"
 urlpatterns = [
     # 课程列表页
     path('list/', CourseListView.as_view(), name="course_list"),
-    re_path('info/(?P<course_id>\d+)/', cache_page(60 * 30)(CourseInfoView.as_view()), name="course_info"),
+    re_path('info/(?P<course_id>\d+)/', CourseInfoView.as_view(), name="course_info"),
     re_path('video/(?P<video_id>\d+)/', VideoPlayView.as_view(), name="video_play"),
     # 课程评论
     re_path('comments/(?P<course_id>\d+)/', CommentsView.as_view(), name="course_comments"),
     # 课程wiki
-    re_path('wiki/(?P<course_id>\d+)/', cache_page(60 * 30)(WikiView.as_view()), name="course_wiki"),
+    re_path('wiki/(?P<course_id>\d+)/', WikiView.as_view(), name="course_wiki"),
     # 添加课程评论,已经把参数放到post当中了
     path('add_comment/', AddCommentsView.as_view(), name="add_comment"),
     re_path('learn/(?P<course_id>\d+)/', CourseLearnView.as_view(), name="course_learn"),

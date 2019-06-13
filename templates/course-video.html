@@ -1,5 +1,3 @@
-<!-- 引入缓存 -->
-{% load cache %}
 <!DOCTYPE html>
 <html lang="utf-8">
 	<head>
@@ -237,7 +235,6 @@
 			</div>
 			
 			<!-- 章节-start -->
-            {% cache 500 'course_note' %}
 			<div class="main-course-right"  >
 				<h4 class="mt-50"></h4>
 				<div class="video-course-fix-parent">
@@ -264,7 +261,6 @@
 					</div>
 				</div>
 			</div>
-            {% endcache %}
 			<!-- 章节-end -->
 		</div>
 		
