@@ -165,12 +165,12 @@ STATICFILES_DIRS = [
 EMAIL_HOST = "smtp.163.com"
 EMAIL_PORT = 25
 # 发邮件的邮箱
-EMAIL_HOST_USER = 'silentlight1997@163.com'
+EMAIL_HOST_USER = ''
 # 使用授权码登录
-EMAIL_HOST_PASSWORD = 'zxcvbnm6025680'
+EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = False
 # 发件人
-EMAIL_FROM = 'Mooc Online<silentlight1997@163.com>'
+EMAIL_FROM = ''
 
 
 # 配置Broker中间人

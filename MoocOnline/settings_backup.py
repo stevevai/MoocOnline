@@ -161,12 +161,12 @@ STATICFILES_DIRS = [
 EMAIL_HOST = "smtp.163.com"
 EMAIL_PORT = 25
 # 发邮件的邮箱
-EMAIL_HOST_USER = 'silentlight1997@163.com'
+EMAIL_HOST_USER = ''
 # 使用授权码登录
-EMAIL_HOST_PASSWORD = 'zxcvbnm6025680'
+EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = False
 # 发件人
-EMAIL_FROM = 'Mooc Online<silentlight1997@163.com>'
+EMAIL_FROM = ''
 
 
 # 配置Broker中间人
@@ -199,10 +199,10 @@ SESSION_CACHE_ALIAS = "default"
 
 
 # 七牛云
-QINIU_ACCESS_KEY = 'pk3wExyXusE2dmmCvzHwUt8hNNJ18DPQ7Ugxgxmh'
-QINIU_SECRET_KEY = 'YbCAmuSMAOACPB3APY7xKG2SjzUuhLNISvQnt1q2'
-QINIU_BUCKET_NAME = 'mooc-online'
-QINIU_BUCKET_DOMAIN = 'prpg634cf.bkt.clouddn.com'
+QINIU_ACCESS_KEY = ''
+QINIU_SECRET_KEY = ''
+QINIU_BUCKET_NAME = ''
+QINIU_BUCKET_DOMAIN = ''
 QINIU_SECURE_URL = False
 
 
